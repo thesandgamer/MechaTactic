@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E9C7FDCE-D52A-8D73-7EB0-C5296AF258F6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AStar">
+      <UniqueIdentifier>{11582c42-54b1-43fb-b347-9de8e137f2f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{97cbf1f9-e68b-4fba-93c5-60402ec0ff95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InformationDisplay">
+      <UniqueIdentifier>{dc254172-f2a8-47d3-8cd9-a6dc0551fa6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Turn">
+      <UniqueIdentifier>{44467689-bd38-4ac1-905c-d35875e45b21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{05b445d7-678f-453a-b4cd-953ef855d6f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Grid">
+      <UniqueIdentifier>{589062a8-c384-4dac-be61-4d3cd2e7b186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controllers">
+      <UniqueIdentifier>{252a223d-a12d-4497-9724-e4a3c85b506f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mechas">
+      <UniqueIdentifier>{4c1bdb83-513e-453a-99e1-b8f6799ff988}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AStar.cpp">
+      <Filter>AStar</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>AStar</Filter>
+    </ClCompile>
+    <ClCompile Include="List.cpp">
+      <Filter>AStar</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>AStar</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="InformationDisplayUi.cpp">
+      <Filter>InformationDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="InformationDisplay.cpp">
+      <Filter>InformationDisplay</Filter>
+    </ClCompile>
+    <ClCompile Include="TurnsManager.cpp">
+      <Filter>Turn</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BandeauTexte.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Controller.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Ennemy.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="MechaParent.cpp">
+      <Filter>Mechas</Filter>
+    </ClCompile>
+    <ClCompile Include="Pawn.cpp">
+      <Filter>Mechas</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AStar.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2AStar.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="AStartUtility.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="InformationDisplayUi.h">
+      <Filter>InformationDisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="IInformationPasseur.h">
+      <Filter>InformationDisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="InformationDisplay.h">
+      <Filter>InformationDisplay</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnsManager.h">
+      <Filter>Turn</Filter>
+    </ClInclude>
+    <ClInclude Include="ITurn.h">
+      <Filter>Turn</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BandeauTexte.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Controller.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Ennemy.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="MechaParent.h">
+      <Filter>Mechas</Filter>
+    </ClInclude>
+    <ClInclude Include="Pawn.h">
+      <Filter>Mechas</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
