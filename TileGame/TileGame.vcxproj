@@ -174,7 +174,9 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AStar.cpp" />
     <ClCompile Include="BandeauTexte.cpp" />
+    <ClCompile Include="BoxCollision.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="Ennemy.cpp" />
@@ -191,6 +193,9 @@
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="P_Collision.cpp" />
+    <ClCompile Include="RaycastCollision.cpp" />
+    <ClCompile Include="SphereCollision.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TurnsManager.cpp" />
   </ItemGroup>
@@ -204,7 +209,9 @@
     <ClInclude Include="AStar.h" />
     <ClInclude Include="AStartUtility.h" />
     <ClInclude Include="BandeauTexte.h" />
+    <ClInclude Include="BoxCollision.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="Ennemy.h" />
@@ -222,6 +229,9 @@
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="P_Collision.h" />
+    <ClInclude Include="RaycastCollision.h" />
+    <ClInclude Include="SphereCollision.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TurnsManager.h" />
     <ClInclude Include="Vector2AStar.h" />

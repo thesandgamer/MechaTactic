@@ -8,6 +8,8 @@ using std::vector;
 
 class Controller : public ITurn
 {
+	friend class PlayerController;
+
 public:
 	Controller();
 	~Controller();
@@ -18,7 +20,7 @@ public:
 	void Draw();
 	void DrawUi();
 
-	bool MovePawn(Vector2 moveTo);//bool to check if the movement is possible
+	bool MoveMecha(Vector2 moveTo);//bool to check if the movement is possible
 
 	bool SelectMecha(MechaParent* pawnSelected);
 	void DeSelectMecha();
@@ -29,21 +31,21 @@ public:
 	void SetGrid(class Grid* grid);
 
 
-	void FinishPlayerTurn();
+	void FinishTurn();
 
 	MechaParent* GetControledPawn() { return controledMecha; }
 
 
 	//==========Interfaces==========
 	void StartTurn();
-	bool EndTurn();
+	bool HaveEndTurn();
 	int initiative;
 	bool finishHisTurn = false;
 	string GetName() { return name; }
 	string name;
 
 
-private:
+protected:
 	vector<MechaParent> mechasList;
 	MechaParent* controledMecha;
 
@@ -55,7 +57,6 @@ private:
 	bool isTurn = false;
 
 	//==========UI==========
-
 
 
 

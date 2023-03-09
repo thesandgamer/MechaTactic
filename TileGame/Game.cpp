@@ -14,13 +14,22 @@ void Game::Start()
 
     const static int CELL_WIDTH = 32;
     const static int CELL_HEIGHT = 32;
-    Vector2 gridPos = { SCREEN_WIDTH / 2 - (GRID_WIDTH * CELL_WIDTH) / 2 ,SCREEN_HEIGHT / 2 - (GRID_HEIGHT * CELL_HEIGHT) / 2 };
+    //Vector2 gridPos = { SCREEN_WIDTH / 2 - (GRID_WIDTH * CELL_WIDTH) / 2 ,SCREEN_HEIGHT / 2 - (GRID_HEIGHT * CELL_HEIGHT) / 2 };
+    Vector2 gridPos = { -200,-200 };
 
     Texture2D tileSprite = LoadTexture("Ressources/TileBackground.png");
 
     grid = Grid(gridPos, GRID_WIDTH, GRID_HEIGHT, CELL_WIDTH, CELL_HEIGHT); //On génère la grille
     grid.spriteOfTiles = tileSprite;
     grid.Start();
+
+//=========Setup la camera==========
+    cam.position = { 250,250,250 };
+    cam.target = { 0,0,0 }; //Regarde au centre du monde 
+    cam.up = { 0,1,0 };
+    cam.fovy = 45;
+    cam.projection = CAMERA_PERSPECTIVE;
+    
 
 //=========Setup les obstacles==========
     Texture2D obstacleSprite = LoadTexture("Ressources/Obstacle.png");
@@ -36,13 +45,17 @@ void Game::Start()
     }
 
 
-//=============Setup Player============
-	player.Start();
-    player.SetGrid(&grid);
+//=============Controllers Setup============
 
-//=============Setup Ennemy============
-    ennemy.Start();
-    ennemy.SetGrid(&grid);
+    controllers.emplace_back(new PlayerController());   //Rajoute un player
+   // controllers.emplace_back(Ennemy());             //Rajoute un ennemy (old)
+
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    {
+        (*i)->Start();
+        (*i)->SetGrid(&grid);
+
+    }
 
 //=============Setup Cursor===========
     cursor.Start();
@@ -64,6 +77,7 @@ void Game::Start()
 
 
 //===========Setup les info==========
+    /*
     infoUi = new InformationDisplayUi();
     infoUi->SetPosition({ (float)SCREEN_WIDTH - SCREEN_WIDTH / 3,0 });
 
@@ -82,6 +96,7 @@ void Game::Start()
     {
         informations.push_back(obstacle->GetInformations());
     }
+    
 
                     //------Forcément de Dernier----------
     //On va parcourir toutes les tiles de la grille et récupérer les informaion pour les mettre dans informations
@@ -92,11 +107,12 @@ void Game::Start()
             informations.push_back(grid.grid[i][j].GetInformations());
         }
     }
+    */
 
 
 //=========Setup Turn Manager===========
-    turnManager.AddPawn(&player);
-    turnManager.AddPawn(&ennemy);
+    turnManager.AddSomethingMakeTurn(&player);
+    turnManager.AddSomethingMakeTurn(&ennemy);
     turnManager.Start();
 
 
@@ -108,13 +124,16 @@ void Game::Update()
     turnManager.Update();
     grid.Update();
 
-	player.Update();
-    ennemy.Update();
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    {
+        (*i)->Update();
+    }
 
     cursor.Updtate();
 
 
 //=======Updtate infos=========
+    /* Ca n'a pas à être là, avoir cette feature dans les player controller
     for (InformationDisplay* inf : informations)
     {
         if (inf->GetPos().x == player.GetMousePosInGrid().x && inf->GetPos().y == player.GetMousePosInGrid().y)
@@ -128,37 +147,50 @@ void Game::Update()
         {
             infoUi->infoLinkedTo = nullptr;
         }
-    }
+    }*/
 }
 
 void Game::Draw()
 {
     BeginDrawing();
     ClearBackground(BLACK);
+    BeginMode3D(cam);
 
-
+    DrawGrid(32, 32);
     grid.Draw();
     for each (Actor* obstacle in obstacles)
     {
         obstacle->Draw();
     }
 
-	player.Draw();
-    ennemy.Draw();
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    {
+        (*i)->Draw();
+    }
+
+    EndMode3D();
 
     DrawUi();
-
+    
     EndDrawing();
 }
 
 void Game::DrawUi()
 {
-	player.DrawUi();
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    {
+        (*i)->DrawUi();
+    }
     cursor.Draw();
 
 //=======Draw les infos========
-    infoUi->Draw();
+    //infoUi->Draw();
 
 //=======
     turnManager.DrawUi();
+}
+
+void Game::Clean()
+{
+
 }

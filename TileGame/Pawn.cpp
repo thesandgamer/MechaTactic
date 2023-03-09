@@ -121,6 +121,8 @@ void Pawn::DrawVisual(Vector2 positionP,bool ghost)
 	if (sprite.width != NULL )
 	{
 		DrawTexture(sprite, positionP.x * gridRef->CELL_WIDTH + gridRef->GetGridPos().x,positionP.y * gridRef->CELL_HEIGHT + gridRef->GetGridPos().y, color);
+		//DrawModel
+		DrawCube({ positionP.x * gridRef->CELL_WIDTH + gridRef->GetGridPos().x,0,positionP.y * gridRef->CELL_HEIGHT + gridRef->GetGridPos().y }, 32,32, 32, color);
 
 	}
 	else

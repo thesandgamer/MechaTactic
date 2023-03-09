@@ -17,7 +17,7 @@ public:
 
 	void DrawUi();
 
-	void AddPawn(ITurn* turn);
+	void AddSomethingMakeTurn(ITurn* turn);
 
 private:
 	ITurn* haveTurn;

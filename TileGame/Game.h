@@ -9,6 +9,9 @@
 #include "Cursor.h"
 #include "Obstacle.h"
 
+#include "Controller.h"
+#include "PlayerController.h"
+
 class Game
 {
 public:
@@ -23,7 +26,7 @@ public:
 	Game(Game&&) = delete;
 	Game& operator=(Game&&) = delete;
 private:
-	Game() : player{ Player() }, SCREEN_WIDTH{ -1 }, SCREEN_HEIGHT{ -1 }, infoUi{nullptr} {};
+	Game() : player{ Player() }, SCREEN_WIDTH{ -1 }, SCREEN_HEIGHT{ -1 } {};// infoUi{nullptr} {};
 
 
 
@@ -34,6 +37,8 @@ public:
 	void Update();
 	void Draw();
 	void DrawUi();
+
+	void Clean();
 
 	Grid* GetGrid() { return &grid; }
 
@@ -48,6 +53,8 @@ private:
 
 
 	TurnsManager turnManager;
+	vector<Controller*> controllers;
+
 	Player player;
 	Ennemy ennemy;
 	Grid grid;
@@ -58,13 +65,16 @@ private:
 
 	vector<Obstacle*> obstacles;
 
+	Camera cam{0};
+
 
 
 //========On va gérer le display des informations
+	/* Mettre la feature dans le player controller
 	InformationDisplayUi* infoUi;
 	vector<InformationDisplay*> informations;
 
-
+	*/
 
 
 

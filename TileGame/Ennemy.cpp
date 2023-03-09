@@ -89,7 +89,7 @@ void Ennemy::StartTurn()
 	finishHisTurn = false;
 }
 
-bool Ennemy::EndTurn()
+bool Ennemy::HaveEndTurn()
 {
 	return finishHisTurn;
 }

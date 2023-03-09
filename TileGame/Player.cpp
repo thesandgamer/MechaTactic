@@ -200,7 +200,7 @@ void Player::StartTurn()
 
 }
 
-bool Player::EndTurn()
+bool Player::HaveEndTurn()
 {
 	return finishHisTurn;
 }

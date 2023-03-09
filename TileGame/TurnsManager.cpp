@@ -32,7 +32,7 @@ void TurnsManager::Update()
 
 	if (haveTurn != nullptr) //Si quelqu'un existe
 	{
-		if (haveTurn->EndTurn())//Si il à finit son tour
+		if (haveTurn->HaveEndTurn())//Si il à finit son tour
 		{
 			//Passe au suivant 
 			if (actual < allControllers.size()-1)
@@ -64,7 +64,7 @@ void TurnsManager::DrawUi()
 
 }
 
-void TurnsManager::AddPawn(ITurn* turn)
+void TurnsManager::AddSomethingMakeTurn(ITurn* turn)
 {
 	allControllers.push_back(turn);
 }

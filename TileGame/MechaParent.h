@@ -25,24 +25,22 @@ class MechaParent : public IInformationPasseur, public Actor
 {
 public:
 	MechaParent();
-	MechaParent(Vector2 positionP);
-	MechaParent(Vector2 positionP, Texture2D spriteP);
-	MechaParent(Vector2 positionP, float widthP, float heightP);
+	MechaParent(Vector3 positionP);
+	MechaParent(Vector3 positionP, Model modelP);
 	~MechaParent();
 
 	void Init();
 	void Draw();
 	void Update();
 
-	void DrawVisual(Vector2 positionP);
+	void DrawVisual();
 
-	//Vector2 position;
-
-	float width;
-	float height;
+	Vector3 GetLocation() { return transform.translation; }
 
 	void MoveTo(Vector2 positionToGo);
 
+
+	//========]	Informations
 	InformationDisplay* GetInformations() { return informations; }
 	void SetInformations(string newInfo) { info = newInfo; }
 
@@ -50,14 +48,14 @@ public:
 
 
 	bool selected = false;
-
 	bool haveDoActions = false;
 
-
+	/*
 	MechaParent(const MechaParent& other)
 	{
 		operator=(other);
 	}
+
 
 	MechaParent& operator=(const MechaParent& other)
 	{
@@ -68,20 +66,24 @@ public:
 		this->informations = other.informations;
 		this->sprite = other.sprite;
 		return *this;
-	}
+	}*/
 
 
 
 
 private:
-	MechaState state;
-	InformationDisplay* informations;
+	Transform transform{ {0,0,0},{0,0,0},{1,1,1} };
+
+	MechaState state{MechaState::NORMAL};
+	InformationDisplay* informations{nullptr};
 	string info;
 	bool canMove = false;
 
+	Model model{};
+
 
 	//-------For A*--------
-	std::vector<Vector2> poses;//Position où aller pour le A*
+	std::vector<Vector2> poses{ };//Position où aller pour le A*
 
 
 	//--------Variables for easing------------

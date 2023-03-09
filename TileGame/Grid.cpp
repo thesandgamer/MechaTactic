@@ -54,8 +54,6 @@ void Grid::Update()
 
 void Grid::Draw()
 {
-
-	DrawCube({ 0,0,0 }, 64, 64, 64, RED);
 	for (std::vector<Tile> ligne : grid)
 	{
 		for (Tile tile : ligne)

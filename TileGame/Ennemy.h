@@ -26,7 +26,7 @@ public:
 
 	//==========Interfaces==========
 	void StartTurn();
-	bool EndTurn();
+	bool HaveEndTurn();
 	int initiative;
 	bool finishHisTurn = false;
 

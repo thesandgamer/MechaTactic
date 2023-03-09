@@ -10,38 +10,17 @@ MechaParent::MechaParent()
 	informations = nullptr;
 }
 
-MechaParent::MechaParent(Vector2 positionP) : Actor(positionP)
+MechaParent::MechaParent(Vector3 positionP)
 {
-	position = positionP;
-	gridRef = nullptr;
-	informations = nullptr;
+	Init();
+}
+
+MechaParent::MechaParent(Vector3 positionP, Model modelP): model{modelP}
+{
 
 	Init();
 }
 
-MechaParent::MechaParent(Vector2 positionP, Texture2D spriteP) : Actor(positionP)
-{
-	position = positionP;
-	gridRef = nullptr;
-	informations = nullptr;
-	sprite = spriteP;
-
-	Init();
-
-}
-
-MechaParent::MechaParent(Vector2 positionP, float widthP, float heightP) : Actor(positionP)
-{
-	position = positionP;
-	width = widthP;
-	height = heightP;
-	gridRef = nullptr;
-	informations = nullptr;
-
-	Init();
-
-
-}
 
 MechaParent::~MechaParent()
 {
@@ -50,18 +29,19 @@ MechaParent::~MechaParent()
 
 void MechaParent::Init()
 {
+	//-----Setup des informations
 	informations = new InformationDisplay();
 	informations->SetPos(&position);
 	informations->infPasseur = this;
 
+	//-----Setup le lien avec la grid
 	gridRef = Game::instance().GetGrid();
-	std::cout << sprite.width << std::endl;
 
 }
 
 void MechaParent::Draw()
 {
-	DrawVisual(position);
+	DrawVisual();
 }
 
 
@@ -112,7 +92,7 @@ void MechaParent::Update()
 
 }
 
-void MechaParent::DrawVisual(Vector2 positionP)
+void MechaParent::DrawVisual()
 {
 	Color color = WHITE;
 
@@ -123,7 +103,6 @@ void MechaParent::DrawVisual(Vector2 positionP)
 		break;
 	case MechaState::SelectedGhost:
 		color = GRAY;
-
 		break;
 	case MechaState::NoActionsPossible:
 		color = BLACK;
@@ -133,11 +112,11 @@ void MechaParent::DrawVisual(Vector2 positionP)
 	default:
 		break;
 	}
-
-	DrawRectangle(positionP.x * gridRef->CELL_WIDTH + width / 4 + gridRef->GetGridPos().x, positionP.y * gridRef->CELL_HEIGHT + height / 4 + gridRef->GetGridPos().y, width, height, color);
-
-
-
+	if (model.meshCount == NULL)
+	{
+		model = LoadModelFromMesh(GenMeshCube(gridRef->CELL_WIDTH, gridRef->CELL_HEIGHT, gridRef->CELL_WIDTH));
+	}
+	DrawModel(model, transform.translation, transform.scale.x, color);
 
 }
 

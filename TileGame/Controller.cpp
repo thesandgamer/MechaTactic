@@ -1,6 +1,5 @@
 #include "Controller.h"
 
-#include "Player.h"
 #include "Grid.h"
 
 
@@ -54,7 +53,7 @@ void Controller::DrawUi()
 
 
 
-bool Controller::MovePawn(Vector2 moveTo)
+bool Controller::MoveMecha(Vector2 moveTo)
 {
 	if (gridRef->grid[moveTo.x][moveTo.y].traversible == true)//Si la case séléctionné est traversible
 	{
@@ -102,7 +101,7 @@ void Controller::SetGrid(Grid* grid)
 	gridRef = grid;
 }
 
-void Controller::FinishPlayerTurn()
+void Controller::FinishTurn()
 {
 	isTurn = false;
 	finishHisTurn = true;
@@ -122,7 +121,7 @@ void Controller::StartTurn()
 	isTurn = true;
 }
 
-bool Controller::EndTurn()
+bool Controller::HaveEndTurn()
 {
 	return finishHisTurn;
 }

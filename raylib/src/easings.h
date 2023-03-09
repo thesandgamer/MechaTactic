@@ -9,13 +9,7 @@
 *                                           // This requires lots of memory on system.
 *   How to use:
 *   The four inputs t,b,c,d are defined as follows:
-*   t = current 
-
-
-
-
-
-(in any unit measure, but same unit as duration)
+*   t = current time (in any unit measure, but same unit as duration)
 *   b = starting value to interpolate
 *   c = the total change in value of b that needs to occur
 *   d = total time it should take to complete (duration)

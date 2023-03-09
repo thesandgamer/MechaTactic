@@ -7,7 +7,7 @@ class ITurn
 {
 public:
 	virtual void StartTurn() = 0;
-	virtual bool EndTurn() = 0;
+	virtual bool HaveEndTurn() = 0;
 
 	int initiative;
 	bool finishHisTurn;

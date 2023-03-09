@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{E9C7FDCE-D52A-8D73-7EB0-C5296AF258F6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AStar">
       <UniqueIdentifier>{11582c42-54b1-43fb-b347-9de8e137f2f5}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,15 @@
     </Filter>
     <Filter Include="Mechas">
       <UniqueIdentifier>{4c1bdb83-513e-453a-99e1-b8f6799ff988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cursor">
+      <UniqueIdentifier>{E9C7FDCE-D52A-8D73-7EB0-C5296AF258F6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain">
+      <UniqueIdentifier>{e62a1b09-09a1-4833-80e8-9b4efe3d9d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collisions">
+      <UniqueIdentifier>{2807864d-3a4a-4934-9921-4c62f304bdb5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,12 +76,11 @@
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Cursor</Filter>
     </ClCompile>
     <ClCompile Include="BandeauTexte.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Controller.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
@@ -93,6 +98,24 @@
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollision.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="RaycastCollision.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollision.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="P_Collision.cpp">
+      <Filter>Collisions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -145,12 +168,11 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Cursor.h">
-      <Filter>Source Files</Filter>
+      <Filter>Cursor</Filter>
     </ClInclude>
     <ClInclude Include="BandeauTexte.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Controller.h">
       <Filter>Controllers</Filter>
     </ClInclude>
@@ -168,6 +190,24 @@
     </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollision.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="RaycastCollision.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollision.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="P_Collision.h">
+      <Filter>Collisions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
