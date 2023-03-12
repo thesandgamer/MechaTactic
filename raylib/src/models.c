@@ -815,6 +815,63 @@ void UnloadModelKeepMeshes(Model model)
     TRACELOG(LOG_INFO, "MODEL: Unloaded model (but not meshes) from RAM and VRAM");
 }
 
+// Compute mesh bounding box limits
+// NOTE: minVertex and maxVertex should be transformed by model transform matrix
+BoundingBox GetMeshBoundingBox(Mesh mesh)
+{
+    // Get min and max vertex to construct bounds (AABB)
+    Vector3 minVertex = { 0 };
+    Vector3 maxVertex = { 0 };
+
+    if (mesh.vertices != NULL)
+    {
+        minVertex = (Vector3){ mesh.vertices[0], mesh.vertices[1], mesh.vertices[2] };
+        maxVertex = (Vector3){ mesh.vertices[0], mesh.vertices[1], mesh.vertices[2] };
+
+        for (int i = 1; i < mesh.vertexCount; i++)
+        {
+            minVertex = Vector3Min(minVertex, (Vector3) { mesh.vertices[i * 3], mesh.vertices[i * 3 + 1], mesh.vertices[i * 3 + 2] });
+            maxVertex = Vector3Max(maxVertex, (Vector3) { mesh.vertices[i * 3], mesh.vertices[i * 3 + 1], mesh.vertices[i * 3 + 2] });
+        }
+    }
+
+    // Create the bounding box
+    BoundingBox box = { 0 };
+    box.min = minVertex;
+    box.max = maxVertex;
+
+    return box;
+}
+
+// Compute model bounding box limits (considers all meshes)
+BoundingBox GetModelBoundingBox(Model model)
+{
+    BoundingBox bounds = { 0 };
+
+    if (model.meshCount > 0)
+    {
+        Vector3 temp = { 0 };
+        bounds = GetMeshBoundingBox(model.meshes[0]);
+
+        for (int i = 1; i < model.meshCount; i++)
+        {
+            BoundingBox tempBounds = GetMeshBoundingBox(model.meshes[i]);
+
+            temp.x = (bounds.min.x < tempBounds.min.x) ? bounds.min.x : tempBounds.min.x;
+            temp.y = (bounds.min.y < tempBounds.min.y) ? bounds.min.y : tempBounds.min.y;
+            temp.z = (bounds.min.z < tempBounds.min.z) ? bounds.min.z : tempBounds.min.z;
+            bounds.min = temp;
+
+            temp.x = (bounds.max.x > tempBounds.max.x) ? bounds.max.x : tempBounds.max.x;
+            temp.y = (bounds.max.y > tempBounds.max.y) ? bounds.max.y : tempBounds.max.y;
+            temp.z = (bounds.max.z > tempBounds.max.z) ? bounds.max.z : tempBounds.max.z;
+            bounds.max = temp;
+        }
+    }
+
+    return bounds;
+}
+
 // Upload vertex data into a VAO (if supported) and VBO
 void UploadMesh(Mesh *mesh, bool dynamic)
 {

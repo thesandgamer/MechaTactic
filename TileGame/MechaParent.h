@@ -87,7 +87,7 @@ private:
 	//-------For drawing-------
 	Model model{};
 
-	Color drawColor{PURPLE};
+	Color drawColor{WHITE};
 	Color baseColor{PURPLE};
 
 

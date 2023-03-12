@@ -3,24 +3,21 @@
 #include "InformationDisplay.h"
 #include "IInformationPasseur.h"
 
+#include "BoxCollision.h"
 class Grid;
 
 class Tile: public IInformationPasseur
 {
 public:
 	Tile();
-	Tile(int xP, int yP);
-	Tile(int xP, int yP,float widthP,float heightP);
+	Tile(Vector3 positionP);
+	Tile(Vector3 positionP,Model modelP);
 	~Tile() {};
 
-	Vector2 pos;
 
-	float width;
-	float height;
+	bool traversible{ true };
 
-	bool traversible;
-
-	Grid* refToGrid;
+	Grid* refToGrid {nullptr};
 
 	void Init();
 	void Draw();
@@ -29,7 +26,7 @@ public:
 
 	string GetInformationOf() override;
 
-
+	/*
 	Tile& operator=(const Tile& other)
 	{
 		this->pos = other.pos;
@@ -41,9 +38,16 @@ public:
 
 		return *this;
 	}	
+	*/
 
-	Texture2D sprite;
 private:
+	Transform transform{ {0,0,0},{0,0,0},{1,1,1} };
+
+	//-------For drawing-------
+	Model model{};
+	BoxCollision collision{};
+	Color drawColor{ WHITE };
+
 	InformationDisplay* informations;
 
 

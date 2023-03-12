@@ -13,6 +13,7 @@ public:
 	BoxCollision(Vector3 sizeP);
 	BoxCollision(Model*  model);
 
+	void Init();
 	void Draw();
 
 	BoundingBox GetBoundingBox(); //++Todo Renvoyer un pointeur de bounding box
@@ -22,6 +23,9 @@ public:
 
 private:
 	BoundingBox boundingBox;
+
+	Model* modelToBoxing{ nullptr };
+
 
 
 	//++ToDo trouver un moyen de créer une box avec comme param une pointeur vers une valeur

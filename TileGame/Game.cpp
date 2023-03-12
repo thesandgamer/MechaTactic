@@ -47,8 +47,8 @@ void Game::Start()
 
 //=============Controllers Setup============
     PlayerController* player = new PlayerController();
-    player->AddMecha({ 32,0,32 });
-    player->AddMecha({ 64,0,64 });
+    player->AddMecha({ 2,0,2 });
+    player->AddMecha({ 4,0,4 });
     controllers.push_back(player);   //Rajoute un player
    // controllers.emplace_back(new Ennemy());             //Rajoute un ennemy (old)
 

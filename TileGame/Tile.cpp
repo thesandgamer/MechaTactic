@@ -6,52 +6,49 @@ Tile::Tile(): refToGrid{nullptr}, informations{nullptr}
 
 }
 
-Tile::Tile(int xP, int yP)
+Tile::Tile(Vector3 positionP)
 {
-	pos.x = xP;
-	pos.y = yP;
-	traversible = true;
-	refToGrid = nullptr;
-
-
+	transform.translation = positionP;
 }
 
-Tile::Tile(int xP, int yP, float widthP, float heightP)
+Tile::Tile(Vector3 positionP, Model modelP): model{modelP}
 {
-	pos.x = xP;
-	pos.y = yP;
-	width = widthP;
-	height = heightP;
-	traversible = true;
-	refToGrid = nullptr;
-
-
-
+	transform.translation = positionP;
 }
+
 
 void Tile::Init()
 {
+	//-------Set collision
+	collision = BoxCollision(&model);
+	collision.SetParent(&transform);
+
+	if (model.meshCount == NULL)//Si on à pas de mesh de loadé, load un cube
+	{
+		drawColor = PURPLE;
+		model = LoadModelFromMesh(GenMeshCube(refToGrid->CELL_WIDTH, refToGrid->CELL_HEIGHT, refToGrid->CELL_WIDTH));
+	}
+	collision.Init();
+
+	//-----Set les infos
 	informations = new InformationDisplay();
-	informations->SetPos(&pos);
+	//informations->SetPos(&pos);
 	informations->infPasseur = this;
+
+	//------
+	transform.translation = { transform.translation.x * refToGrid->CELL_WIDTH,transform.translation.y * refToGrid->CELL_WIDTH, transform.translation.z * refToGrid->CELL_HEIGHT };
+
+
+
 }
 
 void Tile::Draw()
 {
-	if (sprite.width != NULL)
-	{
-		//DrawTexture(sprite, pos.x * refToGrid->CELL_WIDTH + refToGrid->GetGridPos().x, pos.y * refToGrid->CELL_HEIGHT + refToGrid->GetGridPos().y, WHITE);
 
-		DrawCube({ pos.x * refToGrid->CELL_WIDTH + refToGrid->GetGridPos().x ,-32,pos.y * refToGrid->CELL_HEIGHT + refToGrid->GetGridPos().y }, 32, 32, 32, GRAY);
-		//DrawCubeWires({ pos.x * refToGrid->CELL_WIDTH + refToGrid->GetGridPos().x ,-32,pos.y * refToGrid->CELL_HEIGHT + refToGrid->GetGridPos().y }, 32, 32, 32, GREEN);
-
-	}
-	else
-	{
-		DrawRectangle(pos.x * refToGrid->CELL_WIDTH + width / 4 + refToGrid->GetGridPos().x, pos.y * refToGrid->CELL_HEIGHT + height / 4 + refToGrid->GetGridPos().y, width, height, LIGHTGRAY);
-
-	}
+	DrawModel(model, transform.translation, transform.scale.x, drawColor);
+	collision.Draw();
 }
+
 
 string Tile::GetInformationOf()
 {

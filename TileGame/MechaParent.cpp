@@ -30,25 +30,39 @@ MechaParent::~MechaParent()
 
 void MechaParent::Init()
 {
-	//-----Setup des informations
-	informations = new InformationDisplay();
-	informations->SetPos(&position);
-	informations->infPasseur = this;
-
 	//-----Setup le lien avec la grid
 	gridRef = Game::instance().GetGrid();
 
+
+	//Setup le model pour le dessiner
 	if (model.meshCount == NULL)
 	{
 		drawColor = baseColor;
 		model = LoadModelFromMesh(GenMeshCube(gridRef->CELL_WIDTH, gridRef->CELL_HEIGHT, gridRef->CELL_WIDTH));
 	}
 
+	//-------Set collision
+	collision = BoxCollision(&model) ;
+	//collision = BoxCollision({ 32,32,32 });
+	collision.SetParent(&transform);
+
+	//-----Setup des informations
+	informations = new InformationDisplay();
+	informations->SetPos(&position);
+	informations->infPasseur = this;
+
+	collision.Init();
+
+	transform.translation = { transform.translation.x * gridRef->CELL_WIDTH,transform.translation.y * gridRef->CELL_WIDTH, transform.translation.z * gridRef->CELL_HEIGHT };
+
+	
+
 }
 
 void MechaParent::Draw()
 {
 	DrawVisual();
+	collision.Draw();
 }
 
 
@@ -121,7 +135,8 @@ void MechaParent::DrawVisual()
 		break;
 	}*/
 
-	DrawModel(model, transform.translation, transform.scale.x, drawColor);
+	DrawModel(model,transform.translation, transform.scale.x, drawColor);
+	//DrawCubeWires(transform.translation, gridRef->CELL_WIDTH, gridRef->CELL_WIDTH, gridRef->CELL_WIDTH, GREEN);
 
 }
 
@@ -129,7 +144,6 @@ void MechaParent::DrawVisual()
 void MechaParent::MoveTo(Vector2 positionToGo)
 {
 	if (haveDoActions) return;
-
 	//Si il n'y a pas de position à aller, finit
 	//Appel le A star
 	gridRef->Debug_CleanPathVisibility();

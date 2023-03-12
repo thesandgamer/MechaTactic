@@ -37,8 +37,8 @@ void Grid::Start()
 	{
 		for (int j = 0; j < grid[i].size(); j++)
 		{
-			grid[i][j] = Tile(i, j, CELL_WIDTH, CELL_HEIGHT);
-			grid[i][j].sprite = spriteOfTiles;
+			grid[i][j] = Tile( Vector3{(float)i,-1,(float)j} );
+			//Set le model
 			grid[i][j].refToGrid = this;
 			grid[i][j].Init();
 

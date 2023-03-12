@@ -1379,6 +1379,7 @@ RLAPI Model LoadModel(const char *fileName);                                    
 RLAPI Model LoadModelFromMesh(Mesh mesh);                                                   // Load model from generated mesh (default material)
 RLAPI void UnloadModel(Model model);                                                        // Unload model (including meshes) from memory (RAM and/or VRAM)
 RLAPI void UnloadModelKeepMeshes(Model model);                                              // Unload model (but not meshes) from memory (RAM and/or VRAM)
+RLAPI BoundingBox GetModelBoundingBox(Model model);                                         // Compute model bounding box limits (considers all meshes)
 
 // Mesh loading/unloading functions
 RLAPI void UploadMesh(Mesh *mesh, bool dynamic);                                            // Upload vertex data into GPU and provided VAO/VBO ids
