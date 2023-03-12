@@ -109,10 +109,15 @@ void Button::CliquedSendFunctionWithInt()
 }
 
 
+void Button::AddFunctionToTrigger(std::function<void()> func)
+{
+	functionsToTrigger.push_back(func);
+}
+
 void Button::call()
 {
-	if (callback)
+	for (auto i = functionsToTrigger.begin(); i != functionsToTrigger.end(); ++i)
 	{
-		callback();//Appel ce qu'il y a dans callback
+		(*i)();
 	}
 }

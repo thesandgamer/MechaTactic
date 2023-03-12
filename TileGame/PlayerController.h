@@ -5,7 +5,7 @@
 
 //++ToDo: faire en sorte d'avoir un raycast, détécter ce qu'il y a sous le raycast
 
-class PlayerController 
+class PlayerController: public Controller
 {
 public:
     
@@ -13,24 +13,23 @@ public:
     PlayerController();
     ~PlayerController();
 
-    void Start();
-    void Update();
-    void Draw();
-    void DrawUi();
+    void Start() override;
+    void Update() override;
+    void Draw() override;
+    void DrawUi() override;
 
     void PlayerDecideActions();
     void CheckWhatBehindRay();
 
 private:
-    Controller controller;
 
-    Vector2 mousePos;
-    Vector2 mousePosInGrid;
+    Vector2 mousePos{0,0};
+    Vector2 mousePosInGrid{ 0,0 };
 
-    Button* endTurnButton = nullptr;
+    Button* endTurnButton{nullptr};
 
     //----For raycast
-    RaycastCollision ray{ {0,0,0},100000 };
+    //RaycastCollision ray{ {0,0,0},100000 };
     
 
 

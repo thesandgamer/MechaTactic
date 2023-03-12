@@ -15,6 +15,8 @@ Controller::~Controller()
 void Controller::Start()
 {
 	//=========Gère les pawns============
+	std::cout << "		Controller " << name << " have stated" << std::endl;
+	InitPawns();
 }
 
 void Controller::InitPawns()
@@ -51,6 +53,10 @@ void Controller::DrawUi()
 
 }
 
+void Controller::AddMecha(Vector3 location)
+{
+	mechasList.push_back(MechaParent(location));
+}
 
 
 bool Controller::MoveMecha(Vector2 moveTo)

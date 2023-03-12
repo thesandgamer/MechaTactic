@@ -46,29 +46,40 @@ void Game::Start()
 
 
 //=============Controllers Setup============
+    PlayerController* player = new PlayerController();
+    player->AddMecha({ 32,0,32 });
+    player->AddMecha({ 64,0,64 });
+    controllers.push_back(player);   //Rajoute un player
+   // controllers.emplace_back(new Ennemy());             //Rajoute un ennemy (old)
 
-    controllers.emplace_back(new PlayerController());   //Rajoute un player
-   // controllers.emplace_back(Ennemy());             //Rajoute un ennemy (old)
-
+    
+    for (size_t i = 0; i < controllers.size(); i++)
+    {
+        controllers.at(i)->SetGrid(&grid);
+        controllers[i]->Start();
+      
+    }
+    /*
     for (auto i = controllers.begin(); i != controllers.end(); i++)
     {
-        (*i)->Start();
         (*i)->SetGrid(&grid);
-
-    }
+        (*i)->Start();
+        
+    }*/
 
 //=============Setup Cursor===========
     cursor.Start();
 
 //============Setup elements in game==============
-    for (int i = 0; i < player.GetPawns()->size(); i++)
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
     {
-        elementsInGame.push_back(&player.GetPawns()->at(i));
+        for (int j = 0; j < (*i)->GetMechas()->size(); j++)
+        {
+           elementsInGame.push_back(&(*i)->GetMechas()->at(j));
+        }
+
     }
-    for (int i = 0; i < ennemy.GetPawns()->size(); i++)
-    {
-        elementsInGame.push_back(&ennemy.GetPawns()->at(i));
-    }
+
 
     for each (Actor* obstacle in obstacles)
     {
@@ -111,8 +122,10 @@ void Game::Start()
 
 
 //=========Setup Turn Manager===========
-    turnManager.AddSomethingMakeTurn(&player);
-    turnManager.AddSomethingMakeTurn(&ennemy);
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    {
+        turnManager.AddSomethingMakeTurn(*i);
+    }
     turnManager.Start();
 
 
@@ -158,6 +171,7 @@ void Game::Draw()
 
     DrawGrid(32, 32);
     grid.Draw();
+
     for each (Actor* obstacle in obstacles)
     {
         obstacle->Draw();

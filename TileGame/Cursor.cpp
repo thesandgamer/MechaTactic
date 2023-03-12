@@ -29,13 +29,16 @@ void Cursor::Updtate()
 
 void Cursor::Draw()
 {
+	/*	OLD revoir le fonctionnement du curseur
 	Color col = GREEN;
 	float x = mousePosInGrid.x * gridRef->CELL_WIDTH ;
 	float y = mousePosInGrid.y * gridRef->CELL_HEIGHT ;
 
+	
 	if (mousePosInGrid.x >= 0 && mousePosInGrid.x < gridRef->GRID_WITH && mousePosInGrid.y >= 0 && mousePosInGrid.x < gridRef->GRID_HEIGHT)//Si on est dans la grille
 	{
 		//Cas Hover
+		
 		vector<Pawn>* actors = Game::instance().GetPlayer()->GetPawns();//A modifier
 		for (int i = 0; i < actors->size(); i++)
 		{	
@@ -75,6 +78,7 @@ void Cursor::Draw()
 				state = CusorState::PAWN_CAN_NOT_MOVE;
 			}
 		}
+		
 		
 	}
 	else
@@ -119,6 +123,6 @@ void Cursor::Draw()
 
 	//Draw le curseur
 	//DrawRectangle(position.x, position.y, gridRef->CELL_WIDTH /2 , gridRef->CELL_HEIGHT /2, col);
-
+	*/
 
 }

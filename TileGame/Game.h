@@ -26,7 +26,7 @@ public:
 	Game(Game&&) = delete;
 	Game& operator=(Game&&) = delete;
 private:
-	Game() : player{ Player() }, SCREEN_WIDTH{ -1 }, SCREEN_HEIGHT{ -1 } {};// infoUi{nullptr} {};
+	Game() : SCREEN_WIDTH{ -1 }, SCREEN_HEIGHT{ -1 } {};// infoUi{nullptr} {};
 
 
 
@@ -44,7 +44,8 @@ public:
 
 	vector<Actor*> GetElementsInGame() { return elementsInGame; }
 
-	Player* GetPlayer() { return &player; }
+
+	Camera* GetCamera() { return &cam; }
 
 	int  SCREEN_WIDTH;
 	int  SCREEN_HEIGHT;
@@ -55,8 +56,7 @@ private:
 	TurnsManager turnManager;
 	vector<Controller*> controllers;
 
-	Player player;
-	Ennemy ennemy;
+
 	Grid grid;
 
 	Cursor cursor;

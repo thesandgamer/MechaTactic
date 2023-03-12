@@ -43,7 +43,7 @@ void Tile::Draw()
 		//DrawTexture(sprite, pos.x * refToGrid->CELL_WIDTH + refToGrid->GetGridPos().x, pos.y * refToGrid->CELL_HEIGHT + refToGrid->GetGridPos().y, WHITE);
 
 		DrawCube({ pos.x * refToGrid->CELL_WIDTH + refToGrid->GetGridPos().x ,-32,pos.y * refToGrid->CELL_HEIGHT + refToGrid->GetGridPos().y }, 32, 32, 32, GRAY);
-		DrawCubeWires({ pos.x * refToGrid->CELL_WIDTH + refToGrid->GetGridPos().x ,-32,pos.y * refToGrid->CELL_HEIGHT + refToGrid->GetGridPos().y }, 32, 32, 32, GREEN);
+		//DrawCubeWires({ pos.x * refToGrid->CELL_WIDTH + refToGrid->GetGridPos().x ,-32,pos.y * refToGrid->CELL_HEIGHT + refToGrid->GetGridPos().y }, 32, 32, 32, GREEN);
 
 	}
 	else

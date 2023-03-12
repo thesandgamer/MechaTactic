@@ -1,6 +1,7 @@
 #include "PlayerController.h"
+#include "Game.h"
 
-PlayerController::PlayerController()
+PlayerController::PlayerController(): Controller()
 {
 }
 
@@ -10,29 +11,45 @@ PlayerController::~PlayerController()
 
 void PlayerController::Start()
 {
-	controller.name = "Player";
+	name = "Player";
+
+	//------Change the color of mecha to distinc if no models
+	for (auto i = mechasList.begin(); i != mechasList.end(); i++)
+	{
+		(*i).SetBaseColor({0,100,0,255});
+
+	}
+
+	Controller::Start();
 
 	Texture2D buttonSprite = LoadTexture("Ressources/EndTurnButton.png");
 
 	endTurnButton = new Button({ 10,10 }, buttonSprite, 128, 64);
 	endTurnButton->textInButton = "End Turn";
-	endTurnButton->setCallback(std::bind(&Controller::FinishTurn,&controller));//Set la fonction de callback créer un fonction lambda
+	endTurnButton->AddFunctionToTrigger(std::bind(&PlayerController::FinishTurn,this));//Set la fonction de callback créer un fonction lambda
 	
+
+
 }
 
 void PlayerController::Update()
 {
-	if (!controller.isTurn) return;
+	Controller::Update();
+	if (!isTurn) return;
 	PlayerDecideActions();
 }
 
 void PlayerController::Draw()
 {
-	ray.Draw();
+	Controller::Draw();
+
+	//ray.Draw();
 }
 
 void PlayerController::DrawUi()
 {
+	Controller::DrawUi();
+
 	endTurnButton->Update();
 	endTurnButton->Draw();
 }
@@ -42,11 +59,13 @@ void PlayerController::DrawUi()
 void PlayerController::PlayerDecideActions()
 {
 	mousePos = GetMousePosition();
-	mousePosInGrid = controller.gridRef->PosInGrid(mousePos);
+	mousePosInGrid = gridRef->PosInGrid(mousePos);
+
+	CheckWhatBehindRay();
 
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))	//Clique gauche
 	{
-		if (controller.controledMecha == nullptr)	//Si on à pas de mécha selectionné
+		if (controledMecha == nullptr)	//Si on à pas de mécha selectionné
 		{
 			//Select mecha
 		}
@@ -57,13 +76,13 @@ void PlayerController::PlayerDecideActions()
 	}
 	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))	//Clique droit
 	{
-		if (controller.controledMecha == nullptr)
+		if (controledMecha == nullptr)
 		{
 		
 		}
-		else if (controller.controledMecha != nullptr)
+		else if (controledMecha != nullptr)
 		{
-			controller.DeSelectMecha();
+			DeSelectMecha();
 
 		}
 
@@ -72,4 +91,12 @@ void PlayerController::PlayerDecideActions()
 
 void PlayerController::CheckWhatBehindRay()
 {
+	//Quand le tour du joueur est actif
+	//Faire un rayon entre la camera et la souris (faire un truc à la unity Camera.screenPointToRay
+	Vector3 direction;
+	Ray ray{ Game::instance().GetCamera()->position,{0,0,0 } };
+	DrawRay(ray, 10, GREEN);
+	// 
+	//Si le rayon collide une boite de collision, récupérer l'objet lié à la boite de collision
+	//Appel la fonction hover de l'interface de l'objet touché par le rayon
 }

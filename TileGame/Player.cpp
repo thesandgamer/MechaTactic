@@ -34,7 +34,7 @@ void Player::Start()
 	endTurnButton = new Button({ 10,10 }, buttonSprite, 128,64);
 	endTurnButton->textInButton = "End Turn";
 	//endTurnButton->functPrt = [this]() { finishHisTurn = true } ();
-	endTurnButton->setCallback( [this]() { this->FinishPlayerTurn(); } );//Set la fonction de callback créer un fonction lambda
+	endTurnButton->AddFunctionToTrigger( [this]() { this->FinishPlayerTurn(); } );//Set la fonction de callback créer un fonction lambda
 							//Quel objet // Quel fonction
 
 

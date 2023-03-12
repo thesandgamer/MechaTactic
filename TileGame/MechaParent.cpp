@@ -12,13 +12,14 @@ MechaParent::MechaParent()
 
 MechaParent::MechaParent(Vector3 positionP)
 {
-	Init();
+	transform.translation = positionP;
+	//Init();
 }
 
 MechaParent::MechaParent(Vector3 positionP, Model modelP): model{modelP}
 {
-
-	Init();
+	transform.translation = positionP;
+	//Init();
 }
 
 
@@ -36,6 +37,12 @@ void MechaParent::Init()
 
 	//-----Setup le lien avec la grid
 	gridRef = Game::instance().GetGrid();
+
+	if (model.meshCount == NULL)
+	{
+		drawColor = baseColor;
+		model = LoadModelFromMesh(GenMeshCube(gridRef->CELL_WIDTH, gridRef->CELL_HEIGHT, gridRef->CELL_WIDTH));
+	}
 
 }
 
@@ -94,7 +101,8 @@ void MechaParent::Update()
 
 void MechaParent::DrawVisual()
 {
-	Color color = WHITE;
+	/*
+	drawColor = WHITE;
 
 	switch (state)
 	{
@@ -111,12 +119,9 @@ void MechaParent::DrawVisual()
 		break;
 	default:
 		break;
-	}
-	if (model.meshCount == NULL)
-	{
-		model = LoadModelFromMesh(GenMeshCube(gridRef->CELL_WIDTH, gridRef->CELL_HEIGHT, gridRef->CELL_WIDTH));
-	}
-	DrawModel(model, transform.translation, transform.scale.x, color);
+	}*/
+
+	DrawModel(model, transform.translation, transform.scale.x, drawColor);
 
 }
 

@@ -11,6 +11,8 @@
 #include "IInformationPasseur.h"
 #include "ITurn.h"
 
+#include "BoxCollision.h"
+
 
 enum class MechaState
 {
@@ -68,18 +70,27 @@ public:
 		return *this;
 	}*/
 
-
+	void SetBaseColor(Color color) { baseColor = color; }
 
 
 private:
 	Transform transform{ {0,0,0},{0,0,0},{1,1,1} };
+
+	BoxCollision collision{};
 
 	MechaState state{MechaState::NORMAL};
 	InformationDisplay* informations{nullptr};
 	string info;
 	bool canMove = false;
 
+
+	//-------For drawing-------
 	Model model{};
+
+	Color drawColor{PURPLE};
+	Color baseColor{PURPLE};
+
+
 
 
 	//-------For A*--------

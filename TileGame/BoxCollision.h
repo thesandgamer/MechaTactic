@@ -11,6 +11,7 @@ class BoxCollision :
 public:
 	BoxCollision();
 	BoxCollision(Vector3 sizeP);
+	BoxCollision(Model*  model);
 
 	void Draw();
 
@@ -20,6 +21,7 @@ public:
 
 
 private:
+	BoundingBox boundingBox;
 
 
 	//++ToDo trouver un moyen de créer une box avec comme param une pointeur vers une valeur

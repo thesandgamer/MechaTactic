@@ -5,7 +5,7 @@
 #include <functional>
 
 
-typedef std::function<void()> MemberCallback;//Créer un type pointeur fonction void, créer le type du lambda
+typedef std::function<void()> FuncPointer;//Créer un type pointeur fonction void, créer le type du lambda
 
 enum class ButtonState
 {
@@ -38,7 +38,7 @@ public:
 
     std::string textInButton;
 
-    void setCallback(MemberCallback newCallback) { callback = newCallback; }//Set l'instance
+    void AddFunctionToTrigger(std::function<void()> func);//Set l'instance
     void call();//Appel
 
     bool isActive = true;
@@ -55,7 +55,7 @@ private:
     Color drawColor ;
 
 
-    MemberCallback callback; //instance de pointeur de fonction
+    std::vector<std::function<void()>> functionsToTrigger; //instance de pointeur de fonction
 
 };
 

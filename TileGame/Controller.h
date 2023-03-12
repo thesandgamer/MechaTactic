@@ -8,17 +8,18 @@ using std::vector;
 
 class Controller : public ITurn
 {
-	friend class PlayerController;
 
 public:
 	Controller();
 	~Controller();
 
-	void Start();
+	virtual void Start();
 	void InitPawns();
-	void Update();
-	void Draw();
-	void DrawUi();
+	virtual void Update();
+	virtual void Draw();
+	virtual void DrawUi();
+
+	void AddMecha(Vector3 location);
 
 	bool MoveMecha(Vector2 moveTo);//bool to check if the movement is possible
 
@@ -46,15 +47,15 @@ public:
 
 
 protected:
-	vector<MechaParent> mechasList;
-	MechaParent* controledMecha;
+	vector<MechaParent> mechasList{};
+	MechaParent* controledMecha{ nullptr };
 
-	class Grid* gridRef;
-
-	//==========
+	class Grid* gridRef{nullptr};
 
 	//==========
-	bool isTurn = false;
+
+	//==========
+	bool isTurn{false};
 
 	//==========UI==========
 
