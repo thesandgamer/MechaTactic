@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Grid.h"
 
-
+/*
 Player::Player(): controledPawn{nullptr}, gridRef{nullptr}, mousePos{},mousePosInGrid{}
 {
 	name = "Player";
@@ -204,3 +204,4 @@ bool Player::HaveEndTurn()
 {
 	return finishHisTurn;
 }
+*/

@@ -22,9 +22,11 @@ void Cursor::Start()
 
 void Cursor::Updtate()
 {
+	/*
 	mousePos = GetMousePosition();
 	mousePosInGrid = gridRef->PosInGrid(mousePos);
 	position = mousePos;
+	*/
 }
 
 void Cursor::Draw()

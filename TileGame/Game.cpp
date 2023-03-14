@@ -10,18 +10,19 @@ void Game::Start()
 {
 //===========Setup la Grille==============
     const static int GRID_WIDTH = 10;
-    const static int GRID_HEIGHT = 10;
+    const static int GRID_LENGTH = 10;
+    const static int GRID_HEIGHT = 1;
 
     const static int CELL_WIDTH = 32;
+    const static int CELL_LENGTH = 32;
     const static int CELL_HEIGHT = 32;
     //Vector2 gridPos = { SCREEN_WIDTH / 2 - (GRID_WIDTH * CELL_WIDTH) / 2 ,SCREEN_HEIGHT / 2 - (GRID_HEIGHT * CELL_HEIGHT) / 2 };
-    Vector2 gridPos = { -200,-200 };
+    Vector3 gridPos = { -200,0,-200 };
 
-    Texture2D tileSprite = LoadTexture("Ressources/TileBackground.png");
 
-    grid = Grid(gridPos, GRID_WIDTH, GRID_HEIGHT, CELL_WIDTH, CELL_HEIGHT); //On génère la grille
-    grid.spriteOfTiles = tileSprite;
+    grid = Grid(gridPos, {GRID_WIDTH,GRID_HEIGHT,GRID_LENGTH}, CELL_WIDTH,CELL_HEIGHT,CELL_LENGTH); //On génère la grille
     grid.Start();
+
 
 //=========Setup la camera==========
     cam.position = { 250,250,250 };
@@ -47,7 +48,7 @@ void Game::Start()
 
 //=============Controllers Setup============
     PlayerController* player = new PlayerController();
-    player->AddMecha({ 2,0,2 });
+    player->AddMecha({ 0,0,0 });
     player->AddMecha({ 4,0,4 });
     controllers.push_back(player);   //Rajoute un player
    // controllers.emplace_back(new Ennemy());             //Rajoute un ennemy (old)
@@ -169,7 +170,7 @@ void Game::Draw()
     ClearBackground(BLACK);
     BeginMode3D(cam);
 
-    DrawGrid(32, 32);
+   // DrawGrid(32, 32);
     grid.Draw();
 
     for each (Actor* obstacle in obstacles)

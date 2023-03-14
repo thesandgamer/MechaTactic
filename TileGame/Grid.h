@@ -9,7 +9,7 @@
 class Grid
 {
 public:
-	Grid(Vector2 pos ,int width, int height, int cellWidth,int cellHeight);
+	Grid(Vector3 pos,Vector3 gridSize, int cellWidth, int cellLength,int cellHeight);
 	Grid();
 	~Grid();
 
@@ -18,21 +18,23 @@ public:
 	void Draw();
 
 
-	int GRID_WITH;
-	int GRID_HEIGHT;
+	Vector3 GRID_SIZE;
 	
 	int CELL_WIDTH;
+	int CELL_LENGTH;
 	int CELL_HEIGHT;
 
 	std::vector<std::vector<Tile>> grid;
 
 	AStar aStar;
 
-	Vector2 GetGridPos() { return gridPosition; }
+	Vector3 GetGridPos() { return gridPosition; }
 	
-	bool IsInGrid(Vector2 pos);
+	bool IsInGrid(Vector3 pos);
 
-	Vector2 PosInGrid(Vector2 pos);
+	Vector3 PosInGrid(Vector3 pos);
+
+	Vector3 PosInGridToPosToWorld(Vector3 pos);
 
 	void Debug_CleanPathVisibility();
 
@@ -40,6 +42,7 @@ public:
 
 	Texture2D spriteOfTiles;
 
+	/*
 	Grid& operator=(const Grid& other)
 	{
 		this->GRID_WITH = other.GRID_WITH;
@@ -52,9 +55,9 @@ public:
 		this->spriteOfTiles = other.spriteOfTiles;
 		return* this;
 	}
-
+	*/
 private:
-	Vector2 gridPosition;
+	Vector3 gridPosition;
 
 	
 };

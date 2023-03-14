@@ -1,22 +1,16 @@
 #include "Grid.h"
 #include "Game.h"
 
-Grid::Grid(Vector2 pos,int width, int height, int cellWidth, int cellHeight) :gridPosition(pos), GRID_WITH{ width }, GRID_HEIGHT{ height }, CELL_WIDTH{ cellWidth },CELL_HEIGHT{cellHeight}
+
+Grid::Grid(Vector3 pos, Vector3 gridSize, int cellWidth, int cellLength, int cellHeight): CELL_HEIGHT(cellHeight),CELL_LENGTH(cellLength),CELL_WIDTH(cellWidth)
 {
-	
+	gridPosition = pos;
+	GRID_SIZE = gridSize;
+
 }
 
-Grid::Grid() 
+Grid::Grid()
 {
-	GRID_WITH = 0;
-	GRID_HEIGHT = 0;
-	CELL_WIDTH = 0;
-	CELL_HEIGHT = 0;
-	gridPosition = { 0,0 };	
-
-	//aStar = 
-
-
 }
 
 Grid::~Grid()
@@ -25,12 +19,12 @@ Grid::~Grid()
 
 void Grid::Start()
 {
-	grid.resize(GRID_WITH);
+	grid.resize(GRID_SIZE.x);
 	for (std::vector<Tile>& i : grid)
 	{
-		i.resize(GRID_HEIGHT);
+		i.resize(GRID_SIZE.z);
 	}
-	std::cout << "Grid finish to resize" << std::endl;
+	std::cout << "[GRID]----Grid finish to resize" << std::endl;
 
 
 	for (int i = 0; i < grid.size(); i++)
@@ -45,7 +39,7 @@ void Grid::Start()
 		}
 	}
 	//Set la graph de A*
-	aStar = AStar(GRID_WITH, GRID_HEIGHT);
+	aStar = AStar(GRID_SIZE.x, GRID_SIZE.z);
 }
 
 void Grid::Update()
@@ -66,12 +60,12 @@ void Grid::Draw()
 
 }
 
-bool Grid::IsInGrid(Vector2 pos)
+bool Grid::IsInGrid(Vector3 pos)
 {
 	if (pos.x >= 0
 		&& pos.y  >= 0
-			&& pos.x < ( GRID_WITH   ) 
-			&& pos.y < ( GRID_HEIGHT  ))
+			&& pos.x < ( GRID_SIZE.x) 
+			&& pos.y < (GRID_SIZE.z))
 	{
 		return true;
 	}
@@ -84,15 +78,26 @@ bool Grid::IsInGrid(Vector2 pos)
 
 
 //Peut peut être être fait en mettant un pointeur et changeant la valeur
-Vector2 Grid::PosInGrid(Vector2 pos)
+Vector3 Grid::PosInGrid(Vector3 pos)
 {
-	Vector2 newPos;
-	newPos.x = (int) (( ( pos.x  -gridPosition.x)/ CELL_WIDTH));
-	newPos.y = (int) (( (pos.y - gridPosition.y) / CELL_HEIGHT));
+	Vector3 newPos;
+	newPos.x = (( (pos.x - gridPosition.x) / CELL_WIDTH));
+	newPos.y = (( (pos.y - gridPosition.y) / CELL_HEIGHT));
+	newPos.z = (( (pos.z - gridPosition.z) / CELL_LENGTH));
 
 	//std::cout << "Pos in grid: " << newPos.x << " " << newPos.y << std::endl;
 
 	return newPos;
+}
+
+Vector3 Grid::PosInGridToPosToWorld(Vector3 pos)
+{
+	return {
+		(pos.x * CELL_WIDTH)  + GetGridPos().x,
+		(pos.y * CELL_HEIGHT) + GetGridPos().y,
+		(pos.z * CELL_LENGTH) + GetGridPos().z,
+
+	};
 }
 
 void Grid::Debug_CleanPathVisibility()

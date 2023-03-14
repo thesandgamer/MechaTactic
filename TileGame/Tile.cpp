@@ -8,12 +8,12 @@ Tile::Tile(): refToGrid{nullptr}, informations{nullptr}
 
 Tile::Tile(Vector3 positionP)
 {
-	transform.translation = positionP;
+	posInGrid = positionP;
 }
 
 Tile::Tile(Vector3 positionP, Model modelP): model{modelP}
 {
-	transform.translation = positionP;
+	posInGrid = positionP;
 }
 
 
@@ -36,7 +36,7 @@ void Tile::Init()
 	informations->infPasseur = this;
 
 	//------
-	transform.translation = { transform.translation.x * refToGrid->CELL_WIDTH,transform.translation.y * refToGrid->CELL_WIDTH, transform.translation.z * refToGrid->CELL_HEIGHT };
+	posInGridToPos();
 
 
 
@@ -49,6 +49,10 @@ void Tile::Draw()
 	collision.Draw();
 }
 
+void Tile::Update()
+{
+}
+
 
 string Tile::GetInformationOf()
 {
@@ -56,4 +60,10 @@ string Tile::GetInformationOf()
 	informations->SetTitle(info);
 
 	return info;
+}
+
+void Tile::posInGridToPos()
+{
+	transform.translation = refToGrid->PosInGridToPosToWorld(posInGrid);
+
 }

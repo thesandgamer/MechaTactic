@@ -21,6 +21,7 @@ public:
 
 	void Init();
 	void Draw();
+	void Update();
 
 	InformationDisplay* GetInformations() { return informations; }
 
@@ -42,6 +43,9 @@ public:
 
 private:
 	Transform transform{ {0,0,0},{0,0,0},{1,1,1} };
+	Vector3 posInGrid{0,0,0};
+
+	void posInGridToPos();
 
 	//-------For drawing-------
 	Model model{};

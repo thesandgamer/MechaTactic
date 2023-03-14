@@ -6,9 +6,12 @@ using std::vector;
 #include "Button.h"
 #include "Pawn.h"
 
-
+/// <summary>
+/// Juste une archive, plus utilisée
+/// </summary>
 class Player: public ITurn
 {
+	/*
 public:
 	Player();
 	~Player();
@@ -64,7 +67,7 @@ private:
 
 
 
-
+	*/
 };
 
 //C'est la classe qui va servir à gérer le joueur

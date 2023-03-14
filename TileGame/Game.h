@@ -13,8 +13,6 @@
 #include "PlayerController.h"
 
 
-//++ToDo: trouver comment gérer les postions réelles positions grille
-//++ToDo: faire en sorte de bien placer la grille in world comme on veut
 //++ToDo: faire que les raycast de cam vers objets fonctionne
 //++ToDo: faire en sorte que les info s'affichent en fonction de l'objet touché par le rayon
 

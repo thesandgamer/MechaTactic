@@ -12,13 +12,13 @@ MechaParent::MechaParent()
 
 MechaParent::MechaParent(Vector3 positionP)
 {
-	transform.translation = positionP;
+	posInGrid = positionP;
 	//Init();
 }
 
 MechaParent::MechaParent(Vector3 positionP, Model modelP): model{modelP}
 {
-	transform.translation = positionP;
+	posInGrid = positionP;
 	//Init();
 }
 
@@ -53,7 +53,7 @@ void MechaParent::Init()
 
 	collision.Init();
 
-	transform.translation = { transform.translation.x * gridRef->CELL_WIDTH,transform.translation.y * gridRef->CELL_WIDTH, transform.translation.z * gridRef->CELL_HEIGHT };
+	transform.translation = gridRef->PosInGridToPosToWorld(posInGrid);
 
 	
 
@@ -136,7 +136,6 @@ void MechaParent::DrawVisual()
 	}*/
 
 	DrawModel(model,transform.translation, transform.scale.x, drawColor);
-	//DrawCubeWires(transform.translation, gridRef->CELL_WIDTH, gridRef->CELL_WIDTH, gridRef->CELL_WIDTH, GREEN);
 
 }
 

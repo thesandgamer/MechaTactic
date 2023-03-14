@@ -43,6 +43,8 @@ void PlayerController::Draw()
 {
 	Controller::Draw();
 
+	DrawRay(ray, 100000, GREEN);
+	DrawSphere(ray.position, 5, RED);
 	//ray.Draw();
 }
 
@@ -59,7 +61,7 @@ void PlayerController::DrawUi()
 void PlayerController::PlayerDecideActions()
 {
 	mousePos = GetMousePosition();
-	mousePosInGrid = gridRef->PosInGrid(mousePos);
+	//mousePosInGrid = gridRef->PosInGrid(mousePos);
 
 	CheckWhatBehindRay();
 
@@ -93,10 +95,12 @@ void PlayerController::CheckWhatBehindRay()
 {
 	//Quand le tour du joueur est actif
 	//Faire un rayon entre la camera et la souris (faire un truc à la unity Camera.screenPointToRay
-	Vector3 direction;
-	Ray ray{ Game::instance().GetCamera()->position,{0,0,0 } };
-	DrawRay(ray, 10, GREEN);
-	// 
+	Vector3 direction{-1,-1,0};
+	//ray = { Game::instance().GetCamera()->position,direction };
+	ray = GetMouseRay(mousePos, *Game::instance().GetCamera());
+	//GetCollisionRayModel()
+
+ 
 	//Si le rayon collide une boite de collision, récupérer l'objet lié à la boite de collision
 	//Appel la fonction hover de l'interface de l'objet touché par le rayon
 }
