@@ -39,7 +39,7 @@ enum CollisionType {
 class P_Collision
 {
 public:
-	P_Collision();
+	P_Collision(CollisionType type);
 	~P_Collision();
 
 	virtual void Draw();

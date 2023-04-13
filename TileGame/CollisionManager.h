@@ -12,10 +12,19 @@
 struct RaycastHit
 {
 	bool hit;
-	P_Collision hitCollider;
+	P_Collision* hitCollider;
 	float hitDistance;
 	Vector3 hitPosition;
 	Vector3 hitNormal;
+
+	void Clean()
+	{
+		hit = false;
+		hitCollider = nullptr;
+		hitDistance = INFINITY;
+		hitPosition = Vector3Zero();
+		hitNormal = Vector3Zero();
+	};
 };
 
 

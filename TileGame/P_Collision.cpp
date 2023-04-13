@@ -3,7 +3,7 @@
 
 
 
-P_Collision::P_Collision()
+P_Collision::P_Collision(CollisionType type) : collisionType{ type }
 {
 	CollisionManager::GetInstance()->AddCollider(this);//Rajoute tout seul la boite de collisoon au manager à la création
 }

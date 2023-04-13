@@ -32,7 +32,8 @@ MechaParent::~MechaParent()
 void MechaParent::Init()
 {
 	//-------Set collision
-	collision = BoxCollision(&model);
+	collision.modelToBoxing = &model;
+	//collision = BoxCollision(&model);
 	collision.SetParent(&transform);
 	collision.id = "To test";
 

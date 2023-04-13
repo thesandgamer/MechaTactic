@@ -74,12 +74,12 @@ public:
 
 
 private:
-	Transform transform{ {0,0,0},{0,0,0},{1,1,1} };
-	Vector3 posInGrid{ 0,0,0 };
+	Transform transform { {0,0,0},{0,0,0},{1,1,1} };
+	Vector3 posInGrid { 0,0,0 };
 
 	BoxCollision collision{};
 
-	MechaState state{MechaState::NORMAL};
+	MechaState state {MechaState::NORMAL};
 
 	InformationDisplay* informations{nullptr};
 	string info;
@@ -89,8 +89,8 @@ private:
 	//-------For drawing-------
 	Model model{};
 
-	Color drawColor{WHITE};
-	Color baseColor{PURPLE};
+	Color drawColor {WHITE};
+	Color baseColor {PURPLE};
 
 
 

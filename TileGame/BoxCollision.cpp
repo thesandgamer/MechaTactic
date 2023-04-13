@@ -1,21 +1,19 @@
 #include "BoxCollision.h"
 
 
-BoxCollision::BoxCollision()
+BoxCollision::BoxCollision() : P_Collision(BoxCollider)
 {
 	collisionType = BoxCollider;
 
 }
 
-BoxCollision::BoxCollision(Vector3 sizeP) : P_Collision()
+BoxCollision::BoxCollision(Vector3 sizeP) : P_Collision(BoxCollider)
 {
-	collisionType = BoxCollider;
 	Offset.scale = sizeP;
 }
 
-BoxCollision::BoxCollision(Model* model)
+BoxCollision::BoxCollision(Model* model) : P_Collision(BoxCollider)
 {
-	collisionType = BoxCollider;
 	modelToBoxing = model;
 }
 

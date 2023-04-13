@@ -39,6 +39,7 @@ void CollisionManager::RemoveCollider(P_Collision* colliderToRemove)
 bool CollisionManager::DoRayCollision(RaycastCollision* ray, RaycastHit& outHit)
 {
 	RaycastHit infos = {false};
+	outHit.Clean();
 	for each (P_Collision * collider in colliders) //On va récupérer un collider et regarder si il collide avec les autres collider
 	{
 		if (collider == ray) continue;
@@ -48,14 +49,15 @@ bool CollisionManager::DoRayCollision(RaycastCollision* ray, RaycastHit& outHit)
 		{
 		case BoxCollider:
 			RayHitInfo inf = GetRayCollisionBox(ray->GetRay(), dynamic_cast<BoxCollision*>(collider)->GetBoundingBox());
-			
+			if (inf.hit && inf.distance < outHit.hitDistance)
+			{
 				outHit.hit = inf.hit;
 				outHit.hitDistance = inf.distance;
 				outHit.hitNormal = inf.normal;
 				outHit.hitPosition = inf.position;
-				outHit.hitCollider = *collider;
+				outHit.hitCollider = collider;
+			}
 
-			
 
 			break;
 
@@ -63,14 +65,15 @@ bool CollisionManager::DoRayCollision(RaycastCollision* ray, RaycastHit& outHit)
 			inf = (GetRayCollisionSphere(ray->GetRay(),
 				dynamic_cast<SphereCollision*>(collider)->GetCollider().Center,
 				dynamic_cast<SphereCollision*>(collider)->GetCollider().Radius));
-			
+
+			if (inf.hit && inf.distance < outHit.hitDistance)
+			{
 				outHit.hit = inf.hit;
 				outHit.hitDistance = inf.distance;
 				outHit.hitNormal = inf.normal;
 				outHit.hitPosition = inf.position;
-				outHit.hitCollider = *collider;
-
-			
+				outHit.hitCollider = collider;
+			}		
 			break;
 
 		}

@@ -20,11 +20,23 @@ public:
 
 	void Test() {};
 
+	Model* modelToBoxing{ nullptr };
+
+	BoxCollision& operator=(const BoxCollision& other)
+	{
+		this->boundingBox = other.boundingBox;
+		this->modelToBoxing = other.modelToBoxing;
+		this->collideWithLayer = other.collideWithLayer;
+		this->collisions = other.collisions;
+		this->collisionType = other.collisionType;
+		this->drawCollision = other.drawCollision;
+		return *this;
+	}
+
 
 private:
 	BoundingBox boundingBox;
 
-	Model* modelToBoxing{ nullptr };
 
 
 

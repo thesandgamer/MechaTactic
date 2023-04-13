@@ -1,12 +1,11 @@
 #include "SphereCollision.h"
 
-SphereCollision::SphereCollision()
+SphereCollision::SphereCollision() : P_Collision(SphereCollider)
 {
 }
 
-SphereCollision::SphereCollision(float radius) : P_Collision()
+SphereCollision::SphereCollision(float radius) : P_Collision(SphereCollider)
 {
-    collisionType = SphereCollider;
     rad = radius;
 }
 

@@ -1,13 +1,11 @@
 #include "RaycastCollision.h"
 
-RaycastCollision::RaycastCollision() :P_Collision()
+RaycastCollision::RaycastCollision() :P_Collision(RayCollider)
 {
-    collisionType = RayCollider;
 }
 
-RaycastCollision::RaycastCollision(Vector3 directionP, float lengthP) :P_Collision(), direction(directionP), length{ lengthP }
+RaycastCollision::RaycastCollision(Vector3 directionP, float lengthP) :P_Collision(RayCollider), direction(directionP), length{ lengthP }
 {
-    collisionType = RayCollider;
 }
 
 RaycastCollision::~RaycastCollision()

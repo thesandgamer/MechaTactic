@@ -127,9 +127,10 @@ void PlayerController::CheckWhatBehindRay()
 
 	if (CollisionManager::GetInstance()->DoRayCollision(&raycast, hitinfo))
 	{
-		std::cout << "Hit" << std::endl;
+		std::cout << "Hit: " << hitinfo.hitCollider->id << std::endl;
 
 	}
+
 	/*
 	IInteraction* i = dynamic_cast<IInteraction*>(&hitinfo.hitCollider);
 
