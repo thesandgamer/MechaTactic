@@ -4,6 +4,7 @@
 
 #include <set>
 #include <iostream>
+#include <string>
 
 
 enum CollisionTouching {
@@ -50,6 +51,8 @@ public:
 
 	void SetParent(Transform* parentTransform) { Transform = parentTransform; }
 
+	virtual void Draw() = 0;
+
 	//std::set<std::shared_ptr<P_Collision>> collisions{};
 	std::set<P_Collision*> collisions{};
 
@@ -63,8 +66,9 @@ public:
 	CollisionLayer layer{Layer0};
 	CollisionLayer collideWithLayer{Layer0};
 
-	double id{ -1 };
+	std::string id{ "BaseId"};
 
+	bool drawCollision = true;
 
 };
 

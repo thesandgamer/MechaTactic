@@ -29,7 +29,9 @@ private:
     Button* endTurnButton{nullptr};
 
     //----For raycast
-    Ray ray{ {0,0,0},100000 };
+    Ray ray{ {0,0,0},10000000 };
+    RaycastCollision raycast{ {0,0,0},10000000 };
+    RayHitInfo hitinfo;
     
 
 

@@ -19,6 +19,7 @@ Grid::~Grid()
 
 void Grid::Start()
 {
+	
 	grid.resize(GRID_SIZE.x);
 	for (std::vector<Tile>& i : grid)
 	{
@@ -26,7 +27,8 @@ void Grid::Start()
 	}
 	std::cout << "[GRID]----Grid finish to resize" << std::endl;
 
-
+	//---------Fill grid---------
+	
 	for (int i = 0; i < grid.size(); i++)
 	{
 		for (int j = 0; j < grid[i].size(); j++)

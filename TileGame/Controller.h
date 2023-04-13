@@ -26,8 +26,8 @@ public:
 	bool SelectMecha(MechaParent* pawnSelected);
 	void DeSelectMecha();
 
-	vector<MechaParent>* GetMechas();
-	vector<MechaParent> GetMechasDirect();
+	vector<MechaParent*>* GetMechas();
+	vector<MechaParent*> GetMechasDirect();
 
 	void SetGrid(class Grid* grid);
 
@@ -47,7 +47,7 @@ public:
 
 
 protected:
-	vector<MechaParent> mechasList{};
+	vector<MechaParent*> mechasList{};	//Pointeurs car on veut pouvoir mettre des enfants
 	MechaParent* controledMecha{ nullptr };
 
 	class Grid* gridRef{nullptr};

@@ -8,6 +8,8 @@
 #include <iostream>
 #include <string>  
 
+
+
 class CollisionManager
 {
 	//--------------Make it a singleton------------------
@@ -37,6 +39,9 @@ public:
 	 void AddCollider(P_Collision* collider);
 	 void RemoveCollider(P_Collision* colliderToRemove);
 
+
+
+	RayHitInfo DoRayCollision(RaycastCollision* ray);
 
 private:
 

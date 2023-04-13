@@ -59,7 +59,8 @@ void BoxCollision::Init()
 
 void BoxCollision::Draw()
 {
-	DrawBoundingBox(GetBoundingBox(), (IsColliding()) ? RED : GREEN);
+	if (drawCollision)
+		DrawBoundingBox(GetBoundingBox(), (IsColliding()) ? RED : GREEN);
 }
 
 BoundingBox BoxCollision::GetBoundingBox()

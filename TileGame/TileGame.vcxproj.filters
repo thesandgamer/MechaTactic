@@ -117,6 +117,7 @@
     <ClCompile Include="P_Collision.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="IInteraction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -209,5 +210,6 @@
     <ClInclude Include="P_Collision.h">
       <Filter>Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="IInteraction.h" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "CollisionManager.h"
 
 void Game::SetupScreen(int screenwidth, int screenHeight)
 {
@@ -76,7 +77,7 @@ void Game::Start()
     {
         for (int j = 0; j < (*i)->GetMechas()->size(); j++)
         {
-           elementsInGame.push_back(&(*i)->GetMechas()->at(j));
+           elementsInGame.push_back((*i)->GetMechas()->at(j));
         }
 
     }
@@ -138,6 +139,8 @@ void Game::Update()
     turnManager.Update();
     grid.Update();
 
+    CollisionManager::GetInstance()->Update();
+
     for (auto i = controllers.begin(); i != controllers.end(); i++)
     {
         (*i)->Update();
@@ -182,6 +185,9 @@ void Game::Draw()
     {
         (*i)->Draw();
     }
+
+
+    CollisionManager::GetInstance()->Draw();
 
     EndMode3D();
 

@@ -13,6 +13,10 @@ void CollisionManager::Update()
 
 void CollisionManager::Draw()
 {
+	for (auto i = colliders.begin(); i < colliders.end(); i++)
+	{
+		(*i)->Draw();
+	}
 }
 
 void CollisionManager::AddCollider(P_Collision* collider)
@@ -28,6 +32,44 @@ void CollisionManager::RemoveCollider(P_Collision* colliderToRemove)
 		colliders.erase(std::find(colliders.begin(), colliders.end(), colliderToRemove));
 	}
 	
+}
+
+
+//Rayon qui touche ou pas: return si il touche quelque chose, la position où il touche, et ce qu'il touche
+RayHitInfo CollisionManager::DoRayCollision(RaycastCollision* ray)
+{
+	RayHitInfo infos = {false,0};
+	for each (P_Collision * collider in colliders) //On va récupérer un collider et regarder si il collide avec les autres collider
+	{
+		if (collider == ray) continue;
+
+		switch (collider->collisionType)
+		{
+		case BoxCollider:
+			RayHitInfo inf = GetRayCollisionBox(ray->GetRay(), dynamic_cast<BoxCollision*>(collider)->GetBoundingBox());
+			if (inf.hit && abs(inf.distance) < ray->GetLength())
+			{
+				infos = inf;
+
+			}
+
+			break;
+
+		case SphereCollider:
+			inf = (GetRayCollisionSphere(ray->GetRay(),
+				dynamic_cast<SphereCollision*>(collider)->GetCollider().Center,
+				dynamic_cast<SphereCollision*>(collider)->GetCollider().Radius));
+			if (inf.hit && abs(inf.distance) < ray->GetLength())
+			{
+				infos = inf;
+
+			}
+			break;
+
+		}
+
+	}
+	return infos;
 }
 
 void CollisionManager::ProcessColisions()

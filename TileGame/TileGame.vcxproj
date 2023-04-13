@@ -183,6 +183,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="IInteraction.cpp" />
     <ClCompile Include="InformationDisplay.cpp" />
     <ClCompile Include="InformationDisplayUi.cpp" />
     <ClCompile Include="List.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IInformationPasseur.h" />
+    <ClInclude Include="IInteraction.h" />
     <ClInclude Include="InformationDisplay.h" />
     <ClInclude Include="InformationDisplayUi.h" />
     <ClInclude Include="ITurn.h" />

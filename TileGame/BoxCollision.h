@@ -14,7 +14,7 @@ public:
 	BoxCollision(Model*  model);
 
 	void Init();
-	void Draw();
+	void Draw() override;
 
 	BoundingBox GetBoundingBox(); //++Todo Renvoyer un pointeur de bounding box
 

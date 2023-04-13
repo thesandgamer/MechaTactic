@@ -10,7 +10,7 @@ public:
     RaycastCollision(Vector3 directionP, float lengthP);
     ~RaycastCollision();
 
-    void Draw();
+    void Draw() override;
 
     Ray GetRay();
 
@@ -19,6 +19,7 @@ public:
     float GetLength() { return length; }
 
     void SetDirection(Vector3 dir) { direction = dir; }
+    void SetPosition(Vector3 pos);
 
 private:
     Vector3 direction{0,0,0};

@@ -25,11 +25,18 @@ MechaParent::MechaParent(Vector3 positionP, Model modelP): model{modelP}
 
 MechaParent::~MechaParent()
 {
+
 }
 
 
 void MechaParent::Init()
 {
+	//-------Set collision
+	collision = BoxCollision(&model);
+	collision.SetParent(&transform);
+	collision.id = "To test";
+
+
 	//-----Setup le lien avec la grid
 	gridRef = Game::instance().GetGrid();
 
@@ -41,17 +48,15 @@ void MechaParent::Init()
 		model = LoadModelFromMesh(GenMeshCube(gridRef->CELL_WIDTH, gridRef->CELL_HEIGHT, gridRef->CELL_WIDTH));
 	}
 
-	//-------Set collision
-	collision = BoxCollision(&model) ;
-	//collision = BoxCollision({ 32,32,32 });
-	collision.SetParent(&transform);
+	collision.Init();
+
+
 
 	//-----Setup des informations
 	informations = new InformationDisplay();
 	informations->SetPos(&position);
 	informations->infPasseur = this;
 
-	collision.Init();
 
 	transform.translation = gridRef->PosInGridToPosToWorld(posInGrid);
 
@@ -62,7 +67,6 @@ void MechaParent::Init()
 void MechaParent::Draw()
 {
 	DrawVisual();
-	collision.Draw();
 }
 
 

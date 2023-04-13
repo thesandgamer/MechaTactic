@@ -46,10 +46,14 @@ private:
 	Vector3 posInGrid{0,0,0};
 
 	void posInGridToPos();
+	
+
+	//-------Collisions-------
+	BoxCollision collision{};
 
 	//-------For drawing-------
 	Model model{};
-	BoxCollision collision{};
+
 	Color drawColor{ WHITE };
 
 	InformationDisplay* informations;

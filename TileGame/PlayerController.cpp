@@ -1,5 +1,7 @@
 #include "PlayerController.h"
 #include "Game.h"
+#include "CollisionManager.h"
+#include "IInteraction.h"
 
 PlayerController::PlayerController(): Controller()
 {
@@ -16,7 +18,7 @@ void PlayerController::Start()
 	//------Change the color of mecha to distinc if no models
 	for (auto i = mechasList.begin(); i != mechasList.end(); i++)
 	{
-		(*i).SetBaseColor({0,100,0,255});
+		(*i)->SetBaseColor({0,100,0,255});
 
 	}
 
@@ -27,6 +29,12 @@ void PlayerController::Start()
 	endTurnButton = new Button({ 10,10 }, buttonSprite, 128, 64);
 	endTurnButton->textInButton = "End Turn";
 	endTurnButton->AddFunctionToTrigger(std::bind(&PlayerController::FinishTurn,this));//Set la fonction de callback créer un fonction lambda
+
+
+	ray = GetMouseRay(mousePos, *Game::instance().GetCamera());
+	raycast.SetPosition(ray.position);
+	raycast.checkingCollision = true;
+	//raycast.trigger = true;
 	
 
 
@@ -43,9 +51,23 @@ void PlayerController::Draw()
 {
 	Controller::Draw();
 
-	DrawRay(ray, 100000, GREEN);
-	DrawSphere(ray.position, 5, RED);
-	//ray.Draw();
+	//DrawRay(ray, 100000, GREEN);
+	//DrawSphere(ray.position, 5, RED);
+	raycast.Draw();
+
+	
+	/*
+	std::cout << "Have hit: " << hitinfo.hit << "\n";
+	std::cout << "Hit location: " << hitinfo.position.x << " " << hitinfo.position.y << " " << hitinfo.position.z << "\n";
+	std::cout << "Hit Distance: " << hitinfo.distance << "\n";
+	*/
+	if ((hitinfo.hit) && (abs(hitinfo.distance) < raycast.GetLength()))
+	{
+		DrawSphereWires(hitinfo.position, 10, 20, 20, RED);
+		//std::cout << "Hit" << std::endl;
+	}
+	
+
 }
 
 void PlayerController::DrawUi()
@@ -98,8 +120,20 @@ void PlayerController::CheckWhatBehindRay()
 	Vector3 direction{-1,-1,0};
 	//ray = { Game::instance().GetCamera()->position,direction };
 	ray = GetMouseRay(mousePos, *Game::instance().GetCamera());
+
+	raycast.SetDirection(ray.direction);
+	//Récupérer quel objet est sous mon rayon 
+
+	hitinfo = CollisionManager::GetInstance()->DoRayCollision(&raycast);
+
+	if (dynamic_cast<IInteraction>() != nullptr)
+	{
+
+	}
+
 	//GetCollisionRayModel()
 
+	
  
 	//Si le rayon collide une boite de collision, récupérer l'objet lié à la boite de collision
 	//Appel la fonction hover de l'interface de l'objet touché par le rayon

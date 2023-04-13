@@ -22,6 +22,7 @@ void Tile::Init()
 	//-------Set collision
 	collision = BoxCollision(&model);
 	collision.SetParent(&transform);
+	collision.id = "TileCollision";
 
 	if (model.meshCount == NULL)//Si on à pas de mesh de loadé, load un cube
 	{
@@ -46,7 +47,6 @@ void Tile::Draw()
 {
 
 	DrawModel(model, transform.translation, transform.scale.x, drawColor);
-	collision.Draw();
 }
 
 void Tile::Update()

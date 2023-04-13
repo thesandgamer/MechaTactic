@@ -23,7 +23,7 @@ void Controller::InitPawns()
 {
 	for (int i = 0; i < mechasList.size(); i++)
 	{
-		mechasList.at(i).Init();
+		mechasList.at(i)->Init();
 	}
 }
 
@@ -34,7 +34,7 @@ void Controller::Update()
 	//==========Update les pawns============
 	for (int i = 0; i < mechasList.size(); i++)
 	{
-		mechasList.at(i).Update();
+		mechasList.at(i)->Update();
 	}
 }
 
@@ -44,7 +44,7 @@ void Controller::Draw()
 
 	for (int i = 0; i < mechasList.size(); i++)
 	{
-		mechasList.at(i).Draw();
+		mechasList.at(i)->Draw();
 	}
 }
 
@@ -55,7 +55,7 @@ void Controller::DrawUi()
 
 void Controller::AddMecha(Vector3 location)
 {
-	mechasList.push_back(MechaParent(location));
+	mechasList.push_back(new MechaParent(location));
 }
 
 
@@ -92,12 +92,12 @@ void Controller::DeSelectMecha()
 	}
 }
 
-vector<MechaParent>* Controller::GetMechas()
+vector<MechaParent*>* Controller::GetMechas()
 {
 	return &mechasList;
 }
 
-vector<MechaParent> Controller::GetMechasDirect()
+vector<MechaParent*> Controller::GetMechasDirect()
 {
 	return mechasList;
 }
@@ -120,9 +120,9 @@ void Controller::StartTurn()
 	std::cout << "Its " << name <<" Turn " << std::endl;
 	finishHisTurn = false;
 
-	for (MechaParent& mecha : mechasList)
+	for (MechaParent* mecha : mechasList)
 	{
-		mecha.haveDoActions = false;
+		mecha->haveDoActions = false;
 	}
 	isTurn = true;
 }
