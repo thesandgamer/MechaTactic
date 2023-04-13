@@ -3,22 +3,19 @@
 
 BoxCollision::BoxCollision()
 {
+	collisionType = BoxCollider;
+
 }
 
 BoxCollision::BoxCollision(Vector3 sizeP) : P_Collision()
 {
+	collisionType = BoxCollider;
 	Offset.scale = sizeP;
-
-
-	
-		
-	
-
-	
 }
 
 BoxCollision::BoxCollision(Model* model)
 {
+	collisionType = BoxCollider;
 	modelToBoxing = model;
 }
 

@@ -80,6 +80,7 @@ private:
 	BoxCollision collision{};
 
 	MechaState state{MechaState::NORMAL};
+
 	InformationDisplay* informations{nullptr};
 	string info;
 	bool canMove = false;

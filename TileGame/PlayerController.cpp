@@ -61,10 +61,9 @@ void PlayerController::Draw()
 	std::cout << "Hit location: " << hitinfo.position.x << " " << hitinfo.position.y << " " << hitinfo.position.z << "\n";
 	std::cout << "Hit Distance: " << hitinfo.distance << "\n";
 	*/
-	if ((hitinfo.hit) && (abs(hitinfo.distance) < raycast.GetLength()))
+	if ((hitinfo.hit) && (abs(hitinfo.hitDistance) < raycast.GetLength()))
 	{
-		DrawSphereWires(hitinfo.position, 10, 20, 20, RED);
-		//std::cout << "Hit" << std::endl;
+		DrawSphereWires(hitinfo.hitPosition, 10, 20, 20, RED);
 	}
 	
 
@@ -124,12 +123,20 @@ void PlayerController::CheckWhatBehindRay()
 	raycast.SetDirection(ray.direction);
 	//Récupérer quel objet est sous mon rayon 
 
-	hitinfo = CollisionManager::GetInstance()->DoRayCollision(&raycast);
+	
 
-	if (dynamic_cast<IInteraction>() != nullptr)
+	if (CollisionManager::GetInstance()->DoRayCollision(&raycast, hitinfo))
 	{
+		std::cout << "Hit" << std::endl;
 
 	}
+	/*
+	IInteraction* i = dynamic_cast<IInteraction*>(&hitinfo.hitCollider);
+
+	if (i != nullptr)
+	{
+		i->OnHovered();
+	}*/
 
 	//GetCollisionRayModel()
 

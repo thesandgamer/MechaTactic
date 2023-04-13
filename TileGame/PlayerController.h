@@ -2,8 +2,7 @@
 #include "Controller.h"
 
 #include "RaycastCollision.h"
-
-//++ToDo: faire en sorte d'avoir un raycast, détécter ce qu'il y a sous le raycast
+#include "CollisionManager.h"
 
 class PlayerController: public Controller
 {
@@ -31,7 +30,7 @@ private:
     //----For raycast
     Ray ray{ {0,0,0},10000000 };
     RaycastCollision raycast{ {0,0,0},10000000 };
-    RayHitInfo hitinfo;
+    RaycastHit hitinfo { false, {}, 0,{},{} };
     
 
 

@@ -19,7 +19,7 @@ Grid::~Grid()
 
 void Grid::Start()
 {
-	
+	/*
 	grid.resize(GRID_SIZE.x);
 	for (std::vector<Tile>& i : grid)
 	{
@@ -40,6 +40,7 @@ void Grid::Start()
 
 		}
 	}
+	*/
 	//Set la graph de A*
 	aStar = AStar(GRID_SIZE.x, GRID_SIZE.z);
 }

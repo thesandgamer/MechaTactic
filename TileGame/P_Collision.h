@@ -28,6 +28,7 @@ enum CollisionLayer {
 };
 
 enum CollisionType {
+	NOONE,
 	BoxCollider,
 	SphereCollider,
 	MeshCollider,
@@ -41,7 +42,10 @@ public:
 	P_Collision();
 	~P_Collision();
 
-	CollisionType collisionType{ BoxCollider };
+	virtual void Draw();
+
+
+	CollisionType collisionType{ NOONE };
 	bool trigger{false};
 	bool checkingCollision{ false };
 
@@ -51,10 +55,9 @@ public:
 
 	void SetParent(Transform* parentTransform) { Transform = parentTransform; }
 
-	virtual void Draw() = 0;
 
 	//std::set<std::shared_ptr<P_Collision>> collisions{};
-	std::set<P_Collision*> collisions{};
+	std::set<P_Collision*> collisions{};	//Avec quels autres collisions il collide
 
 
 	Transform Offset{ {0,0,0},{0,0,0},{1,1,1} };//Offset de transform

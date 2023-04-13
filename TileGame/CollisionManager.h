@@ -9,6 +9,15 @@
 #include <string>  
 
 
+struct RaycastHit
+{
+	bool hit;
+	P_Collision hitCollider;
+	float hitDistance;
+	Vector3 hitPosition;
+	Vector3 hitNormal;
+};
+
 
 class CollisionManager
 {
@@ -41,7 +50,7 @@ public:
 
 
 
-	RayHitInfo DoRayCollision(RaycastCollision* ray);
+	  bool DoRayCollision(RaycastCollision* ray, RaycastHit& outHit);
 
 private:
 

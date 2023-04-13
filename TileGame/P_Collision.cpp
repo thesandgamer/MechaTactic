@@ -15,6 +15,10 @@ P_Collision::~P_Collision()
 	Transform = nullptr;
 }
 
+void P_Collision::Draw()
+{
+}
+
 bool P_Collision::IsColliding()
 {
 
