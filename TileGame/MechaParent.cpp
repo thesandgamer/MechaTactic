@@ -120,25 +120,28 @@ void MechaParent::Update()
 
 void MechaParent::DrawVisual()
 {
-	/*
+	
 	drawColor = WHITE;
 
 	switch (state)
 	{
 	case MechaState::NORMAL:
-		color = WHITE;
+		drawColor = WHITE;
 		break;
 	case MechaState::SelectedGhost:
-		color = GRAY;
+		drawColor = GRAY;
+		break;
+	case MechaState::Selected:
+		drawColor = GRAY;
 		break;
 	case MechaState::NoActionsPossible:
-		color = BLACK;
+		drawColor = BLACK;
 		break;
 	case MechaState::Destroyed:
 		break;
 	default:
 		break;
-	}*/
+	}
 
 	DrawModel(model,transform.translation, transform.scale.x, drawColor);
 
@@ -166,5 +169,15 @@ string MechaParent::GetInformationOf()
 	informations->SetTitle(info);
 
 	return info;
+}
+
+void MechaParent::OnHovered()
+{
+}
+
+void MechaParent::OnClicked()
+{
+	state = MechaState::Selected;
+	selected = true;
 }
 

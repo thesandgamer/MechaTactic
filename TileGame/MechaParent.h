@@ -10,20 +10,23 @@
 #include "InformationDisplay.h"
 #include "IInformationPasseur.h"
 #include "ITurn.h"
+#include "IInteraction.h"
 
 #include "BoxCollision.h"
 
 
+//++ToDo: Pousser l'utilisation de la machine d'état 
 enum class MechaState
 {
 	NORMAL,
+	Selected,
 	SelectedGhost,
 	NoActionsPossible,
 	Destroyed,
 };
 
 
-class MechaParent : public IInformationPasseur, public Actor
+class MechaParent : public IInformationPasseur, public Actor, public IInteraction
 {
 public:
 	MechaParent();
@@ -43,10 +46,16 @@ public:
 
 
 	//========]	Informations
+
 	InformationDisplay* GetInformations() { return informations; }
 	void SetInformations(string newInfo) { info = newInfo; }
 
 	string GetInformationOf() override;
+
+	//========] Interaction
+
+	void OnHovered() override;
+	void OnClicked() override;
 
 
 	bool selected = false;
