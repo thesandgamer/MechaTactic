@@ -90,7 +90,7 @@ void PlayerController::PlayerDecideActions()
 	{
 		if (controledMecha == nullptr)	//Si on à pas de mécha selectionné
 		{
-			//Select mecha
+			SelectMecha();
 		}
 		else	//Si on à un mecha de selectioné
 		{ 
@@ -149,3 +149,16 @@ void PlayerController::CheckWhatBehindRay()
 	//Si le rayon collide une boite de collision, récupérer l'objet lié à la boite de collision
 	//Appel la fonction hover de l'interface de l'objet touché par le rayon
 }
+
+void PlayerController::SelectMecha()
+{
+	if (hitinfo.hitCollider != nullptr)
+	{
+		if (hitinfo.hitCollider->Parent != nullptr)
+		{
+			controledMecha = dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent);
+			std::cout << "Mecha selected" << std::endl;
+		}
+	}
+}
+

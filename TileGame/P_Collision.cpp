@@ -32,5 +32,13 @@ bool P_Collision::IsColliding()
 			}
 		}
 	}
-	return false;//Sinob si pas de collision où que des trigger pas de colliding
+	return false;//Sinon si pas de collision où que des trigger pas de colliding
 }
+
+void P_Collision::SetParent(Actor* parentP)
+{
+	Parent = parentP;
+	Transform = parentP->GetTransformPointer();
+}
+
+

@@ -20,6 +20,8 @@ public:
     void PlayerDecideActions();
     void CheckWhatBehindRay();
 
+    void SelectMecha();
+
 private:
 
     Vector2 mousePos{0,0};
@@ -31,6 +33,7 @@ private:
     Ray ray{ {0,0,0},10000000 };
     RaycastCollision raycast{ {0,0,0},10000000 };
     RaycastHit hitinfo { false, {}, 0,{},{} };
+
     
 
 

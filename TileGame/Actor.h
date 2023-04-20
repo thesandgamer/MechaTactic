@@ -16,9 +16,13 @@ public:
 
 	bool isActive = true;
 
+	Transform GetTransform() { return transform; }
+	Transform* GetTransformPointer() { return &transform; }
+	void SetPosition(Vector3 newPos) { transform.translation = newPos; }
+
 
 protected:
-	Transform transform;
+	Transform transform{ {-1,-1,-1},{0,0,0}, {1,1,1} };
 
 
 };

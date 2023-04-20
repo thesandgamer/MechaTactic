@@ -55,7 +55,7 @@ public:
 
 	bool IsColliding();
 
-	void SetParent(Transform* parentTransform) { Transform = parentTransform; }
+	void SetParent(Actor* parentP);
 
 
 	//std::set<std::shared_ptr<P_Collision>> collisions{};
@@ -64,7 +64,7 @@ public:
 
 	Transform Offset{ {0,0,0},{0,0,0},{1,1,1} };//Offset de transform
 	//std::shared_ptr<Transform> Transform{};	//Transform du parent
-	Transform* Transform{};	//Transform du parent
+	Transform* Transform{ nullptr };	//Transform du parent
 	Actor* Parent {nullptr};
 
 	virtual void Test() {};
