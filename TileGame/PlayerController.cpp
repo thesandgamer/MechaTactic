@@ -127,19 +127,22 @@ void PlayerController::CheckWhatBehindRay()
 
 	if (CollisionManager::GetInstance()->DoRayCollision(&raycast, hitinfo))
 	{
-		std::cout << "Hit: " << hitinfo.hitCollider->id << std::endl;
+		//std::cout << "Hit: " << hitinfo.hitCollider->id << std::endl;
+		//Récupérer l'acteur dans le collider touché
+		
+		IInteraction* i = nullptr;
+		if (hitinfo.hitCollider->Parent != nullptr)
+		{
+			i = dynamic_cast<IInteraction*>(hitinfo.hitCollider->Parent);
+		}
 
+		if (i != nullptr)
+		{
+			i->OnHovered();
+		}
+		
 	}
 
-	/*
-	IInteraction* i = dynamic_cast<IInteraction*>(&hitinfo.hitCollider);
-
-	if (i != nullptr)
-	{
-		i->OnHovered();
-	}*/
-
-	//GetCollisionRayModel()
 
 	
  

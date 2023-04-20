@@ -1,7 +1,5 @@
 #pragma once
 #include "Actor.h"
-#include "Player.h"
-#include "Ennemy.h"
 #include "Grid.h"
 #include "Button.h"
 #include "InformationDisplayUi.h"

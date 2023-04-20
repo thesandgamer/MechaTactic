@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 
+#include "Actor.h"
+
 
 enum CollisionTouching {
 	Up =1 <<0,
@@ -63,6 +65,7 @@ public:
 	Transform Offset{ {0,0,0},{0,0,0},{1,1,1} };//Offset de transform
 	//std::shared_ptr<Transform> Transform{};	//Transform du parent
 	Transform* Transform{};	//Transform du parent
+	Actor* Parent {nullptr};
 
 	virtual void Test() {};
 
@@ -71,7 +74,8 @@ public:
 
 	std::string id{ "BaseId"};
 
-	bool drawCollision = true;
+	bool drawCollision{ true };
+
 
 };
 

@@ -4,16 +4,25 @@ Obstacle::Obstacle()
 {
 }
 
-Obstacle::Obstacle(Vector2 positionP, Texture2D spriteP) :Actor(positionP,spriteP)
+Obstacle::Obstacle(Vector3 positionP) : Actor()
 {
+	/*
 	informations = new InformationDisplay();
 	informations->SetPos(&position);
-	informations->infPasseur = this;
+	informations->infPasseur = this;*/
+}
+
+void Obstacle::Init()
+{
 }
 
 void Obstacle::Draw()
 {
-	DrawTexture(sprite, position.x * gridRef->CELL_WIDTH + gridRef->GetGridPos().x, position.y * gridRef->CELL_HEIGHT + gridRef->GetGridPos().y, WHITE);
+	//DrawTexture(sprite, position.x * gridRef->CELL_WIDTH + gridRef->GetGridPos().x, position.y * gridRef->CELL_HEIGHT + gridRef->GetGridPos().y, WHITE);
+}
+
+void Obstacle::Update()
+{
 }
 
 string Obstacle::GetInformationOf()

@@ -84,16 +84,7 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Ennemy.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Controllers</Filter>
-    </ClCompile>
     <ClCompile Include="MechaParent.cpp">
-      <Filter>Mechas</Filter>
-    </ClCompile>
-    <ClCompile Include="Pawn.cpp">
       <Filter>Mechas</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
@@ -177,16 +168,7 @@
     <ClInclude Include="Controller.h">
       <Filter>Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="Ennemy.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Controllers</Filter>
-    </ClInclude>
     <ClInclude Include="MechaParent.h">
-      <Filter>Mechas</Filter>
-    </ClInclude>
-    <ClInclude Include="Pawn.h">
       <Filter>Mechas</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">

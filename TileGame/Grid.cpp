@@ -2,14 +2,14 @@
 #include "Game.h"
 
 
-Grid::Grid(Vector3 pos, Vector3 gridSize, int cellWidth, int cellLength, int cellHeight): CELL_HEIGHT(cellHeight),CELL_LENGTH(cellLength),CELL_WIDTH(cellWidth)
+Grid::Grid(Vector3 pos, Vector3 gridSize, int cellWidth, int cellLength, int cellHeight): CELL_HEIGHT(cellHeight),CELL_LENGTH(cellLength),CELL_WIDTH(cellWidth), Actor()
 {
 	gridPosition = pos;
 	GRID_SIZE = gridSize;
 
 }
 
-Grid::Grid()
+Grid::Grid(): Actor()
 {
 }
 
@@ -43,6 +43,10 @@ void Grid::Start()
 		
 	//Set la graph de A*
 	aStar = AStar(GRID_SIZE.x, GRID_SIZE.z);
+}
+
+void Grid::Init()
+{
 }
 
 void Grid::Update()
@@ -115,10 +119,11 @@ void Grid::Debug_CleanPathVisibility()
 
 void Grid::CalculateObstacles()
 {
+	/*
 	for each (Actor * act in Game::instance().GetElementsInGame())
 	{
-		aStar.aStarGrid.AddObstacle(act->position);
+		aStar.aStarGrid.AddObstacle({act->transform.translation.x,act->transform.translation.z);
 		//grid[act->position.x][act->position.y].traversible = false;
 
-	}
+	}*/
 }

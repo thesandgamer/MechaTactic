@@ -5,7 +5,7 @@
 //Constructeur à vide
 MechaParent::MechaParent()
 {
-	position = { -1, -1 };
+	posInGrid = { 0,0,0 };
 	gridRef = nullptr;
 	informations = nullptr;
 }
@@ -55,7 +55,7 @@ void MechaParent::Init()
 
 	//-----Setup des informations
 	informations = new InformationDisplay();
-	informations->SetPos(&position);
+	informations->SetPos(&posInGrid);
 	informations->infPasseur = this;
 
 
@@ -81,14 +81,14 @@ void MechaParent::Update()
 		//Vector2AStar pos = { position.x,position.y };
 
 
-		if (position.x == posToGo.x && position.y == posToGo.y)//Si on est arrivé à la position suivante
+		if (posInGrid.x == posToGo.x && posInGrid.y == posToGo.y)//Si on est arrivé à la position suivante
 		{
 			positionIterator++;//On augmente l'iterator
 			currentTime = 0; //Et on reset le temps
 		}
 
-		position.x = EaseQuadInOut(currentTime, position.x, posToGo.x - position.x, duration);//On va au x suivant suivant un lerping
-		position.y = EaseQuadInOut(currentTime, position.y, posToGo.y - position.y, duration);//On va au y suivant suivant un lerping
+		posInGrid.x = EaseQuadInOut(currentTime, posInGrid.x, posToGo.x - posInGrid.x, duration);//On va au x suivant suivant un lerping
+		posInGrid.y = EaseQuadInOut(currentTime, posInGrid.y, posToGo.y - posInGrid.y, duration);//On va au y suivant suivant un lerping
 
 		currentTime++; //Augmente le temps
 
@@ -151,7 +151,7 @@ void MechaParent::MoveTo(Vector2 positionToGo)
 	//Si il n'y a pas de position à aller, finit
 	//Appel le A star
 	gridRef->Debug_CleanPathVisibility();
-	poses = gridRef->aStar.GetPath({ position.x,position.y }, { positionToGo.x,positionToGo.y });
+	poses = gridRef->aStar.GetPath({ posInGrid.x,posInGrid.y }, { positionToGo.x,positionToGo.y });
 	canMove = true;
 	currentTime = 0;
 	positionIterator = 0;
@@ -162,7 +162,7 @@ void MechaParent::MoveTo(Vector2 positionToGo)
 //Ici on va set les informations affiché du mecha
 string MechaParent::GetInformationOf()
 {
-	info += "Ma position: " + std::to_string(position.x) + " : " + std::to_string(position.y);
+	info += "Ma position: " + std::to_string(posInGrid.x) + " : " + std::to_string(posInGrid.y);
 	informations->SetTitle(info);
 
 	return info;

@@ -35,11 +35,11 @@ void Game::Start()
 
 //=========Setup les obstacles==========
     Texture2D obstacleSprite = LoadTexture("Ressources/Obstacle.png");
-    obstacles.push_back(new Obstacle({ 4,4 }, obstacleSprite));
-    obstacles.push_back(new Obstacle({ 2,2 }, obstacleSprite));
-    obstacles.push_back(new Obstacle({ 8,3 }, obstacleSprite));
-    obstacles.push_back(new Obstacle({ 8,5 }, obstacleSprite));
-    obstacles.push_back(new Obstacle({ 3,8 }, obstacleSprite));
+  //  obstacles.push_back(new Obstacle({ 4,4 }, obstacleSprite));
+   // obstacles.push_back(new Obstacle({ 2,2 }, obstacleSprite));
+  //  obstacles.push_back(new Obstacle({ 8,3 }, obstacleSprite));
+  //  obstacles.push_back(new Obstacle({ 8,5 }, obstacleSprite));
+  //  obstacles.push_back(new Obstacle({ 3,8 }, obstacleSprite));
 
     for each (Obstacle * obstacle in obstacles)
     {

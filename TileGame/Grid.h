@@ -6,7 +6,7 @@
 #include "Tile.h"
 #include "AStar.h"
 
-class Grid
+class Grid: public Actor
 {
 public:
 	Grid(Vector3 pos,Vector3 gridSize, int cellWidth, int cellLength,int cellHeight);
@@ -14,8 +14,9 @@ public:
 	~Grid();
 
 	void Start();
-	void Update();
-	void Draw();
+	void Init() override;
+	void Draw() override;
+	void Update() override;
 
 
 	Vector3 GRID_SIZE;

@@ -6,7 +6,7 @@
 #include "BoxCollision.h"
 class Grid;
 
-class Tile: public IInformationPasseur
+class Tile: public IInformationPasseur, public Actor
 {
 public:
 	Tile();
@@ -19,9 +19,9 @@ public:
 
 	Grid* refToGrid {nullptr};
 
-	void Init();
-	void Draw();
-	void Update();
+	void Init() override;
+	void Draw() override;
+	void Update() override;
 
 	InformationDisplay* GetInformations() { return informations; }
 

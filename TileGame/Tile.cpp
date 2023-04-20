@@ -6,12 +6,12 @@ Tile::Tile(): refToGrid{nullptr}, informations{nullptr}
 
 }
 
-Tile::Tile(Vector3 positionP)
+Tile::Tile(Vector3 positionP): Actor()
 {
 	posInGrid = positionP;
 }
 
-Tile::Tile(Vector3 positionP, Model modelP): model{modelP}
+Tile::Tile(Vector3 positionP, Model modelP) : model{ modelP }, Actor()
 {
 	posInGrid = positionP;
 }

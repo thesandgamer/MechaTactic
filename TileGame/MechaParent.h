@@ -77,6 +77,8 @@ private:
 	Transform transform { {0,0,0},{0,0,0},{1,1,1} };
 	Vector3 posInGrid { 0,0,0 };
 
+	Grid* gridRef;
+
 	BoxCollision collision{};
 
 	MechaState state {MechaState::NORMAL};

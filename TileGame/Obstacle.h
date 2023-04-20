@@ -1,14 +1,19 @@
 #pragma once
 #include "Actor.h"	
+#include "IInformationPasseur.h"
+#include "InformationDisplay.h"
 
 class Obstacle: public Actor, public IInformationPasseur
 {
 public:
 	Obstacle();
-	Obstacle(Vector2 positionP, Texture2D spriteP);
+	Obstacle(Vector3 positionP);
 	~Obstacle() {};
 
-	void Draw();
+
+	void Init() override;
+	void Draw() override;
+	void Update() override;
 
 	InformationDisplay* GetInformations() { return informations; }
 	void SetInformations(string newInfo) { info = newInfo; }
