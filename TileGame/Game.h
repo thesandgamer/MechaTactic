@@ -11,7 +11,6 @@
 #include "PlayerController.h"
 
 
-//++ToDo: faire que les raycast de cam vers objets fonctionne
 //++ToDo: faire en sorte que les info s'affichent en fonction de l'objet touché par le rayon
 
 class Game

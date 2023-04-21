@@ -19,6 +19,7 @@ public:
 
     void PlayerDecideActions();
     void CheckWhatBehindRay();
+    void PrepareWhereMoveMecha();
 
     void SelectMecha();
 

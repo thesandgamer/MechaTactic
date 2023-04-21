@@ -95,6 +95,8 @@ void PlayerController::PlayerDecideActions()
 		else	//Si on à un mecha de selectioné
 		{ 
 			//controller.MoveMecha();
+			PrepareWhereMoveMecha();
+			
 		}
 	}
 	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))	//Clique droit
@@ -142,12 +144,6 @@ void PlayerController::CheckWhatBehindRay()
 		}
 		
 	}
-
-
-	
- 
-	//Si le rayon collide une boite de collision, récupérer l'objet lié à la boite de collision
-	//Appel la fonction hover de l'interface de l'objet touché par le rayon
 }
 
 void PlayerController::SelectMecha()
@@ -165,6 +161,24 @@ void PlayerController::SelectMecha()
 		{
 			i->OnClicked();
 		}	
+	}
+}
+
+void PlayerController::PrepareWhereMoveMecha()
+{
+	//++ToDo: si on à déjà un mécha, check si on clique sur une tuile vide et non pas un mecha,
+	if (hitinfo.IsCollideActor())
+	{
+		Tile* i = dynamic_cast<Tile*>(hitinfo.hitCollider->Parent);
+		if (i != nullptr)	//Si on à cliqué sur une tuile
+		{
+			if (true)//Si sur une tuile vide vérifie si y'a pas un méchas dessus
+			{
+				//Récupère la postion de la tuile et bouge le mécha à cette tuile
+
+			}
+
+		}
 	}
 }
 

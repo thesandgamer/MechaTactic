@@ -10,7 +10,6 @@
 
 //++ToDo: Faire en sorte de passer le jeu en 3d:
 // Camera 3d: controllable(pour l'instant utiliser camear free)
-// Selection de mecha par raycast à partir de la camera 
 // Load de mesh pour les mechas, si le mesh est pas trouvé draw un debug cube
 // En plus:
 // Faire une map plus grande avec de la hauteur(map générée procéduralement)

@@ -18,7 +18,9 @@ public:
 
 	Transform GetTransform() { return transform; }
 	Transform* GetTransformPointer() { return &transform; }
+
 	void SetPosition(Vector3 newPos) { transform.translation = newPos; }
+	Vector3 GetPosition() { return transform.translation; }
 
 
 protected:
