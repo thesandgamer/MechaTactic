@@ -25,6 +25,11 @@ struct RaycastHit
 		hitPosition = Vector3Zero();
 		hitNormal = Vector3Zero();
 	};
+
+	bool IsCollideActor()
+	{
+		return hit && hitCollider != nullptr && hitCollider->Parent != nullptr;
+	}
 };
 
 

@@ -152,20 +152,19 @@ void PlayerController::CheckWhatBehindRay()
 
 void PlayerController::SelectMecha()
 {
-	if (hitinfo.hitCollider != nullptr) //++ToDo: créer une fonction IfHitActor dans hitinfo
+	
+	if (hitinfo.IsCollideActor())
 	{
-		if (hitinfo.hitCollider->Parent != nullptr)
+		IInteraction* i = dynamic_cast<IInteraction*>(hitinfo.hitCollider->Parent);
+
+		std::cout << "Mecha selected" << std::endl;
+
+		controledMecha = dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent);
+
+		if (i != nullptr)
 		{
-			IInteraction* i = dynamic_cast<IInteraction*>(hitinfo.hitCollider->Parent);;
-
-			controledMecha = dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent);
-			std::cout << "Mecha selected" << std::endl;
-
-			if (i != nullptr)
-			{
-				i->OnClicked();
-			}
-		}
+			i->OnClicked();
+		}	
 	}
 }
 
