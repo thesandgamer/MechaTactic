@@ -40,9 +40,10 @@ public:
 		return *this;
 	}	
 	*/
+	Vector3 posInGrid{ 0,0,0 };
+
 
 private:
-	Vector3 posInGrid{0,0,0};
 
 	void posInGridToPos();
 	

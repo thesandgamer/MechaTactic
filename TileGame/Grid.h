@@ -36,6 +36,7 @@ public:
 	Vector3 PosInGrid(Vector3 pos);
 
 	Vector3 PosInGridToPosToWorld(Vector3 pos);
+	Vector3 PosInWorldToPosInGrid(Vector3 pos);
 
 	void Debug_CleanPathVisibility();
 

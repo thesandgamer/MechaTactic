@@ -107,6 +107,16 @@ Vector3 Grid::PosInGridToPosToWorld(Vector3 pos)
 	};
 }
 
+Vector3 Grid::PosInWorldToPosInGrid(Vector3 pos)
+{
+	return {
+		(pos.x / CELL_WIDTH),
+		(pos.y / CELL_HEIGHT),
+		(pos.z / CELL_LENGTH),
+
+	};
+}
+
 void Grid::Debug_CleanPathVisibility()
 {
 	for (int i = 0; i < grid.size() ;i++)

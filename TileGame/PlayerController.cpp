@@ -174,8 +174,9 @@ void PlayerController::PrepareWhereMoveMecha()
 		{
 			if (true)//Si sur une tuile vide vérifie si y'a pas un méchas dessus
 			{
+				Vector3 pos = i->posInGrid;
 				//Récupère la postion de la tuile et bouge le mécha à cette tuile
-
+				controledMecha->MoveTo(pos);
 			}
 
 		}

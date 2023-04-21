@@ -42,7 +42,7 @@ public:
 
 	Vector3 GetLocation() { return transform.translation; }
 
-	void MoveTo(Vector2 positionToGo);
+	void MoveTo(Vector3 positionToGo);
 
 
 	//========]	Informations

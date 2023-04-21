@@ -49,6 +49,7 @@ void MechaParent::Init()
 		model = LoadModelFromMesh(GenMeshCube(gridRef->CELL_WIDTH, gridRef->CELL_HEIGHT, gridRef->CELL_WIDTH));
 	}
 
+	//----Init les collisions
 	collision.Init();
 
 
@@ -59,6 +60,7 @@ void MechaParent::Init()
 	informations->infPasseur = this;
 
 
+	//----Set sa postion in world depending of is position in grid
 	transform.translation = gridRef->PosInGridToPosToWorld(posInGrid);
 
 	
@@ -78,26 +80,30 @@ void MechaParent::Update()
 	{
 		if (poses.empty()) return;
 		Vector2 posToGo = poses[positionIterator];
+		Vector3 posTo = gridRef->PosInGridToPosToWorld({posToGo.x,0,posToGo.y});
 		//Vector2AStar pos = { position.x,position.y };
 
 
-		if (posInGrid.x == posToGo.x && posInGrid.y == posToGo.y)//Si on est arrivé à la position suivante
+		if (transform.translation.x == posTo.x && transform.translation.z == posTo.z)//Si on est arrivé à la position suivante
 		{
 			positionIterator++;//On augmente l'iterator
 			currentTime = 0; //Et on reset le temps
-		}
+			posInGrid = { posToGo.x,0,posToGo.y };//Set la position actuelle dans la grille
 
-		posInGrid.x = EaseQuadInOut(currentTime, posInGrid.x, posToGo.x - posInGrid.x, duration);//On va au x suivant suivant un lerping
-		posInGrid.y = EaseQuadInOut(currentTime, posInGrid.y, posToGo.y - posInGrid.y, duration);//On va au y suivant suivant un lerping
+		}
+		
+
+		transform.translation.x = EaseQuadInOut(currentTime, transform.translation.x, posTo.x - transform.translation.x, duration);//On va au x suivant suivant un lerping
+		transform.translation.z = EaseQuadInOut(currentTime, transform.translation.z, posTo.z - transform.translation.z, duration);//On va au y suivant suivant un lerping
 
 		currentTime++; //Augmente le temps
 
 		if (positionIterator >= poses.size()) //Si on est arrivé à la fin des position où aller
 		{
-
 			canMove = false;
 			haveDoActions = true;
 			selected = false;
+
 			return;
 		}
 
@@ -148,13 +154,13 @@ void MechaParent::DrawVisual()
 }
 
 
-void MechaParent::MoveTo(Vector2 positionToGo)
+void MechaParent::MoveTo(Vector3 positionToGo)
 {
 	if (haveDoActions) return;
 	//Si il n'y a pas de position à aller, finit
 	//Appel le A star
 	gridRef->Debug_CleanPathVisibility();
-	poses = gridRef->aStar.GetPath({ posInGrid.x,posInGrid.y }, { positionToGo.x,positionToGo.y });
+	poses = gridRef->aStar.GetPath({ posInGrid.x,posInGrid.z }, { positionToGo.x,positionToGo.z });
 	canMove = true;
 	currentTime = 0;
 	positionIterator = 0;
@@ -165,7 +171,7 @@ void MechaParent::MoveTo(Vector2 positionToGo)
 //Ici on va set les informations affiché du mecha
 string MechaParent::GetInformationOf()
 {
-	info += "Ma position: " + std::to_string(posInGrid.x) + " : " + std::to_string(posInGrid.y);
+	info += "Ma position: " + std::to_string(posInGrid.x) + " : " + std::to_string(posInGrid.z);
 	informations->SetTitle(info);
 
 	return info;

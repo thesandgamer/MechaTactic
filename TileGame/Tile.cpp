@@ -1,5 +1,6 @@
 #include "Tile.h"
 #include "Grid.h"
+#include "Game.h"
 
 Tile::Tile(): refToGrid{nullptr}, informations{nullptr}
 {
@@ -45,8 +46,19 @@ void Tile::Init()
 
 void Tile::Draw()
 {
+	if (posInGrid.x == 0 && posInGrid.z == 0)
+	{
+		drawColor = RED;
+	}
+	if (posInGrid.x == 9 && posInGrid.z == 9)
+	{
+		drawColor = RED;
+	}
 
 	DrawModel(model, transform.translation, transform.scale.x, drawColor);
+
+	//Vector2 pos = GetWorldToScreen(transform.translation,*Game::instance().GetCamera());
+	//DrawText("A", pos.x, pos.y, 60, RED);
 }
 
 void Tile::Update()
