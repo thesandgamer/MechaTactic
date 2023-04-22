@@ -46,7 +46,6 @@ public:
 private:
 
 	void posInGridToPos();
-	
 
 	//-------Collisions-------
 	BoxCollision collision{};

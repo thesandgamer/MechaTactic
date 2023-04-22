@@ -28,6 +28,7 @@ void TurnsManager::Start()
 void TurnsManager::Update()
 {
 	Game::instance().GetGrid()->CalculateObstacles(); //Pas mettre ça ici 
+
 	endTurnBandeau.Update();
 
 	if (haveTurn != nullptr) //Si quelqu'un existe

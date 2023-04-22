@@ -19,7 +19,6 @@ void PlayerController::Start()
 	for (auto i = mechasList.begin(); i != mechasList.end(); i++)
 	{
 		(*i)->SetBaseColor({0,100,0,255});
-
 	}
 
 	Controller::Start();
@@ -30,7 +29,7 @@ void PlayerController::Start()
 	endTurnButton->textInButton = "End Turn";
 	endTurnButton->AddFunctionToTrigger(std::bind(&PlayerController::FinishTurn,this));//Set la fonction de callback créer un fonction lambda
 
-
+	//----Raycast to select
 	ray = GetMouseRay(mousePos, *Game::instance().GetCamera());
 	raycast.SetPosition(ray.position);
 	raycast.checkingCollision = true;

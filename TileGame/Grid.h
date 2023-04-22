@@ -59,6 +59,7 @@ public:
 	}
 	*/
 private:
+
 	Vector3 gridPosition;
 
 	

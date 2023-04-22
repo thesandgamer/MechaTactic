@@ -110,9 +110,9 @@ Vector3 Grid::PosInGridToPosToWorld(Vector3 pos)
 Vector3 Grid::PosInWorldToPosInGrid(Vector3 pos)
 {
 	return {
-		(pos.x / CELL_WIDTH),
-		(pos.y / CELL_HEIGHT),
-		(pos.z / CELL_LENGTH),
+		(pos.x - GetGridPos().x )/ CELL_WIDTH  ,
+		(pos.y - GetGridPos().y )/ CELL_HEIGHT ,
+		(pos.z - GetGridPos().z ) / CELL_LENGTH ,
 
 	};
 }
@@ -129,13 +129,15 @@ void Grid::Debug_CleanPathVisibility()
 
 void Grid::CalculateObstacles()
 {
-	//Trouver comment faire pour que les obstacles soient calculés
 	/*
 	for each (Actor * act in Game::instance().GetElementsInGame())//Pour chaque element du jeu
 	{
-		//aStar.aStarGrid.AddObstacle({ act->GetPosition().x,act->GetPosition().z});
-		//grid[act->GetPosition().x][act->GetPosition().z].traversible = false;
+		//problème icic c'est que la position est une position in world
+		Vector3 posInGrid = PosInWorldToPosInGrid(act->GetPosition());
 
-	}
-	*/
+		aStar.aStarGrid.AddObstacle({ posInGrid.x,posInGrid.z});
+		grid[posInGrid.x][posInGrid.z].traversible = false;
+
+	}*/
+	
 }
