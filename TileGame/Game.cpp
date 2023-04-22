@@ -147,7 +147,6 @@ void Game::Update()
 
     cursor.Updtate();
 
-
 //=======Updtate infos=========
     /* Ca n'a pas à être là, avoir cette feature dans les player controller
     for (InformationDisplay* inf : informations)
