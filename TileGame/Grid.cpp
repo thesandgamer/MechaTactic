@@ -2,7 +2,7 @@
 #include "Game.h"
 
 
-Grid::Grid(Vector3 pos, Vector3 gridSize, int cellWidth, int cellLength, int cellHeight): CELL_HEIGHT(cellHeight),CELL_LENGTH(cellLength),CELL_WIDTH(cellWidth), Actor()
+Grid::Grid(Vector3 pos, Vector3 gridSize): Actor()
 {
 	gridPosition = pos;
 	GRID_SIZE = gridSize;
@@ -129,15 +129,41 @@ void Grid::Debug_CleanPathVisibility()
 
 void Grid::CalculateObstacles()
 {
-	/*
+	//Check tout ce qui peut faire obstacle au déplacement
+	//Si une tuile se trouve au même endroit
+
+	for (int i = 0; i < grid.size(); i++)
+	{
+		for (int j = 0; j < grid[i].size(); j++)
+		{
+			aStar.aStarGrid.RemoveObstacle({ grid[i][j].posInGrid.x,grid[i][j].posInGrid.z });
+			grid[i][j].traversible = true;
+		}
+	}
+
+	
 	for each (Actor * act in Game::instance().GetElementsInGame())//Pour chaque element du jeu
 	{
 		//problème icic c'est que la position est une position in world
 		Vector3 posInGrid = PosInWorldToPosInGrid(act->GetPosition());
 
-		aStar.aStarGrid.AddObstacle({ posInGrid.x,posInGrid.z});
+		aStar.aStarGrid.AddObstacle({ posInGrid.x,posInGrid.z });
 		grid[posInGrid.x][posInGrid.z].traversible = false;
+		
+		/*
+		if (posInGrid.x == grid[posInGrid.x][posInGrid.z].posInGrid.x && posInGrid.z == grid[posInGrid.x][posInGrid.z].posInGrid.z)
+		{
+			aStar.aStarGrid.AddObstacle({ posInGrid.x,posInGrid.z });
+			grid[posInGrid.x][posInGrid.z].traversible = false;
+		}
+		else
+		{
+			aStar.aStarGrid.RemoveObstacle({ posInGrid.x,posInGrid.z });
+			grid[posInGrid.x][posInGrid.z].traversible = true;
+		}
+		*/
+		
 
-	}*/
+	}
 	
 }

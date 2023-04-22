@@ -27,7 +27,6 @@ void TurnsManager::Start()
 
 void TurnsManager::Update()
 {
-	Game::instance().GetGrid()->CalculateObstacles(); //Pas mettre ça ici 
 
 	endTurnBandeau.Update();
 
@@ -56,6 +55,8 @@ void TurnsManager::MakeTurns()
 
 	haveTurn = allControllers.at(actual);	//Le controller qui va jouer va être celui à l'actuel
 	haveTurn->StartTurn();
+	Game::instance().GetGrid()->CalculateObstacles(); 
+
 
 }
 

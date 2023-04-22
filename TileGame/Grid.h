@@ -9,7 +9,7 @@
 class Grid: public Actor
 {
 public:
-	Grid(Vector3 pos,Vector3 gridSize, int cellWidth, int cellLength,int cellHeight);
+	Grid(Vector3 pos,Vector3 gridSize);
 	Grid();
 	~Grid();
 
@@ -21,9 +21,9 @@ public:
 
 	Vector3 GRID_SIZE;
 	
-	int CELL_WIDTH;
-	int CELL_LENGTH;
-	int CELL_HEIGHT;
+	const static int CELL_WIDTH { 32 };
+	const static int CELL_LENGTH { 32 };
+	const static int CELL_HEIGHT { 32 };
 
 	std::vector<std::vector<Tile>> grid;
 

@@ -21,7 +21,7 @@ void Game::Start()
     Vector3 gridPos = { -200,0,-200 };
 
 
-    grid = Grid(gridPos, {GRID_WIDTH,GRID_HEIGHT,GRID_LENGTH}, CELL_WIDTH,CELL_HEIGHT,CELL_LENGTH); //On génère la grille
+    grid = Grid(gridPos, {GRID_WIDTH,GRID_HEIGHT,GRID_LENGTH}); //On génère la grille
     grid.Start();
 
 
@@ -34,15 +34,14 @@ void Game::Start()
     
 
 //=========Setup les obstacles==========
-    Texture2D obstacleSprite = LoadTexture("Ressources/Obstacle.png");
-  //  obstacles.push_back(new Obstacle({ 4,4 }, obstacleSprite));
-   // obstacles.push_back(new Obstacle({ 2,2 }, obstacleSprite));
-  //  obstacles.push_back(new Obstacle({ 8,3 }, obstacleSprite));
-  //  obstacles.push_back(new Obstacle({ 8,5 }, obstacleSprite));
-  //  obstacles.push_back(new Obstacle({ 3,8 }, obstacleSprite));
+    obstacles.push_back(new Obstacle({ 2,0,2 }));
+    obstacles.push_back(new Obstacle({ 8,0,3 }));
+    obstacles.push_back(new Obstacle({ 8,0,5 }));
+    obstacles.push_back(new Obstacle({ 3,0,8 }));
 
     for each (Obstacle * obstacle in obstacles)
     {
+        obstacle->refToGrid = &grid;
         obstacle->Init();
     }
 

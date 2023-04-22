@@ -2,6 +2,8 @@
 #include "Actor.h"	
 #include "IInformationPasseur.h"
 #include "InformationDisplay.h"
+#include "BoxCollision.h"
+#include "Grid.h"
 
 class Obstacle: public Actor, public IInformationPasseur
 {
@@ -15,15 +17,27 @@ public:
 	void Draw() override;
 	void Update() override;
 
+
 	InformationDisplay* GetInformations() { return informations; }
 	void SetInformations(string newInfo) { info = newInfo; }
 
 	string GetInformationOf() override;
 
+	Vector3 posInGrid{ 0,0,0 };
+
+	Grid* refToGrid{  nullptr };
 
 private:
 	InformationDisplay* informations;
 	string info;
+
+	//-------Collisions-------
+	BoxCollision collision{};
+
+	//-------For drawing-------
+	Model model{};
+
+	Color drawColor{ WHITE };
 
 };
 

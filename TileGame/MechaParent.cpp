@@ -89,6 +89,7 @@ void MechaParent::Update()
 			positionIterator++;//On augmente l'iterator
 			currentTime = 0; //Et on reset le temps
 			posInGrid = { posToGo.x,0,posToGo.y };//Set la position actuelle dans la grille
+			gridRef->CalculateObstacles();
 
 		}
 		

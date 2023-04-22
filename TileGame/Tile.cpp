@@ -46,7 +46,7 @@ void Tile::Init()
 
 void Tile::Draw()
 {
-	if (!traversible) drawColor = BLACK;
+	if (!traversible) drawColor = DARKPURPLE;
 	else drawColor = PURPLE;
 	DrawModel(model, transform.translation, transform.scale.x, drawColor);
 
