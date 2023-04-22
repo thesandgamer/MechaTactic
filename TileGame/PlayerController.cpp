@@ -51,16 +51,8 @@ void PlayerController::Draw()
 {
 	Controller::Draw();
 
-	//DrawRay(ray, 100000, GREEN);
-	//DrawSphere(ray.position, 5, RED);
 	raycast.Draw();
 
-	
-	/*
-	std::cout << "Have hit: " << hitinfo.hit << "\n";
-	std::cout << "Hit location: " << hitinfo.position.x << " " << hitinfo.position.y << " " << hitinfo.position.z << "\n";
-	std::cout << "Hit Distance: " << hitinfo.distance << "\n";
-	*/
 	if ((hitinfo.hit) && (abs(hitinfo.hitDistance) < raycast.GetLength()))
 	{
 		DrawSphereWires(hitinfo.hitPosition, 10, 20, 20, RED);
@@ -94,9 +86,7 @@ void PlayerController::PlayerDecideActions()
 		}
 		else	//Si on à un mecha de selectioné
 		{ 
-			//controller.MoveMecha();
 			PrepareWhereMoveMecha();
-			
 		}
 	}
 	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))	//Clique droit

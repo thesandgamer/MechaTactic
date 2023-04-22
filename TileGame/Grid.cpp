@@ -129,11 +129,13 @@ void Grid::Debug_CleanPathVisibility()
 
 void Grid::CalculateObstacles()
 {
+	//Trouver comment faire pour que les obstacles soient calculés
 	/*
-	for each (Actor * act in Game::instance().GetElementsInGame())
+	for each (Actor * act in Game::instance().GetElementsInGame())//Pour chaque element du jeu
 	{
-		aStar.aStarGrid.AddObstacle({act->transform.translation.x,act->transform.translation.z);
-		//grid[act->position.x][act->position.y].traversible = false;
+		//aStar.aStarGrid.AddObstacle({ act->GetPosition().x,act->GetPosition().z});
+		//grid[act->GetPosition().x][act->GetPosition().z].traversible = false;
 
-	}*/
+	}
+	*/
 }

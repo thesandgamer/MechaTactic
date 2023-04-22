@@ -53,11 +53,14 @@ public:
 
 private:
 
-
+	//---Gère les controllers
 	TurnsManager turnManager;
 	vector<Controller*> controllers;
 
+	Camera cam{ 0 };
 
+
+	//-----Pour lagrille
 	Grid grid;
 
 	Cursor cursor;
@@ -66,7 +69,6 @@ private:
 
 	vector<Obstacle*> obstacles;
 
-	Camera cam{0};
 
 
 

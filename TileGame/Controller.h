@@ -6,6 +6,13 @@ using std::vector;
 #include "Button.h"
 #include "MechaParent.h"
 
+enum ControllerState
+{
+	Thinking,
+	MechaSelected,
+	MechaMakeActions,
+};
+
 class Controller : public ITurn
 {
 
