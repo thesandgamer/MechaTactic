@@ -28,7 +28,7 @@ public:
 
 	void AddMecha(Vector3 location);
 
-	bool MoveMecha(Vector2 moveTo);//bool to check if the movement is possible
+	bool MoveMecha(Vector3 moveTo);//bool to check if the movement is possible
 
 	bool SelectMecha(MechaParent* pawnSelected);
 	void DeSelectMecha();
@@ -60,6 +60,7 @@ protected:
 	class Grid* gridRef{nullptr};
 
 	//==========
+	ControllerState cState {Thinking};
 
 	//==========
 	bool isTurn{false};

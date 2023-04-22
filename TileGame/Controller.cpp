@@ -15,7 +15,7 @@ Controller::~Controller()
 void Controller::Start()
 {
 	//=========Gère les pawns============
-	std::cout << "		Controller " << name << " have stated" << std::endl;
+	std::cout << "		Controller " << name << " have started" << std::endl;
 	InitPawns();
 }
 
@@ -59,19 +59,21 @@ void Controller::AddMecha(Vector3 location)
 }
 
 
-bool Controller::MoveMecha(Vector2 moveTo)
+bool Controller::MoveMecha(Vector3 moveTo)
 {
+	controledMecha->MoveTo(moveTo);
+	DeSelectMecha();
+	return true;
+
+	/*
 	if (gridRef->grid[moveTo.x][moveTo.y].traversible == true)//Si la case séléctionné est traversible
 	{
-		//std::cout << "traversible" << std::endl;
-		controledMecha->MoveTo({ moveTo.x, moveTo.y });
-		DeSelectMecha();
-		return true;
+		
 	}
 	else
 	{
 		return false;
-	}
+	}*/
 
 }
 

@@ -46,15 +46,6 @@ void Tile::Init()
 
 void Tile::Draw()
 {
-	if (posInGrid.x == 0 && posInGrid.z == 0)
-	{
-		drawColor = RED;
-	}
-	if (posInGrid.x == 9 && posInGrid.z == 9)
-	{
-		drawColor = RED;
-	}
-
 	DrawModel(model, transform.translation, transform.scale.x, drawColor);
 
 	//Vector2 pos = GetWorldToScreen(transform.translation,*Game::instance().GetCamera());

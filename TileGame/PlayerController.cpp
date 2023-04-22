@@ -166,7 +166,10 @@ void PlayerController::PrepareWhereMoveMecha()
 			{
 				Vector3 pos = i->posInGrid;
 				//Récupère la postion de la tuile et bouge le mécha à cette tuile
-				controledMecha->MoveTo(pos);
+				MoveMecha(pos);
+
+				//controledMecha->MoveTo(pos);
+
 			}
 
 		}
