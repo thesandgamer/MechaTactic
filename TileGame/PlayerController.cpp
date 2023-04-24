@@ -143,7 +143,7 @@ void PlayerController::SelectMecha()
 		IInteraction* i = dynamic_cast<IInteraction*>(hitinfo.hitCollider->Parent);
 
 		std::cout << "Mecha selected" << std::endl;
-
+		//++ToDo: rajouter vérfication
 		controledMecha = dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent);
 
 		if (i != nullptr)

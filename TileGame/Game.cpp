@@ -51,7 +51,6 @@ void Game::Start()
     player->AddMecha({ 0,0,0 });
     player->AddMecha({ 4,0,4 });
     controllers.push_back(player);   //Rajoute un player
-   // controllers.emplace_back(new Ennemy());             //Rajoute un ennemy (old)
 
     
     for (size_t i = 0; i < controllers.size(); i++)
