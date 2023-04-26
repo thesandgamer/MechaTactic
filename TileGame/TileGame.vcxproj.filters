@@ -109,6 +109,7 @@
       <Filter>Collisions</Filter>
     </ClCompile>
     <ClCompile Include="IInteraction.cpp" />
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -193,5 +194,6 @@
       <Filter>Collisions</Filter>
     </ClInclude>
     <ClInclude Include="IInteraction.h" />
+    <ClInclude Include="Camera.h" />
   </ItemGroup>
 </Project>
