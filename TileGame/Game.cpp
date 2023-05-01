@@ -26,12 +26,7 @@ void Game::Start()
 
 
 //=========Setup la camera==========
-    cam.position = { 250,250,250 };
-    cam.target = { 0,0,0 }; //Regarde au centre du monde 
-    cam.up = { 0,1,0 };
-    cam.fovy = 45;
-    cam.projection = CAMERA_PERSPECTIVE;
-    
+    cam.Init();
 
 //=========Setup les obstacles==========
     obstacles.push_back(new Obstacle({ 2,0,2 }));
@@ -145,6 +140,7 @@ void Game::Update()
     }
 
     cursor.Updtate();
+    cam.Update();
 
 //=======Updtate infos=========
     /* Ca n'a pas à être là, avoir cette feature dans les player controller
@@ -168,7 +164,7 @@ void Game::Draw()
 {
     BeginDrawing();
     ClearBackground(BLACK);
-    BeginMode3D(cam);
+    BeginMode3D(cam.GetCamera());
 
    // DrawGrid(32, 32);
     grid.Draw();
@@ -183,6 +179,7 @@ void Game::Draw()
         (*i)->Draw();
     }
 
+    cam.Draw();
 
     CollisionManager::GetInstance()->Draw();
 

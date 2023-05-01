@@ -20,6 +20,7 @@
 // En plus:
 // Faire en sorte que les mechas attatquent
 // Faire une IA pour les mechas ennemis
+// Améliorer le A* pour le rendre mieux
 // Faire une map plus grande avec de la hauteur(map générée procéduralement), et avec un A* pas en grille
 
 

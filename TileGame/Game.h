@@ -6,6 +6,7 @@
 #include "TurnsManager.h"
 #include "Cursor.h"
 #include "Obstacle.h"
+#include "CameraActor.h"
 
 #include "Controller.h"
 #include "PlayerController.h"
@@ -46,7 +47,8 @@ public:
 	vector<Actor*> GetElementsInGame() { return elementsInGame; }
 
 
-	Camera* GetCamera() { return &cam; }
+	CameraActor cam; // Faire en sorte qu'il y ait plusieurs camera, un par player controller
+
 
 	int  SCREEN_WIDTH;
 	int  SCREEN_HEIGHT;
@@ -57,7 +59,6 @@ private:
 	TurnsManager turnManager;
 	vector<Controller*> controllers;
 
-	Camera cam{ 0 };
 
 
 	//-----Pour lagrille

@@ -30,7 +30,7 @@ void PlayerController::Start()
 	endTurnButton->AddFunctionToTrigger(std::bind(&PlayerController::FinishTurn,this));//Set la fonction de callback créer un fonction lambda
 
 	//----Raycast to select
-	ray = GetMouseRay(mousePos, *Game::instance().GetCamera());
+	ray = GetMouseRay(mousePos, Game::instance().cam.GetCamera());
 	raycast.SetPosition(ray.position);
 	raycast.checkingCollision = true;
 	//raycast.trigger = true;
@@ -109,7 +109,7 @@ void PlayerController::CheckWhatBehindRay()
 	//Faire un rayon entre la camera et la souris (faire un truc à la unity Camera.screenPointToRay
 	Vector3 direction{-1,-1,0};
 	//ray = { Game::instance().GetCamera()->position,direction };
-	ray = GetMouseRay(mousePos, *Game::instance().GetCamera());
+	ray = GetMouseRay(mousePos, Game::instance().cam.GetCamera());
 
 	raycast.SetDirection(ray.direction);
 	//Récupérer quel objet est sous mon rayon 

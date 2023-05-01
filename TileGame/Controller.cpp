@@ -74,6 +74,10 @@ void Controller::ShowPath(Vector3 end)
 
 		//Faire en sorte que la couleur ne se garde pas
 	}
+	else
+	{ 
+		gridRef->ResetTilesColor();
+	}
 }
 
 bool Controller::MoveMecha(Vector3 moveTo)

@@ -176,7 +176,7 @@
     <ClCompile Include="BandeauTexte.cpp" />
     <ClCompile Include="BoxCollision.cpp" />
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraActor.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Cursor.cpp" />
@@ -210,7 +210,7 @@
     <ClInclude Include="BandeauTexte.h" />
     <ClInclude Include="BoxCollision.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraActor.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Cursor.h" />

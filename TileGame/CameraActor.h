@@ -1,4 +1,6 @@
 #pragma once
+#include "raylib.h"
+#include "Actor.h"
 
 //Class pour gérer la camera, la bouger, la faire tourner, zoomer dézommer,...
 //La camera doit avoir:
@@ -11,13 +13,21 @@
 //	Une fonction move avec touches
 //	Une fonction move qui bouge la position
 
-class Camera
+class CameraActor: public Actor
 {
 public:
+	CameraActor();
+	CameraActor(Vector3 basePos);
+	~CameraActor();
 
+	void Init();
+	void Draw();
+	void Update();
+
+	Camera& GetCamera() { return cam; }
 
 private:
-
+	Camera cam{ 0 };
 
 };
 
