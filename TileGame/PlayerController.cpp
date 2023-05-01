@@ -126,13 +126,28 @@ void PlayerController::CheckWhatBehindRay()
 		{
 			i = dynamic_cast<IInteraction*>(hitinfo.hitCollider->Parent);
 		}
+		else
+		{
+			gridRef->ResetTilesColor();
+
+		}
 
 		if (i != nullptr)
 		{
 			i->OnHovered();
 			ShowPath(i->GetPosInGrid());
 		}
+		else
+		{
+			gridRef->ResetTilesColor();
+
+		}
 		
+	}
+	else
+	{
+		gridRef->ResetTilesColor();
+
 	}
 }
 
