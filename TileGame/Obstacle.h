@@ -23,11 +23,14 @@ public:
 
 	string GetInformationOf() override;
 
-	Vector3 posInGrid{ 0,0,0 };
+	Vector3 GetPosInGrid() { return posInGrid; }
+
 
 	Grid* refToGrid{  nullptr };
 
 private:
+	Vector3 posInGrid{ 0,0,0 };
+
 	InformationDisplay* informations;
 	string info;
 

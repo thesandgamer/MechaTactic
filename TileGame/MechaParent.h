@@ -57,6 +57,9 @@ public:
 	void OnHovered() override;
 	void OnClicked() override;
 
+	Vector3 GetPosInGrid() { return posInGrid; }
+
+
 
 	bool selected = false;
 	bool haveDoActions = false;
@@ -80,6 +83,8 @@ public:
 	}*/
 
 	void SetBaseColor(Color color) { baseColor = color; }
+
+	//++ToDo: Limiter le déplacement des mechas et afficher au sol où il peut se déplacqer
 
 
 private:

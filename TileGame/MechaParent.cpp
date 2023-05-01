@@ -160,7 +160,7 @@ void MechaParent::MoveTo(Vector3 positionToGo)
 	if (haveDoActions) return;
 	//Si il n'y a pas de position à aller, finit
 	//Appel le A star
-	gridRef->Debug_CleanPathVisibility();
+	//gridRef->Debug_CleanPathVisibility();	//Inuitile pour l'instant
 	poses = gridRef->aStar.GetPath({ posInGrid.x,posInGrid.z }, { positionToGo.x,positionToGo.z });
 	canMove = true;
 	currentTime = 0;

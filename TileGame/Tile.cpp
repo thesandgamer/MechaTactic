@@ -46,8 +46,9 @@ void Tile::Init()
 
 void Tile::Draw()
 {
+	/*
 	if (!traversible) drawColor = DARKPURPLE;
-	else drawColor = PURPLE;
+	else drawColor = PURPLE;*/
 	DrawModel(model, transform.translation, transform.scale.x, drawColor);
 
 	//Vector2 pos = GetWorldToScreen(transform.translation,*Game::instance().GetCamera());

@@ -59,10 +59,28 @@ void Controller::AddMecha(Vector3 location)
 }
 
 
+void Controller::ShowPath(Vector3 end)
+{
+	if (controledMecha != nullptr)
+	{
+		gridRef->ResetTilesColor();
+		//Fait path entre mecha selectionné et position
+		std::vector<Vector2> poses = gridRef->aStar.GetPath({ controledMecha->GetPosInGrid().x,controledMecha->GetPosInGrid().z }, { end.x,end.z });
+
+		for (Vector2 pos : poses)
+		{
+			gridRef->grid[pos.x][pos.y].ChangeColor(YELLOW);
+		}
+
+		//Faire en sorte que la couleur ne se garde pas
+	}
+}
+
 bool Controller::MoveMecha(Vector3 moveTo)
 {
 	controledMecha->MoveTo(moveTo);
 	DeSelectMecha();
+	gridRef->ResetTilesColor();
 	return true;
 
 	/*

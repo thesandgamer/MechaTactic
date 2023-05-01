@@ -25,6 +25,9 @@ public:
 	const static int CELL_LENGTH { 32 };
 	const static int CELL_HEIGHT { 32 };
 
+	/// <summary>
+	/// Stoque les tuiles qui vont composer le terrain de jeu
+	/// </summary>
 	std::vector<std::vector<Tile>> grid;
 
 	AStar aStar;
@@ -32,17 +35,17 @@ public:
 	Vector3 GetGridPos() { return gridPosition; }
 	
 	bool IsInGrid(Vector3 pos);
-
+	 
 	Vector3 PosInGrid(Vector3 pos);
 
 	Vector3 PosInGridToPosToWorld(Vector3 pos);
 	Vector3 PosInWorldToPosInGrid(Vector3 pos);
 
-	void Debug_CleanPathVisibility();
-
 	void CalculateObstacles();
 
 	Texture2D spriteOfTiles;
+
+	void ResetTilesColor();
 
 	/*
 	Grid& operator=(const Grid& other)

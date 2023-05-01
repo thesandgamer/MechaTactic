@@ -2,11 +2,12 @@
 #include "raylib.h"
 #include "InformationDisplay.h"
 #include "IInformationPasseur.h"
+#include "IInteraction.h"
 
 #include "BoxCollision.h"
 class Grid;
 
-class Tile: public IInformationPasseur, public Actor
+class Tile: public IInformationPasseur, public Actor, public IInteraction
 {
 public:
 	Tile();
@@ -27,6 +28,13 @@ public:
 
 	string GetInformationOf() override;
 
+	void ChangeColor(Color color) { drawColor = color; }
+
+
+	void OnHovered()  {};
+	void OnClicked()  {};
+	Vector3 GetPosInGrid()  { return posInGrid; } ;
+
 	/*
 	Tile& operator=(const Tile& other)
 	{
@@ -40,10 +48,10 @@ public:
 		return *this;
 	}	
 	*/
-	Vector3 posInGrid{ 0,0,0 };
 
 
 private:
+	Vector3 posInGrid{ 0,0,0 };
 
 	void posInGridToPos();
 

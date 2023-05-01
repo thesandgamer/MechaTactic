@@ -117,16 +117,6 @@ Vector3 Grid::PosInWorldToPosInGrid(Vector3 pos)
 	};
 }
 
-void Grid::Debug_CleanPathVisibility()
-{
-	for (int i = 0; i < grid.size() ;i++)
-	{
-		for (int j = 0; j < grid[i].size(); j++)
-		{
-		}
-	}
-}
-
 void Grid::CalculateObstacles()
 {
 	//Check tout ce qui peut faire obstacle au déplacement
@@ -136,7 +126,7 @@ void Grid::CalculateObstacles()
 	{
 		for (int j = 0; j < grid[i].size(); j++)
 		{
-			aStar.aStarGrid.RemoveObstacle({ grid[i][j].posInGrid.x,grid[i][j].posInGrid.z });
+			aStar.aStarGrid.RemoveObstacle({ grid[i][j].GetPosInGrid().x,grid[i][j].GetPosInGrid().z});
 			grid[i][j].traversible = true;
 		}
 	}
@@ -166,4 +156,15 @@ void Grid::CalculateObstacles()
 
 	}
 	
+}
+
+void Grid::ResetTilesColor()
+{
+	for (int i = 0; i < grid.size(); i++)
+	{
+		for (int j = 0; j < grid[i].size(); j++)
+		{
+			grid[i][j].ChangeColor(PURPLE);
+		}
+	}
 }
