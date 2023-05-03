@@ -55,10 +55,10 @@ public:
 
 
 protected:
-	vector<MechaParent*> mechasList{};	//Pointeurs car on veut pouvoir mettre des enfants
-	MechaParent* controledMecha{ nullptr };
+	vector<MechaParent*> mechasList{};	//*Remplacer par smart pointer
+	MechaParent* controledMecha{ nullptr };	//Juste un lien vers le mecha
 
-	class Grid* gridRef{nullptr};
+	class Grid* gridRef{nullptr};	//Juste un lien vers la grille
 
 	//==========
 	ControllerState cState {Thinking};

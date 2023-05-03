@@ -24,8 +24,10 @@ void PlayerController::Start()
 	Controller::Start();
 
 	Texture2D buttonSprite = LoadTexture("Ressources/EndTurnButton.png");
+	Vector2 buttonPos = { 10,10 };
 
-	endTurnButton = new Button({ 10,10 }, buttonSprite, 128, 64);
+	endTurnButton = std::make_unique<Button>( buttonPos, buttonSprite, 128, 64 );
+
 	endTurnButton->textInButton = "End Turn";
 	endTurnButton->AddFunctionToTrigger(std::bind(&PlayerController::FinishTurn,this));//Set la fonction de callback créer un fonction lambda
 

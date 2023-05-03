@@ -28,7 +28,8 @@ private:
     Vector2 mousePos{0,0};
     Vector2 mousePosInGrid{ 0,0 };
 
-    Button* endTurnButton{nullptr};
+    //Button* endTurnButton{nullptr}; //*Remplacer par smart pointer: le pointeur lui appartient
+    std::unique_ptr<Button> endTurnButton;
 
     //----For raycast
     Ray ray{ {0,0,0},10000000 };
