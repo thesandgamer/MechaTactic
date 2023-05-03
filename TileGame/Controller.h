@@ -21,7 +21,6 @@ public:
 	~Controller();
 
 	virtual void Start();
-	void InitPawns();
 	virtual void Update();
 	virtual void Draw();
 	virtual void DrawUi();
@@ -31,11 +30,16 @@ public:
 	void ShowPath(Vector3 end);
 	bool MoveMecha(Vector3 moveTo);//bool to check if the movement is possible
 
+
 	bool SelectMecha(MechaParent* pawnSelected);
 	void DeSelectMecha();
 
-	vector<MechaParent*>* GetMechas();
-	vector<MechaParent*> GetMechasDirect();
+
+	//vector<MechaParent*>* GetMechas();
+	//vector<MechaParent*> GetMechasDirect();
+
+	int GetNumberOfMechas() { return mechasList.size(); }
+	MechaParent* GetMechaAt(int index) { return mechasList.at(index); }
 
 	void SetGrid(class Grid* grid);
 
@@ -48,25 +52,31 @@ public:
 	//==========Interfaces==========
 	void StartTurn();
 	bool HaveEndTurn();
+
 	int initiative;
 	bool finishHisTurn = false;
+
 	string GetName() { return name; }
 	string name;
 
 
 protected:
+
+	//======] For Mechas
+	void InitPawns();
+
 	vector<MechaParent*> mechasList{};	//*Remplacer par smart pointer
 	MechaParent* controledMecha{ nullptr };	//Juste un lien vers le mecha
 
+	//======] Grid
 	class Grid* gridRef{nullptr};	//Juste un lien vers la grille
 
-	//==========
+	//======] State
 	ControllerState cState {Thinking};
 
-	//==========
 	bool isTurn{false};
 
-	//==========UI==========
+	//======] UI
 
 
 

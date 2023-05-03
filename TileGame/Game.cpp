@@ -66,16 +66,18 @@ void Game::Start()
     cursor.Start();
 
 //============Setup elements in game==============
+
+    // Rajoute tout les méchas de tous les controllers dans les éléments in game(sert d'obstacles)
     for (auto i = controllers.begin(); i != controllers.end(); i++)
     {
-        for (int j = 0; j < (*i)->GetMechas()->size(); j++)
+        for (int j = 0; j < (*i)->GetNumberOfMechas(); j++)
         {
-           elementsInGame.push_back((*i)->GetMechas()->at(j));
+           elementsInGame.push_back((*i)->GetMechaAt(j));  //Rajoute tous les méchas
         }
 
     }
 
-
+    //Rajoute obstacles
     for each (Actor* obstacle in obstacles)
     {
         elementsInGame.push_back(obstacle);

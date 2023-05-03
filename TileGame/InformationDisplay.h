@@ -7,6 +7,8 @@
 
 using std::string;
 
+//++ToDo: Refacto cette classe
+
 class InformationDisplay
 {
 public:

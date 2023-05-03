@@ -5,6 +5,8 @@
 #include <functional>
 
 
+//++ToDo: refacto cette classe
+
 typedef std::function<void()> FuncPointer;//Créer un type pointeur fonction void, créer le type du lambda
 
 enum class ButtonState

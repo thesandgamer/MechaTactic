@@ -6,6 +6,8 @@
 #include "Tile.h"
 #include "AStar.h"
 
+//++ToDo: refacto cette classe(remttre bien public/privé)
+
 class Grid: public Actor
 {
 public:

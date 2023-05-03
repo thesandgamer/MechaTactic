@@ -26,6 +26,33 @@ enum class MechaState
 };
 
 
+/*	//++ToDo:
+
+	Mécha: 
+		Pour la séléction de son action
+	en mode déplacement de base
+	Mode déplacement:
+		Quand on survolle une tile acessible, montre le chemin actuel/ possible
+	Mode Capacité:
+		Montre zone possible
+
+
+	Mode effectue la capacitée: perte du controller du contrôle sur le mecha
+
+
+	Capacité?
+	Affichage à l'écran quand le mecha est selectionné
+	Affiche les boutons:
+		Quand on clique sur le bouton, le bouton est selectionné, et la capacité aussi
+		Si on clique sur un autre bouton le bouton selectionné précédement se déséléctionne, et la capacité de même 
+
+
+	Faire un reset du mecha (actif, capactié selectionné,...) 
+
+
+*/
+
+
 class MechaParent : public IInformationPasseur, public Actor, public IInteraction
 {
 public:
@@ -90,7 +117,7 @@ public:
 private:
 	Vector3 posInGrid { 0,0,0 };
 
-	Grid* gridRef;
+	Grid* gridRef;	//Juste un lien vers la grille
 
 	BoxCollision collision{};
 

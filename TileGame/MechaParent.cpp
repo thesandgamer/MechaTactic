@@ -46,7 +46,7 @@ void MechaParent::Init()
 	if (model.meshCount == NULL)
 	{
 		drawColor = baseColor;
-		model = LoadModelFromMesh(GenMeshCube(gridRef->CELL_WIDTH, gridRef->CELL_HEIGHT, gridRef->CELL_WIDTH));
+		model = LoadModelFromMesh(GenMeshCube(gridRef->CELL_WIDTH-10, gridRef->CELL_HEIGHT, gridRef->CELL_WIDTH-10));
 	}
 
 	//----Init les collisions

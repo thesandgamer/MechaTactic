@@ -116,6 +116,7 @@ void Controller::DeSelectMecha()
 	}
 }
 
+/*
 vector<MechaParent*>* Controller::GetMechas()
 {
 	return &mechasList;
@@ -124,7 +125,7 @@ vector<MechaParent*>* Controller::GetMechas()
 vector<MechaParent*> Controller::GetMechasDirect()
 {
 	return mechasList;
-}
+}*/
 
 void Controller::SetGrid(Grid* grid)
 {
