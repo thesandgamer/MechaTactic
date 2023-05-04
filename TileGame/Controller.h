@@ -65,11 +65,11 @@ protected:
 	//======] For Mechas
 	void InitPawns();
 
-	vector<MechaParent*> mechasList{};	//*Remplacer par smart pointer
+	vector<MechaParent*> mechasList{};	//*Remplacer par smart pointer: unique pointers
 	MechaParent* controledMecha{ nullptr };	//Juste un lien vers le mecha
 
 	//======] Grid
-	class Grid* gridRef{nullptr};	//Juste un lien vers la grille
+	class Grid* gridRef{nullptr};	//Juste un lien vers la grille: juste une référence
 
 	//======] State
 	ControllerState cState {Thinking};
