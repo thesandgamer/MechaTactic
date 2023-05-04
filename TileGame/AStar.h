@@ -20,6 +20,7 @@ public:
 	std::vector<Vector2> GetPath(Vector2 startPos, Vector2 endPos);
 
 	Graph aStarGrid;
+
 	int GRID_WIDTH;
 	int GRID_HEIGHT;
 

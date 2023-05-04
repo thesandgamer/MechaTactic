@@ -2,7 +2,7 @@
 
 CameraActor::CameraActor(): Actor()
 {
-    cam.position = { 250,250,250 };
+    cam.position = { 250,350,250 };
 
 }
 
