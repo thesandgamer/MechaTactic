@@ -177,6 +177,7 @@
     <ClCompile Include="BoxCollision.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CameraActor.cpp" />
+    <ClCompile Include="Capacity.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Cursor.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="BoxCollision.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CameraActor.h" />
+    <ClInclude Include="Capacity.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Cursor.h" />

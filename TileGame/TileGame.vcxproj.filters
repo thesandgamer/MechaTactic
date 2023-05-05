@@ -110,6 +110,7 @@
     </ClCompile>
     <ClCompile Include="IInteraction.cpp" />
     <ClCompile Include="CameraActor.cpp" />
+    <ClCompile Include="Capacity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -195,5 +196,6 @@
     </ClInclude>
     <ClInclude Include="IInteraction.h" />
     <ClInclude Include="CameraActor.h" />
+    <ClInclude Include="Capacity.h" />
   </ItemGroup>
 </Project>

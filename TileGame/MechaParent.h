@@ -14,6 +14,7 @@
 
 #include "BoxCollision.h"
 
+#include "Capacity.h"
 
 //++ToDo: Pousser l'utilisation de la machine d'état 
 enum class MechaState
@@ -115,6 +116,12 @@ public:
 
 
 private:
+
+
+	std::vector<Capacity> capacities;
+	void ManagerCapacities();
+
+
 	Vector3 posInGrid { 0,0,0 };
 
 	Grid* gridRef;	//Juste un lien vers la grille

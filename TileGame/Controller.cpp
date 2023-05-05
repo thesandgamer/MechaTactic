@@ -58,9 +58,13 @@ void Controller::AddMecha(Vector3 location)
 	mechasList.push_back(new MechaParent(location));
 }
 
-
+/// <summary>
+/// Function pour mettre en éviedence le chemin entre le mécha selectionné et une position
+/// </summary>
+/// <param name="end"></param>
 void Controller::ShowPath(Vector3 end)
 {
+	//++ToDo: faire en sorte que ça dessine plus un trait entre de tile en tile
 	if (controledMecha != nullptr)
 	{
 		gridRef->ResetTilesColor();
