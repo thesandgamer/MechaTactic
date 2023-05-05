@@ -47,7 +47,8 @@ void Game::Start()
     player->AddMecha({ 4,0,4 });
     controllers.push_back(player);   //Rajoute un player
 
-    
+    //++ToDo: fait en sorte que ça marche avec plusieurs player controller
+
     for (size_t i = 0; i < controllers.size(); i++)
     {
         controllers.at(i)->SetGrid(&grid);
