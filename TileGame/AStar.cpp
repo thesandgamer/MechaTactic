@@ -51,26 +51,26 @@ std::vector<Vector2> AStar::GetPath(Vector2 startPos, Vector2 endPos)
         }
 
         //C'est là qu'on va décider quel sera le prochain node à calculer
-        for (Node& nextNode : aStarGrid.GetAroundNodes(current))
+        for (Node* nextNode : aStarGrid.GetAroundNodes(current))
         {
-
-            if (closedList.IsInList(nextNode) || !aStarGrid.GetNode(nextNode.positon).traversable) //Si le node à déjà été vérifié ou si il n'est pas traversable
+            if (nextNode == nullptr) continue;
+            if (closedList.IsInList(*nextNode) || !aStarGrid.GetNode(nextNode->positon)->traversable) //Si le node à déjà été vérifié ou si il n'est pas traversable
             {
                 continue; //Passe au voisin suivant
             }
 
             //On va définir le cout du prochain node
-            double newCost = CalculateFCostOfNode(nextNode.positon, startNode.positon, goalNode.positon);
+            double newCost = CalculateFCostOfNode(nextNode->positon, startNode.positon, goalNode.positon);
 
-            if (newCost < nextNode.cost || !openList.IsInList(nextNode))//Si le chemin à un plus petit cout que le node qui est check ou si il n'est pas dans open(donc pas encore check)
+            if (newCost < nextNode->cost || !openList.IsInList(*nextNode))//Si le chemin à un plus petit cout que le node qui est check ou si il n'est pas dans open(donc pas encore check)
             {
                 //Du coup c'est ce node qu'on va prendre
-                nextNode.cost = newCost; //On va set son f cost            
-                nextNode.cameFrom = &current; //Dit que le node vien du node current
-                nextNode.cameFrom = &aStarGrid.GetNode(current); //Dit que le node vien du node current
-                if (!openList.IsInList(nextNode))
+                nextNode->cost = newCost; //On va set son f cost            
+                nextNode->cameFrom = &current; //Dit que le node vien du node current
+                nextNode->cameFrom = aStarGrid.GetNode(current); //Dit que le node vien du node current
+                if (!openList.IsInList(*nextNode))
                 {
-                    openList += nextNode;
+                    openList += *nextNode;
                 }
             }
         }

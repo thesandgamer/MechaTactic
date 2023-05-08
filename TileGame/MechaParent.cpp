@@ -75,76 +75,62 @@ void MechaParent::Draw()
 
 void MechaParent::Update()
 {
-
-	if (canMove)
+	//If the mech have to move make it move
+	if (state == MechaState::INMOVEMENT)
 	{
-		if (poses.empty()) return;
-		Vector2 posToGo = poses[positionIterator];
-		Vector3 posTo = gridRef->PosInGridToPosToWorld({posToGo.x,0,posToGo.y});
-		//Vector2AStar pos = { position.x,position.y };
-
-
-		if (transform.translation.x == posTo.x && transform.translation.z == posTo.z)//Si on est arrivé à la position suivante
-		{
-			positionIterator++;//On augmente l'iterator
-			currentTime = 0; //Et on reset le temps
-			posInGrid = { posToGo.x,0,posToGo.y };//Set la position actuelle dans la grille
-			gridRef->CalculateObstacles();
-
-		}
-		
-
-		transform.translation.x = EaseQuadInOut(currentTime, transform.translation.x, posTo.x - transform.translation.x, duration);//On va au x suivant suivant un lerping
-		transform.translation.z = EaseQuadInOut(currentTime, transform.translation.z, posTo.z - transform.translation.z, duration);//On va au y suivant suivant un lerping
-
-		currentTime++; //Augmente le temps
-
-		if (positionIterator >= poses.size()) //Si on est arrivé à la fin des position où aller
-		{
-			canMove = false;
-			haveDoActions = true;
-			selected = false;
-
-			return;
-		}
-
+		MakeMovement();
+	}
+	//If the mech have to make capacity, make it
+	if (state == MechaState::INCAPACITY)
+	{
+		//MakeCapacity();
 	}
 
+	//MakePassiveCapacity
+	
+	/*
 	if (haveDoActions)
 	{
-		state = MechaState::NoActionsPossible;
+		state = MechaState::DEACTIVATED;
 	}
 	else if (selected)
 	{
-		state = MechaState::SelectedGhost;
+		state = MechaState::SELECTED;
 	}
 	else
 	{
-		state = MechaState::NORMAL;
-	}
+		state = MechaState::IDLE;
+	}*/
 
+}
+
+void MechaParent::StartTurn()
+{
+	haveDoActions = false;
+	state = MechaState::IDLE;
 }
 
 void MechaParent::DrawVisual()
 {
-	
 	drawColor = WHITE;
 
 	switch (state)
 	{
-	case MechaState::NORMAL:
+	case MechaState::IDLE:
 		drawColor = WHITE;
 		break;
-	case MechaState::SelectedGhost:
+	case MechaState::SELECTED:
 		drawColor = GRAY;
 		break;
-	case MechaState::Selected:
+	case MechaState::MODE_MOVE:
 		drawColor = GRAY;
 		break;
-	case MechaState::NoActionsPossible:
+	case MechaState::MODE_CAPACITY:
+		drawColor = GRAY;
+
+		break;
+	case MechaState::DEACTIVATED:
 		drawColor = BLACK;
-		break;
-	case MechaState::Destroyed:
 		break;
 	default:
 		break;
@@ -154,12 +140,15 @@ void MechaParent::DrawVisual()
 
 }
 
-
+/// <summary>
+/// Tell the mech to move to a GridPosition
+/// </summary>
+/// <param name="positionToGo(InGrid)"></param>
 void MechaParent::MoveTo(Vector3 positionToGo)
 {
 	if (haveDoActions) return;
-	//Si il n'y a pas de position à aller, finit
-	//Appel le A star
+	state = MechaState::INMOVEMENT;
+
 	//gridRef->Debug_CleanPathVisibility();	//Inuitile pour l'instant
 	poses = gridRef->aStar.GetPath({ posInGrid.x,posInGrid.z }, { positionToGo.x,positionToGo.z });
 	canMove = true;
@@ -184,7 +173,65 @@ void MechaParent::OnHovered()
 
 void MechaParent::OnClicked()
 {
-	state = MechaState::Selected;
+	Select();
+}
+
+void MechaParent::Select()
+{
 	selected = true;
+	state = MechaState::SELECTED;
+}
+
+void MechaParent::DeSelect()
+{
+	selected = false;
+	if (state != MechaState::INMOVEMENT && state != MechaState::INCAPACITY)
+	{
+		state = MechaState::IDLE;
+
+	}
+}
+
+
+/// <summary>
+/// Make actual movement for the mech
+/// </summary>
+void MechaParent::MakeMovement()
+{
+	if (canMove)
+	{
+		if (poses.empty()) return;
+		Vector2 posToGo = poses[positionIterator];
+		Vector3 posTo = gridRef->PosInGridToPosToWorld({ posToGo.x,0,posToGo.y });
+		//Vector2AStar pos = { position.x,position.y };
+
+
+		if (transform.translation.x == posTo.x && transform.translation.z == posTo.z)//Si on est arrivé à la position suivante
+		{
+			positionIterator++;//On augmente l'iterator
+			currentTime = 0; //Et on reset le temps
+			posInGrid = { posToGo.x,0,posToGo.y };//Set la position actuelle dans la grille
+			gridRef->CalculateObstacles();
+
+		}
+
+
+		transform.translation.x = EaseQuadInOut(currentTime, transform.translation.x, posTo.x - transform.translation.x, duration);//On va au x suivant suivant un lerping
+		transform.translation.z = EaseQuadInOut(currentTime, transform.translation.z, posTo.z - transform.translation.z, duration);//On va au y suivant suivant un lerping
+
+		currentTime++; //Augmente le temps
+
+		if (positionIterator >= poses.size()) //Si on est arrivé à la fin des position où aller
+		{
+			canMove = false;
+			haveDoActions = true;
+
+			DeSelect();
+			state = MechaState::DEACTIVATED;
+
+			return;
+		}
+
+	}
 }
 

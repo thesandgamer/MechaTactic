@@ -19,11 +19,13 @@
 //++ToDo: Pousser l'utilisation de la machine d'état 
 enum class MechaState
 {
-	NORMAL,
-	Selected,
-	SelectedGhost,
-	NoActionsPossible,
-	Destroyed,
+	IDLE,
+	SELECTED,
+	INMOVEMENT,
+	INCAPACITY,
+	DEACTIVATED,
+	MODE_MOVE,
+	MODE_CAPACITY,
 };
 
 
@@ -66,6 +68,8 @@ public:
 	void Draw();
 	void Update();
 
+	void StartTurn();
+
 	void DrawVisual();
 
 	Vector3 GetLocation() { return transform.translation; }
@@ -88,8 +92,14 @@ public:
 	Vector3 GetPosInGrid() { return posInGrid; }
 
 
+	//
+	void Select();
+	void DeSelect();
 
-	bool selected = false;
+	bool IsSelected() { return selected; }
+
+
+
 	bool haveDoActions = false;
 
 	/*
@@ -112,11 +122,15 @@ public:
 
 	void SetBaseColor(Color color) { baseColor = color; }
 
+	MechaState& GetState() { return state; }
+	void SetState(MechaState newState) { state = newState; }
+
 	//++ToDo: Limiter le déplacement des mechas et afficher au sol où il peut se déplacqer
 
 
 private:
 
+	bool selected = false;
 
 	std::vector<Capacity> capacities;
 	void ManagerCapacities();
@@ -124,11 +138,11 @@ private:
 
 	Vector3 posInGrid { 0,0,0 };
 
-	Grid* gridRef;	//Juste un lien vers la grille
+	Grid* gridRef {nullptr};	//Juste un lien vers la grille
 
 	BoxCollision collision{};
 
-	MechaState state {MechaState::NORMAL};
+	MechaState state {MechaState::IDLE};
 
 	InformationDisplay* informations{nullptr};
 	string info;
@@ -152,6 +166,8 @@ private:
 	int currentTime = 0; //Variable utilisé pour l'easing
 	int positionIterator = 0;
 	int duration = 40;
+
+	void MakeMovement();
 
 
 

@@ -25,6 +25,8 @@ public:
 
 private:
 
+    void ComputeShowPath();
+
     Vector2 mousePos{0,0};
     Vector2 mousePosInGrid{ 0,0 };
 
@@ -35,6 +37,9 @@ private:
     Ray ray{ {0,0,0},10000000 };
     RaycastCollision raycast{ {0,0,0},10000000 };
     RaycastHit hitinfo { false, {}, 0,{},{} };
+
+    IInteraction* hitObject { nullptr };
+
 
     
 

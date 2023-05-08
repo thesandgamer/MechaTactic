@@ -43,8 +43,9 @@ void PlayerController::Start()
 
 void PlayerController::Update()
 {
-	Controller::Update();
 	if (!isTurn) return;
+
+	Controller::Update();
 	PlayerDecideActions();
 }
 
@@ -79,30 +80,43 @@ void PlayerController::PlayerDecideActions()
 
 	CheckWhatBehindRay();
 
-	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))	//Clique gauche
+	if (!IsCurrentMechInAction())
 	{
-		if (controledMecha == nullptr)	//Si on à pas de mécha selectionné
+		ComputeShowPath();
+
+		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))	//Clique gauche
 		{
-			SelectMecha();
+			if (hitObject != nullptr)
+			{
+				hitObject->OnClicked();
+			}
+
+			if (controledMecha == nullptr)	//Si on à pas de mécha selectionné
+			{
+				SelectMecha();
+			}
+			else	//Si on à un mecha de selectioné
+			{
+				PrepareWhereMoveMecha();
+			}
 		}
-		else	//Si on à un mecha de selectioné
-		{ 
-			PrepareWhereMoveMecha();
-		}
-	}
-	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))	//Clique droit
-	{
-		if (controledMecha == nullptr)
+		if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))	//Clique droit
 		{
-		
-		}
-		else if (controledMecha != nullptr)
-		{
-			DeSelectMecha();
+			if (controledMecha == nullptr)
+			{
+
+			}
+			else if (controledMecha != nullptr)
+			{
+				DeSelectMecha();
+
+			}
 
 		}
 
 	}
+
+	
 }
 
 void PlayerController::CheckWhatBehindRay()
@@ -120,24 +134,47 @@ void PlayerController::CheckWhatBehindRay()
 
 	if (CollisionManager::GetInstance()->DoRayCollision(&raycast, hitinfo))
 	{
-		//std::cout << "Hit: " << hitinfo.hitCollider->id << std::endl;
-		//Récupérer l'acteur dans le collider touché
+
+		if (hitinfo.hitCollider->Parent != nullptr)	//Si la collision touché est attaché à un acteur
+		{
+			hitObject = dynamic_cast<IInteraction*>(hitinfo.hitCollider->Parent);	//Set l'objet touché
+		}
+
+		//Appel les fonctions de l'objet touché
+		if (hitObject != nullptr)
+		{
+			hitObject->OnHovered();
+		}
 		
-		IInteraction* i = nullptr;
-		if (hitinfo.hitCollider->Parent != nullptr)
-		{
-			i = dynamic_cast<IInteraction*>(hitinfo.hitCollider->Parent);
-		}
-		else
-		{
-			gridRef->ResetTilesColor();
+	}
 
-		}
+}
 
-		if (i != nullptr)
+void PlayerController::SelectMecha()
+{
+	if (hitinfo.IsCollideActor())
+	{
+		if (dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent) != nullptr)
 		{
-			i->OnHovered();
-			ShowPath(i->GetPosInGrid());
+			std::cout << "Mecha selected" << std::endl;
+			//++ToDo: rajouter vérfication
+			controledMecha = dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent);
+		}		
+	}
+}
+
+void PlayerController::ComputeShowPath()
+{
+	if (controledMecha != nullptr)//Si on un mécha de séléctionné
+	{
+		if (hitObject != nullptr)	//Et si le on à touché un objet
+		{
+			if (controledMecha->GetState() != MechaState::INMOVEMENT && controledMecha->GetState() != MechaState::INCAPACITY)
+			{
+				controledMecha->SetState(MechaState::MODE_MOVE); //Le mecha est donc en mode mouvement
+				ShowPath(hitObject->GetPosInGrid());	//On affiche le chemin emprintable
+			}
+			
 		}
 		else
 		{
@@ -149,28 +186,13 @@ void PlayerController::CheckWhatBehindRay()
 	else
 	{
 		gridRef->ResetTilesColor();
-
 	}
 }
 
-void PlayerController::SelectMecha()
-{
-	
-	if (hitinfo.IsCollideActor())
-	{
-		IInteraction* i = dynamic_cast<IInteraction*>(hitinfo.hitCollider->Parent);
 
-		std::cout << "Mecha selected" << std::endl;
-		//++ToDo: rajouter vérfication
-		controledMecha = dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent);
-
-		if (i != nullptr)
-		{
-			i->OnClicked();
-		}	
-	}
-}
-
+/// <summary>
+/// Make move the mecha 
+/// </summary>
 void PlayerController::PrepareWhereMoveMecha()
 {
 	//++ToDo: si on à déjà un mécha, check si on clique sur une tuile vide et non pas un mecha,
@@ -181,12 +203,15 @@ void PlayerController::PrepareWhereMoveMecha()
 		{
 			if (true)//Si sur une tuile vide vérifie si y'a pas un méchas dessus
 			{
-				Vector3 pos = i->GetPosInGrid();
 				//Récupère la postion de la tuile et bouge le mécha à cette tuile
+				Vector3 pos = i->GetPosInGrid();
+
 				MoveMecha(pos);
 
-				//controledMecha->MoveTo(pos);
+				DeSelectMecha();
 
+
+				
 			}
 
 		}

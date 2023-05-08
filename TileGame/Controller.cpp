@@ -50,6 +50,7 @@ void Controller::Draw()
 
 void Controller::DrawUi()
 {
+	if (!isTurn) return;
 
 }
 
@@ -84,11 +85,28 @@ void Controller::ShowPath(Vector3 end)
 	}
 }
 
+bool Controller::IsCurrentMechInAction()
+{
+	if (controledMecha != nullptr)	//Si on à un mécha selectionné
+	{
+		if (controledMecha->GetState() == MechaState::INMOVEMENT 
+			&& controledMecha->GetState() == MechaState::INCAPACITY)	//Si il ne fait rien
+		{
+			return true;
+		}
+		return false;	//Le mecha ne fait rien
+	}
+	return false;	//Il n'y a pas de mecha selectionné
+}
+
 bool Controller::MoveMecha(Vector3 moveTo)
 {
 	controledMecha->MoveTo(moveTo);
-	DeSelectMecha();
-	gridRef->ResetTilesColor();
+
+	//DeSelectMecha();
+
+	gridRef->ResetTilesColor();//To remove the show path
+
 	return true;
 
 	/*
@@ -106,18 +124,21 @@ bool Controller::MoveMecha(Vector3 moveTo)
 bool Controller::SelectMecha(MechaParent* pawnSelected)
 {
 	if (controledMecha != nullptr) DeSelectMecha();
+
 	controledMecha = pawnSelected;
-	pawnSelected->selected = true;
-	return false;
+	pawnSelected->Select();
+
+	return true;
 }
 
 void Controller::DeSelectMecha()
 {
 	if (controledMecha != nullptr)
 	{
-		controledMecha->selected = false;
+		controledMecha->DeSelect();
 		controledMecha = nullptr;
 	}
+
 }
 
 /*
@@ -151,7 +172,7 @@ void Controller::StartTurn()
 
 	for (MechaParent* mecha : mechasList)
 	{
-		mecha->haveDoActions = false;
+		mecha->StartTurn();
 	}
 	isTurn = true;
 }

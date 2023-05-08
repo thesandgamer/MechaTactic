@@ -27,7 +27,6 @@ public:
 
 	void AddMecha(Vector3 location);
 
-	void ShowPath(Vector3 end);
 	bool MoveMecha(Vector3 moveTo);//bool to check if the movement is possible
 
 
@@ -61,6 +60,10 @@ public:
 
 
 protected:
+
+	void ShowPath(Vector3 end);
+
+	bool IsCurrentMechInAction();
 
 	//======] For Mechas
 	void InitPawns();
