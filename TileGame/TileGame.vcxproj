@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActiveCapacity.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AStar.cpp" />
     <ClCompile Include="BandeauTexte.cpp" />
@@ -205,6 +206,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActiveCapacity.h" />
     <ClInclude Include="Actor.h" />
     <ClInclude Include="AStar.h" />
     <ClInclude Include="AStartUtility.h" />

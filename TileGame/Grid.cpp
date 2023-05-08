@@ -67,6 +67,13 @@ void Grid::Draw()
 
 }
 
+Tile* Grid::GetTile(int posInGridX, int posInGridY)
+{
+	if (posInGridX < 0 || posInGridY < 0 || posInGridX > grid.size() || posInGridY > grid.at(posInGridX).size()) return nullptr;
+	return &grid[posInGridX][posInGridY];
+	
+}
+
 bool Grid::IsInGrid(Vector3 pos)
 {
 	if (pos.x >= 0

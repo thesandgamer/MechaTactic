@@ -111,6 +111,7 @@
     <ClCompile Include="IInteraction.cpp" />
     <ClCompile Include="CameraActor.cpp" />
     <ClCompile Include="Capacity.cpp" />
+    <ClCompile Include="ActiveCapacity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -197,5 +198,6 @@
     <ClInclude Include="IInteraction.h" />
     <ClInclude Include="CameraActor.h" />
     <ClInclude Include="Capacity.h" />
+    <ClInclude Include="ActiveCapacity.h" />
   </ItemGroup>
 </Project>

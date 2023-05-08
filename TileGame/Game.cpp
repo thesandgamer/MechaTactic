@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "CollisionManager.h"
 
+#include "ActiveCapacity.h"
+
 void Game::SetupScreen(int screenwidth, int screenHeight)
 {
     SCREEN_WIDTH = screenwidth;
@@ -43,8 +45,10 @@ void Game::Start()
 
 //=============Controllers Setup============
     PlayerController* player = new PlayerController();
-    player->AddMecha({ 0,0,0 });
+    player->AddMecha({ 2,0,4 });
     player->AddMecha({ 4,0,4 });
+    player->GetMechaAt(0)->AddCapacity(new ActiveCapacity(*player->GetMechaAt(0)) );
+    //{ player->GetMechaAt(0) }
     controllers.push_back(player);   //Rajoute un player
 
     //++ToDo: fait en sorte que ça marche avec plusieurs player controller

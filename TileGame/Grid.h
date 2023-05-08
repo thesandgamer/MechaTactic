@@ -32,6 +32,8 @@ public:
 	/// </summary>
 	std::vector<std::vector<Tile>> grid;
 
+	Tile* GetTile(int posInGridX, int posInGridY);
+
 	AStar aStar;
 
 	Vector3 GetGridPos() { return gridPosition; }

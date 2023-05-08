@@ -185,7 +185,7 @@ void PlayerController::ComputeShowPath()
 	}
 	else
 	{
-		gridRef->ResetTilesColor();
+		//gridRef->ResetTilesColor();
 	}
 }
 

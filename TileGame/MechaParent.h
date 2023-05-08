@@ -128,17 +128,21 @@ public:
 	//++ToDo: Limiter le déplacement des mechas et afficher au sol où il peut se déplacqer
 
 
+	Grid* gridRef{ nullptr };	//Juste un lien vers la grille
+
+	void AddCapacity(Capacity* newCapacity);
+
+
 private:
 
 	bool selected = false;
 
-	std::vector<Capacity> capacities;
-	void ManagerCapacities();
+	std::vector<Capacity*> capacities;
+	//void ManagerCapacities();
 
 
 	Vector3 posInGrid { 0,0,0 };
 
-	Grid* gridRef {nullptr};	//Juste un lien vers la grille
 
 	BoxCollision collision{};
 

@@ -70,11 +70,22 @@ void MechaParent::Init()
 void MechaParent::Draw()
 {
 	DrawVisual();
+
+	if (isActive)
+	{
+		for (const auto& cap : capacities)
+		{
+			cap->DrawPossibleZone();
+		}
+	}
+	
 }
 
 
 void MechaParent::Update()
 {
+
+
 	//If the mech have to move make it move
 	if (state == MechaState::INMOVEMENT)
 	{
@@ -192,6 +203,10 @@ void MechaParent::DeSelect()
 	}
 }
 
+void MechaParent::AddCapacity(Capacity* newCapacity)
+{
+	capacities.push_back(newCapacity);
+}
 
 /// <summary>
 /// Make actual movement for the mech

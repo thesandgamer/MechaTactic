@@ -13,6 +13,8 @@ public:
 	virtual void Init();
 	virtual void DrawUi();
 
+	virtual void DrawPossibleZone();
+
 private:
 
 };
