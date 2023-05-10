@@ -31,6 +31,8 @@ void Game::Start()
     cam.Init();
 
 //=========Setup les obstacles==========
+    //++ToDo: faire en sorte d'avoir une fonction pour rajouter un obstacle qui va vérifier qu'on peut rajouter à cet endroit là
+
     obstacles.push_back(new Obstacle({ 2,0,2 }));
     obstacles.push_back(new Obstacle({ 8,0,3 }));
     obstacles.push_back(new Obstacle({ 8,0,5 }));
