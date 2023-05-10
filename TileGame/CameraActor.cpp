@@ -19,10 +19,28 @@ CameraActor::~CameraActor()
 
 void CameraActor::Init()
 {
+
+    switch (camType)
+    {
+    case TopDown:
+        cam.target = { transform.translation.x,transform.translation.y - 800,transform.translation.z - 1 }; 
+        break;
+    case Iso:
+        transform.translation.y += 100;
+
+        transform.translation.x += 250;
+        transform.translation.z += 250;
+        cam.target = { transform.translation.x - 5,transform.translation.y - 10,transform.translation.z - 5 }; 
+
+        break;
+    default:
+        break;
+    }
+
     cam.position = transform.translation;
 
+
     //=========Setup la camera==========
-    cam.target = { transform.translation.x,transform.translation.y-800,transform.translation.z-1}; //Regarde au centre du monde 
     //cam.target = { 0,0,0 };
     cam.up = { 0,1,0 };
     cam.fovy = 45;
@@ -47,4 +65,10 @@ void CameraActor::Update()
 
 }
 
+
+void CameraActor:: SetCameraType(CameraType newType)
+{
+    camType = newType;
+    Init();
+}
 

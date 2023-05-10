@@ -14,6 +14,12 @@
 //	Une fonction move avec touches
 //	Une fonction move qui bouge la position
 
+enum CameraType
+{
+	TopDown,
+	Iso
+};
+
 class CameraActor: public Actor
 {
 public:
@@ -27,10 +33,16 @@ public:
 
 	Camera& GetCamera() { return cam; }
 
+	void SetCameraType(CameraType newType);
+
 private:
 	Camera cam{ 0 };
 
 	float targetDistance;
 	Vector2 angle;
+
+	CameraType camType { Iso };
+
+	
 };
 
