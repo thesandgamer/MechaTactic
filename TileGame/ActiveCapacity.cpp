@@ -14,16 +14,17 @@ void ActiveCapacity::Init()
 	possibleZone = {
 		{0,0,1,0,0},
 		{0,5,1,0,0},
-		{0,0,1,1,1},
-		{0,0,1,0,0},
-		{0,1,1,0,0},
+		{0,1,1,0,1},
+		{1,0,1,0,0},
+		{0,1,1,0,1},
+		{0,0,1,0,1},
 
 	};
 	/*
 	possibleZone = {
 		{0,1,0,1,0},
 		{1,1,1,1,1},
-		{5,1,0,1,0},
+		{0,1,5,1,0},
 		{1,1,1,1,1},
 		{0,1,0,1,0},
 
@@ -59,6 +60,7 @@ void ActiveCapacity::DrawPossibleZone()
 
 			if (possibleZone[xx][yy] == 1)
 			{
+				/*
 				//Check if the pos of the mecha in attack is on border
 				int a = 0;
 				if (mechaPosInGraph[0] == 0){
@@ -78,15 +80,16 @@ void ActiveCapacity::DrawPossibleZone()
 
 				int divX = std::ceil(mechaPosInGraph[0] + a);
 				int divY = std::ceil(mechaPosInGraph[1] + b);
+				*/
 
 				//To have the origin where start puting mech
 				//	L'origin = postion du mecha - (position du mecha dans le graph)
-				int originX = pos.x - ((mechaPosInGraph[0]));// / divX;
-				int originY = pos.y - ((mechaPosInGraph[1]));// / divY;
+				int originX = pos.x - ((mechaPosInGraph[0]));
+				int originY = pos.y - ((mechaPosInGraph[1]));
 
-				if (linkToMech.gridRef->GetTile(originX + xx, originY + yy) != nullptr)
+				if (linkToMech.gridRef->GetTile(originX + yy, originY + xx) != nullptr)
 				{	
-					linkToMech.gridRef->GetTile(originX + xx, originY + yy)->ChangeColor(RED);
+					linkToMech.gridRef->GetTile(originX + yy, originY + xx)->ChangeColor(RED);
 				}
 			}
 		}

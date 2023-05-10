@@ -2,7 +2,7 @@
 
 CameraActor::CameraActor(): Actor()
 {
-    transform.translation = { 0,800,1 };
+    transform.translation = {0,400,0 };
 
 }
 
@@ -22,8 +22,8 @@ void CameraActor::Init()
     cam.position = transform.translation;
 
     //=========Setup la camera==========
-   // cam.target = { transform.translation.x,transform.translation.y-500,transform.translation.z }; //Regarde au centre du monde 
-    cam.target = { 0,0,0 };
+    cam.target = { transform.translation.x,transform.translation.y-800,transform.translation.z-1}; //Regarde au centre du monde 
+    //cam.target = { 0,0,0 };
     cam.up = { 0,1,0 };
     cam.fovy = 45;
     cam.projection = CAMERA_PERSPECTIVE;

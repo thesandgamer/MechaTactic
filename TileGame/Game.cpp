@@ -45,8 +45,8 @@ void Game::Start()
 
 //=============Controllers Setup============
     PlayerController* player = new PlayerController();
-    player->AddMecha({ 4,0,4 });
-   // player->AddMecha({ 4,0,4 });
+    player->AddMecha({ 1,0,4 });
+    player->AddMecha({ 8,0,8 });
     player->GetMechaAt(0)->AddCapacity(new ActiveCapacity(*player->GetMechaAt(0)) );
     //{ player->GetMechaAt(0) }
     controllers.push_back(player);   //Rajoute un player
@@ -176,7 +176,8 @@ void Game::Draw()
    // DrawGrid(32, 32);
     grid.Draw();
 
-   // DrawCube({ 0,-32,0 }, 32, 32, 32, DARKPURPLE);    //Center of world
+   //DrawCube({ 0,-32,0 }, 32, 32, 32, DARKPURPLE);    //Center of world
+   //DrawCube({ 128,-32,128 }, 32, 32, 32, DARKPURPLE);    //Center of world
 
     for each (Actor* obstacle in obstacles)
     {
