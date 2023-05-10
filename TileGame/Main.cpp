@@ -24,6 +24,13 @@
 // Faire une map plus grande avec de la hauteur(map générée procéduralement), et avec un A* pas en grille
 
 
+//++ToDo:
+//  Créer un système pour permettre de mettre en lumière des cases:
+//      Les cases sur lesquelles le mecha va se déplacer
+//      Les cases d'attaque possible
+//      ??NotNow?? les cases de déplacement possible
+//
+
 using namespace std;
 
 //Setup la taille de l'écran

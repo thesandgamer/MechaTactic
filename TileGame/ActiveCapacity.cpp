@@ -3,6 +3,8 @@
 #include "MechaParent.h"
 
 
+//++ToDo: afficher la capacité active seulement quand elle est séléctionné
+
 ActiveCapacity::ActiveCapacity(MechaParent& mech) : linkToMech(mech)
 {
 	Init();
