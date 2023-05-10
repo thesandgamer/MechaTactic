@@ -4,7 +4,7 @@
 
 Grid::Grid(Vector3 pos, Vector3 gridSize): Actor()
 {
-	gridPosition = pos;
+	transform.translation = pos;
 	GRID_SIZE = gridSize;
 
 }
@@ -95,9 +95,9 @@ bool Grid::IsInGrid(Vector3 pos)
 Vector3 Grid::PosInGrid(Vector3 pos)
 {
 	Vector3 newPos;
-	newPos.x = (( (pos.x - gridPosition.x) / CELL_WIDTH));
-	newPos.y = (( (pos.y - gridPosition.y) / CELL_HEIGHT));
-	newPos.z = (( (pos.z - gridPosition.z) / CELL_LENGTH));
+	newPos.x = (( (pos.x - transform.translation.x) / CELL_WIDTH));
+	newPos.y = (( (pos.y - transform.translation.y) / CELL_HEIGHT));
+	newPos.z = (( (pos.z - transform.translation.z) / CELL_LENGTH));
 
 	//std::cout << "Pos in grid: " << newPos.x << " " << newPos.y << std::endl;
 

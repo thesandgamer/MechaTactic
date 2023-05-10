@@ -12,15 +12,15 @@ void Game::SetupScreen(int screenwidth, int screenHeight)
 void Game::Start()
 {
 //===========Setup la Grille==============
-    const static int GRID_WIDTH = 10;
-    const static int GRID_LENGTH = 10;
+    const static int GRID_WIDTH = 9;
+    const static int GRID_LENGTH = 9;
     const static int GRID_HEIGHT = 1;
 
     const static int CELL_WIDTH = 32;
     const static int CELL_LENGTH = 32;
     const static int CELL_HEIGHT = 32;
     //Vector2 gridPos = { SCREEN_WIDTH / 2 - (GRID_WIDTH * CELL_WIDTH) / 2 ,SCREEN_HEIGHT / 2 - (GRID_HEIGHT * CELL_HEIGHT) / 2 };
-    Vector3 gridPos = { -200,0,-200 };
+    Vector3 gridPos = { - (GRID_WIDTH * (CELL_WIDTH) /2 - CELL_WIDTH/2)  ,0, -(GRID_LENGTH * (CELL_LENGTH) /2 - CELL_LENGTH/2) }; //Center grid in world
 
 
     grid = Grid(gridPos, {GRID_WIDTH,GRID_HEIGHT,GRID_LENGTH}); //On génère la grille
@@ -175,6 +175,8 @@ void Game::Draw()
 
    // DrawGrid(32, 32);
     grid.Draw();
+
+   // DrawCube({ 0,-32,0 }, 32, 32, 32, DARKPURPLE);    //Center of world
 
     for each (Actor* obstacle in obstacles)
     {

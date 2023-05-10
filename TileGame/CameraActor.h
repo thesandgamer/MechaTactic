@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "raymath.h"
 #include "Actor.h"
 
 //Class pour gérer la camera, la bouger, la faire tourner, zoomer dézommer,...
@@ -29,5 +30,7 @@ public:
 private:
 	Camera cam{ 0 };
 
+	float targetDistance;
+	Vector2 angle;
 };
 

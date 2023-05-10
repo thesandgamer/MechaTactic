@@ -36,7 +36,7 @@ public:
 
 	AStar aStar;
 
-	Vector3 GetGridPos() { return gridPosition; }
+	Vector3 GetGridPos() { return transform.translation; }
 	
 	bool IsInGrid(Vector3 pos);
 	 
@@ -67,7 +67,6 @@ public:
 	*/
 private:
 
-	Vector3 gridPosition;
 
 	
 };
