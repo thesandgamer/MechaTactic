@@ -10,23 +10,24 @@ ActiveCapacity::ActiveCapacity(MechaParent& mech) : linkToMech(mech)
 
 void ActiveCapacity::Init()
 {
-	/*
+	
 	possibleZone = {
 		{0,0,1,0,0},
+		{0,5,1,0,0},
+		{0,0,1,1,1},
 		{0,0,1,0,0},
-		{1,1,5,1,1},
-		{0,0,1,0,0},
-		{0,0,1,0,0},
-
-	};*/
-	possibleZone = {
-		{0,1,0,1,0},
-		{1,1,1,1,1},
-		{0,1,5,1,0},
-		{1,1,1,1,1},
-		{0,1,0,1,0},
+		{0,1,1,0,0},
 
 	};
+	/*
+	possibleZone = {
+		{0,1,0,1,0},
+		{1,1,1,1,1},
+		{5,1,0,1,0},
+		{1,1,1,1,1},
+		{0,1,0,1,0},
+
+	};*/
 }
 
 void ActiveCapacity::DrawPossibleZone()
@@ -55,28 +56,37 @@ void ActiveCapacity::DrawPossibleZone()
 		{
 
 			if (possibleZone[xx][yy] == 5) continue;	//Si c'est la case d'origine
+
 			if (possibleZone[xx][yy] == 1)
 			{
+				//Check if the pos of the mecha in attack is on border
 				int a = 0;
 				if (mechaPosInGraph[0] == 0){
-					a = (mechaPosInGraph[0] == 0) ? 1 : 0;
+					a = 0;
 				}
 				if(mechaPosInGraph[0] >= possibleZone.capacity()-1){
-					a = (mechaPosInGraph[0] > possibleZone.capacity()-1) ? 0 : 1;
+					a = 1;
 				}
 
 				int b = 0;
 				if (mechaPosInGraph[1] == 0){
-					b = (mechaPosInGraph[1] == 0) ? 1 : 0;
+					b = 1;
 				}
 				if(mechaPosInGraph[1] >= possibleZone.at(xx).capacity()-1) {
-					b = (mechaPosInGraph[1] > possibleZone.at(xx).capacity()-1) ? 0 : 1;
+					b = 0;
 				}
 
+				int divX = std::ceil(mechaPosInGraph[0] + a);
+				int divY = std::ceil(mechaPosInGraph[1] + b);
 
-				if (linkToMech.gridRef->GetTile(pos.x/ (mechaPosInGraph[0]+ a ) + xx, pos.y/ (mechaPosInGraph[1]+ b) + yy) != nullptr)
+				//To have the origin where start puting mech
+				//	L'origin = postion du mecha - (position du mecha dans le graph)
+				int originX = pos.x - ((mechaPosInGraph[0]));// / divX;
+				int originY = pos.y - ((mechaPosInGraph[1]));// / divY;
+
+				if (linkToMech.gridRef->GetTile(originX + xx, originY + yy) != nullptr)
 				{	
-					linkToMech.gridRef->GetTile(pos.x/ (mechaPosInGraph[0]+ a ) + xx, pos.y/ (mechaPosInGraph[1]+ b) + yy)->ChangeColor(RED);
+					linkToMech.gridRef->GetTile(originX + xx, originY + yy)->ChangeColor(RED);
 				}
 			}
 		}

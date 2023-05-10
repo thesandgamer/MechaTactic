@@ -45,8 +45,8 @@ void Game::Start()
 
 //=============Controllers Setup============
     PlayerController* player = new PlayerController();
-    player->AddMecha({ 2,0,4 });
     player->AddMecha({ 4,0,4 });
+   // player->AddMecha({ 4,0,4 });
     player->GetMechaAt(0)->AddCapacity(new ActiveCapacity(*player->GetMechaAt(0)) );
     //{ player->GetMechaAt(0) }
     controllers.push_back(player);   //Rajoute un player

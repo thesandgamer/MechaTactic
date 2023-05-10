@@ -69,7 +69,7 @@ void Grid::Draw()
 
 Tile* Grid::GetTile(int posInGridX, int posInGridY)
 {
-	if (posInGridX < 0 || posInGridY < 0 || posInGridX > grid.size() || posInGridY > grid.at(posInGridX).size()) return nullptr;
+	if (posInGridX < 0 || posInGridY < 0 || posInGridX > grid.size()-1 || posInGridY > grid.at(posInGridX).size()-1) return nullptr;
 	return &grid[posInGridX][posInGridY];
 	
 }
