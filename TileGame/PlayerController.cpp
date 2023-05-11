@@ -77,12 +77,12 @@ void PlayerController::PlayerDecideActions()
 {
 	mousePos = GetMousePosition();
 	//mousePosInGrid = gridRef->PosInGrid(mousePos);
-
 	CheckWhatBehindRay();
+
 
 	if (!IsCurrentMechInAction())
 	{
-		
+
 		if (cState == MechaMoveSelected)
 			ComputeShowPath();
 

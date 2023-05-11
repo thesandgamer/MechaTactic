@@ -31,6 +31,14 @@
 //      ??NotNow?? les cases de déplacement possible
 //
 
+//
+// Si on clique avec une capacité hors d'une bonne case déséléctionne la capacité
+// Si on déséléctionne capacité repase en mode mouvement
+// Si clique sur case pas acessible en mode déplacement déséléctionne le mécha
+// Mecha reste séléctionné quand finit déplacement mais peut plus bouger
+// 
+//
+
 using namespace std;
 
 //Setup la taille de l'écran

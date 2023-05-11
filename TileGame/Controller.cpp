@@ -90,13 +90,14 @@ void Controller::ShowPath(Vector3 end)
 	}
 }
 
-bool Controller::IsCurrentMechInAction()
+bool Controller::IsCurrentMechInAction()	//marche pas car controlled mecha est reset quand on l'active
 {
 	if (controledMecha != nullptr)	//Si on à un mécha selectionné
 	{
 		if (controledMecha->GetState() == MechaState::INMOVEMENT 
-			&& controledMecha->GetState() == MechaState::INCAPACITY)	//Si il ne fait rien
+			|| controledMecha->GetState() == MechaState::INCAPACITY)	//Si il ne fait rien
 		{
+			//cState = MechaMakeActions;
 			return true;
 		}
 		return false;	//Le mecha ne fait rien
