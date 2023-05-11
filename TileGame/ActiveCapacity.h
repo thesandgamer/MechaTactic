@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 
+#include "Button.h"
+
 class MechaParent;
 
 
@@ -14,14 +16,25 @@ public:
     ActiveCapacity(MechaParent& mech);
 
     void Init() override;
+    void Draw() override;
+    void Update() override;
+    void DrawUi() override;
 
     void DrawPossibleZone() override;
 
+    void ButtonClicked();
+    void SelectCapacity();
+    void DeselectCapacity();
+
 private:
+    Button button { {10,120},40,40 };
+
 
     std::vector<std::vector<int>> possibleZone{};
 
     MechaParent& linkToMech ;
+
+    bool isActive {false};
 
 };
 

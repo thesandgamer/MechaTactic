@@ -75,10 +75,18 @@ void MechaParent::Draw()
 	{
 		for (const auto& cap : capacities)
 		{
-			cap->DrawPossibleZone();
+			cap->Draw();
 		}
 	}
 	
+}
+
+void MechaParent::DrawUI()
+{
+	for (const auto& cap : capacities)
+	{
+		cap->DrawUi();
+	}
 }
 
 
@@ -113,6 +121,14 @@ void MechaParent::Update()
 		state = MechaState::IDLE;
 	}*/
 
+	if (isActive)
+	{
+		for (const auto& cap : capacities)
+		{
+			cap->Update();
+		}
+	}
+
 }
 
 void MechaParent::StartTurn()
@@ -123,12 +139,12 @@ void MechaParent::StartTurn()
 
 void MechaParent::DrawVisual()
 {
-	drawColor = WHITE;
+	drawColor = baseColor;
 
 	switch (state)
 	{
 	case MechaState::IDLE:
-		drawColor = WHITE;
+		drawColor = baseColor;
 		break;
 	case MechaState::SELECTED:
 		drawColor = GRAY;
@@ -205,7 +221,12 @@ void MechaParent::DeSelect()
 
 void MechaParent::AddCapacity(Capacity* newCapacity)
 {
-	capacities.push_back(newCapacity);
+	capacities.push_back((newCapacity));
+}
+
+Capacity* MechaParent::GetCurrentActiveCapacity()
+{
+	return currentActiveCapacity;
 }
 
 /// <summary>

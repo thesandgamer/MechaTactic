@@ -6,6 +6,8 @@
 
 
 //++ToDo: refacto cette classe
+//++ToDo; faire en sorte que le bouton peut être en type levier(reste appuyé(en tout cas visuellement))
+
 
 typedef std::function<void()> FuncPointer;//Créer un type pointeur fonction void, créer le type du lambda
 
@@ -52,7 +54,7 @@ private:
     Vector2 position;
     float width;
     float height;
-    Texture2D sprite;
+    Texture2D sprite;   //Pourrait être un pointeur avec un ressource manager
 
     Color drawColor ;
 

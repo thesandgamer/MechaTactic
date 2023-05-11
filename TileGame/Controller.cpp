@@ -51,6 +51,10 @@ void Controller::Draw()
 void Controller::DrawUi()
 {
 	if (!isTurn) return;
+	for (auto i = mechasList.begin(); i < mechasList.end(); i++)
+	{
+		(*i)->DrawUI();
+	}
 
 }
 
@@ -122,12 +126,18 @@ bool Controller::MoveMecha(Vector3 moveTo)
 
 }
 
+/// <summary>
+/// I think to remove this but i'm not sure
+/// </summary>
+/// <param name="pawnSelected"></param>
+/// <returns></returns>
 bool Controller::SelectMecha(MechaParent* pawnSelected)
 {
 	if (controledMecha != nullptr) DeSelectMecha();
 
 	controledMecha = pawnSelected;
 	pawnSelected->Select();
+	cState = MechaSelected;
 
 	return true;
 }
@@ -138,6 +148,9 @@ void Controller::DeSelectMecha()
 	{
 		controledMecha->DeSelect();
 		controledMecha = nullptr;
+		cState = Thinking;
+		gridRef->ResetTilesColor();
+
 	}
 
 }

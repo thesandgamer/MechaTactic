@@ -15,6 +15,7 @@
 #include "BoxCollision.h"
 
 #include "Capacity.h"
+#include "ActiveCapacity.h"
 
 //++ToDo: Pousser l'utilisation de la machine d'état 
 enum class MechaState
@@ -66,6 +67,7 @@ public:
 
 	void Init();
 	void Draw();
+	void DrawUI();
 	void Update();
 
 	void StartTurn();
@@ -132,12 +134,15 @@ public:
 
 	void AddCapacity(Capacity* newCapacity);
 
+	Capacity* GetCurrentActiveCapacity();
 
 private:
 
-	bool selected = false;
+	bool selected{ false };
 
-	std::vector<Capacity*> capacities;
+	std::vector<Capacity*> capacities;	//Comment mettre un unique ptr ici?
+	ActiveCapacity* currentActiveCapacity;	//Pointer car besoin de savoir si c'est null
+
 	//void ManagerCapacities();
 
 

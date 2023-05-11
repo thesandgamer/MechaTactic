@@ -8,6 +8,14 @@ void Capacity::DrawUi()
 {
 }
 
+void Capacity::Draw()
+{
+}
+
+void Capacity::Update()
+{
+}
+
 void Capacity::DrawPossibleZone()
 {
 }

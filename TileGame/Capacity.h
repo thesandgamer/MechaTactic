@@ -12,6 +12,8 @@ public:
 
 	virtual void Init();
 	virtual void DrawUi();
+	virtual void Draw() ;
+	virtual void Update() ;
 
 	virtual void DrawPossibleZone();
 

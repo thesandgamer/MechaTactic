@@ -18,7 +18,7 @@ void PlayerController::Start()
 	//------Change the color of mecha to distinc if no models
 	for (auto i = mechasList.begin(); i != mechasList.end(); i++)
 	{
-		(*i)->SetBaseColor({0,100,0,255});
+		(*i)->SetBaseColor({200,150,0,255});	//Si on met plus de 255 comment ça marque erreur
 	}
 
 	Controller::Start();
@@ -82,7 +82,9 @@ void PlayerController::PlayerDecideActions()
 
 	if (!IsCurrentMechInAction())
 	{
-		ComputeShowPath();
+		
+		if (cState == MechaMoveSelected)
+			ComputeShowPath();
 
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))	//Clique gauche
 		{
@@ -144,9 +146,20 @@ void PlayerController::CheckWhatBehindRay()
 		if (hitObject != nullptr)
 		{
 			hitObject->OnHovered();
+			if (cState == MechaSelected) cState = MechaMoveSelected;
+
+		}
+		else
+		{
+			if (cState == MechaMoveSelected)	gridRef->ResetTilesColor();  cState = MechaSelected;
 		}
 		
 	}
+	else
+	{
+		if (cState == MechaMoveSelected) gridRef->ResetTilesColor(); cState = MechaSelected;
+	}
+
 
 }
 
@@ -159,6 +172,10 @@ void PlayerController::SelectMecha()
 			std::cout << "Mecha selected" << std::endl;
 			//++ToDo: rajouter vérfication
 			controledMecha = dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent);
+			controledMecha->Select();
+
+			cState = MechaSelected;
+
 		}		
 	}
 }

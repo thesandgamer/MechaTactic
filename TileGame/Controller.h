@@ -8,9 +8,11 @@ using std::vector;
 
 enum ControllerState
 {
-	Thinking,
-	MechaSelected,
-	MechaMakeActions,
+	Thinking,	//State où aucun mécha n'est séléctionné
+	MechaSelected,	//Un mecha est séléctionné
+	MechaMoveSelected,	
+	MechaCapacitySelected,
+	MechaMakeActions,	//Un mecha fait ses actions
 };
 
 class Controller : public ITurn

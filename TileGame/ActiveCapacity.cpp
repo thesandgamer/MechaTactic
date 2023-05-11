@@ -14,14 +14,15 @@ void ActiveCapacity::Init()
 {
 	
 	possibleZone = {
+		{0,0,5,0,0},
 		{0,0,1,0,0},
-		{0,5,1,0,0},
-		{0,1,1,0,1},
+		{0,1,1,1,1},
 		{0,0,1,0,0},
-		{0,0,1,1,1},
-		{0,0,0,0,1},
+		{0,0,1,0,0},
+		{0,0,1,0,0},
 
 	};
+
 	/*
 	possibleZone = {
 		{0,1,0,1,0},
@@ -31,6 +32,29 @@ void ActiveCapacity::Init()
 		{0,1,0,1,0},
 
 	};*/
+
+
+	button.textInButton = "Cap1";
+	button.AddFunctionToTrigger(std::bind(&ActiveCapacity::ButtonClicked, this));
+
+}
+
+void ActiveCapacity::Draw()
+{
+	if (!isActive) return;
+	DrawPossibleZone();
+}
+
+void ActiveCapacity::Update()
+{
+	if (!isActive) return;
+
+}
+
+void ActiveCapacity::DrawUi()
+{
+	button.Update();
+	button.Draw();
 }
 
 void ActiveCapacity::DrawPossibleZone()
@@ -50,8 +74,7 @@ void ActiveCapacity::DrawPossibleZone()
 			}
 		}
 	}
-	//mechaPosInGraph[0] /= possibleZone.size();
-	//mechaPosInGraph[1] /= possibleZone.at(0).size();
+
 
 	for (size_t xx = 0; xx < possibleZone.size(); xx++)
 	{
@@ -96,4 +119,22 @@ void ActiveCapacity::DrawPossibleZone()
 			}
 		}
 	}
+}
+
+void ActiveCapacity::ButtonClicked()
+{
+	if (isActive) DeselectCapacity();
+	else SelectCapacity();
+}
+
+void ActiveCapacity::SelectCapacity()
+{
+	isActive = true;
+	//++ToDo: un event écouté par le controller qui déteient le mecha, pour dire passer en state capacité active séléctionnée
+}
+
+void ActiveCapacity::DeselectCapacity()
+{
+	isActive = false;
+	linkToMech.gridRef->ResetTilesColor();
 }

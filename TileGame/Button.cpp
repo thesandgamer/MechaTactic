@@ -70,7 +70,7 @@ float fontSize = 10;
 void Button::Draw()
 {
 	if (!isActive) return;
-	if (sprite.width != NULL)
+	if (sprite.width >= 0)
 	{
 		DrawTexture(sprite, position.x , position.y, drawColor);
 
