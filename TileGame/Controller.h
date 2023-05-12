@@ -6,6 +6,8 @@ using std::vector;
 #include "Button.h"
 #include "MechaParent.h"
 
+
+
 enum ControllerState
 {
 	Thinking,	//State où aucun mécha n'est séléctionné
@@ -82,7 +84,5 @@ protected:
 	bool isTurn{false};
 
 	//======] UI
-
-
 
 };

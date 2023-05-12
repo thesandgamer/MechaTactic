@@ -49,7 +49,8 @@ void Game::Start()
     PlayerController* player = new PlayerController();
     player->AddMecha({ 1,0,4 });
     player->AddMecha({ 8,0,8 });
-    player->GetMechaAt(0)->AddCapacity(new ActiveCapacity(*player->GetMechaAt(0)) );
+    //Créer unique pointer pas stoqué car Add capacity à une R value(&&) (transfert de propritété)
+    player->GetMechaAt(0)->AddCapacity(std::make_unique<ActiveCapacity>(*player->GetMechaAt(0)) );
     //{ player->GetMechaAt(0) }
     controllers.push_back(player);   //Rajoute un player
 

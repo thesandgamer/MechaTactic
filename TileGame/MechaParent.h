@@ -132,7 +132,7 @@ public:
 
 	Grid* gridRef{ nullptr };	//Juste un lien vers la grille
 
-	void AddCapacity(Capacity* newCapacity);
+	void AddCapacity(std::unique_ptr<Capacity>&& newCapacity);	//&& r value
 
 	Capacity* GetCurrentActiveCapacity();
 
@@ -140,7 +140,8 @@ private:
 
 	bool selected{ false };
 
-	std::vector<Capacity*> capacities;	//Comment mettre un unique ptr ici?
+	//std::vector<Capacity*> capacities;	//Comment mettre un unique ptr ici?
+	std::vector<std::unique_ptr<Capacity>> capacities;	//Comment mettre un unique ptr ici?
 	ActiveCapacity* currentActiveCapacity;	//Pointer car besoin de savoir si c'est null
 
 	//void ManagerCapacities();

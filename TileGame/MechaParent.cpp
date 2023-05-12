@@ -71,7 +71,7 @@ void MechaParent::Draw()
 {
 	DrawVisual();
 
-	if (isActive)
+	if (selected)
 	{
 		for (const auto& cap : capacities)
 		{
@@ -83,9 +83,13 @@ void MechaParent::Draw()
 
 void MechaParent::DrawUI()
 {
-	for (const auto& cap : capacities)
+	if (selected)
 	{
-		cap->DrawUi();
+
+		for (const auto& cap : capacities)
+		{
+			cap->DrawUi();
+		}
 	}
 }
 
@@ -121,7 +125,7 @@ void MechaParent::Update()
 		state = MechaState::IDLE;
 	}*/
 
-	if (isActive)
+	if (selected)
 	{
 		for (const auto& cap : capacities)
 		{
@@ -219,9 +223,9 @@ void MechaParent::DeSelect()
 	}
 }
 
-void MechaParent::AddCapacity(Capacity* newCapacity)
+void MechaParent::AddCapacity(std::unique_ptr<Capacity>&& newCapacity)
 {
-	capacities.push_back((newCapacity));
+	capacities.push_back(std::move(newCapacity));	//Std::move: pour transférer pour pas de copie
 }
 
 Capacity* MechaParent::GetCurrentActiveCapacity()
