@@ -23,33 +23,92 @@ Button::~Button()
 
 }
 
+void Button::ButtonIdle()
+{
+	state = ButtonState::IDLE;
+	drawColor = WHITE;
+}
+
 void Button::ButtonCliqued()
 {
 	TraceLog(LOG_INFO, " Button cliqued");
 	drawColor = GRAY;
+
 	CliquedSendFunction();
 	CliquedSendFunctionWithInt();
+
+	state = ButtonState::CLICK;
 }
 
 void Button::ButtonHovered()
 {
+	if (!lever)
+	{
+		state = ButtonState::HOVER;
+		drawColor = LIGHTGRAY;
+	}
+	if (lever)
+	{
+		if (state != ButtonState::CLICK)
+		{
+			state = ButtonState::HOVER;
+			drawColor = LIGHTGRAY;
+		}
+	}
+	
 }
 
 void Button::Update()
 {
 	if (!isActive) return;
 	mousePos = &GetMousePosition();
+
+	ButtonState oldState = ButtonState::IDLE; 
+	if (state != ButtonState::HOVER)
+	{
+		oldState = state;
+	}
+
 	//Check Si la souris est en hover
 	if ((position.x < mousePos->x && mousePos->x < position.x + width)
-		&& (position.y < mousePos->y && mousePos->y < position.y + height))
+		&& (position.y < mousePos->y && mousePos->y < position.y + height))	//If hover
 	{
-		state = ButtonState::HOVER;
-		drawColor = LIGHTGRAY;
+		ButtonHovered();
+		if (lever)
+		{
+			if (state == ButtonState::CLICK)//Si on hover le bouton déjà cliqué
+			{
+				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+				{
+					ButtonCliqued();
+					ButtonIdle();
+					
+				}
+			}
+		}
 	}
 	else
 	{
-		state = ButtonState::IDLE;
-		drawColor = WHITE;
+		if (!lever)	//Si le bouton n'est pas un levier
+		{
+			ButtonIdle();
+		}
+		else
+		{
+			//Retourne à l'état avant d'être hover
+			if (oldState == ButtonState::CLICK)
+			{
+				drawColor = GRAY;
+				state = ButtonState::CLICK;
+			}
+			if (oldState == ButtonState::IDLE)
+			{
+				ButtonIdle();
+			}
+
+		}
+
+		
 	}
 
 	if (state == ButtonState::HOVER)
@@ -70,7 +129,7 @@ float fontSize = 10;
 void Button::Draw()
 {
 	if (!isActive) return;
-	if (sprite.width >= 0)
+	if (sprite.width >= 0)	//Si il possède un sprite
 	{
 		DrawTexture(sprite, position.x , position.y, drawColor);
 
@@ -79,11 +138,6 @@ void Button::Draw()
 	{
 		DrawRectangle(position.x, position.y, width, height, drawColor);
 	}
-	/*
-	if (textInButton != "")
-	{
-		DrawText(textInButton.c_str(), position.x+ width/2 - textInButton.length(), position.y + height/2 , (width + height) /20, WHITE);
-	}*/
 
 }
 

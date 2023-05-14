@@ -36,6 +36,7 @@ void ActiveCapacity::Init()
 
 	button.textInButton = "Cap1";
 	button.AddFunctionToTrigger(std::bind(&ActiveCapacity::ButtonClicked, this));
+	button.lever = true;
 
 }
 

@@ -8,6 +8,7 @@
 //++ToDo: refacto cette classe
 //++ToDo; faire en sorte que le bouton peut être en type levier(reste appuyé(en tout cas visuellement))
 
+//++ToDo: refacto pour que la façon levier fonctionne mieux avec un couleur reste activé
 
 typedef std::function<void()> FuncPointer;//Créer un type pointeur fonction void, créer le type du lambda
 
@@ -24,6 +25,7 @@ public:
     Button(Vector2 pos, float widthP, float heightP);
     ~Button();
 
+    void ButtonIdle();
     void ButtonCliqued();
     void ButtonHovered();
 
@@ -47,6 +49,9 @@ public:
 
     bool isActive = true;
 
+    bool lever{ false };
+
+
 private:
     ButtonState state;
 
@@ -57,6 +62,7 @@ private:
     Texture2D sprite;   //Pourrait être un pointeur avec un ressource manager
 
     Color drawColor ;
+
 
 
     std::vector<std::function<void()>> functionsToTrigger; //instance de pointeur de fonction
