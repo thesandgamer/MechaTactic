@@ -228,9 +228,14 @@ void MechaParent::AddCapacity(std::unique_ptr<Capacity>&& newCapacity)
 	capacities.push_back(std::move(newCapacity));	//Std::move: pour transférer pour pas de copie
 }
 
-Capacity* MechaParent::GetCurrentActiveCapacity()
+ActiveCapacity* MechaParent::GetCurrentActiveCapacity()
 {
 	return currentActiveCapacity;
+}
+
+void MechaParent::SetCurrentActiveCapacity(ActiveCapacity* capacity)
+{
+	currentActiveCapacity = capacity;
 }
 
 /// <summary>

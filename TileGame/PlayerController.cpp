@@ -80,12 +80,18 @@ void PlayerController::PlayerDecideActions()
 	CheckWhatBehindRay();
 
 
-	if (!IsCurrentMechInAction())
+	if (!IsCurrentMechInAction())	//Si on à pas de mécha ou si celui quon à de séléctionné ne fait rien
 	{
-
-		if (cState == MechaMoveSelected)
-			ComputeShowPath();
-
+		if (controledMecha != nullptr)
+		{
+			if (controledMecha->GetState() != MechaState::MODE_CAPACITY)
+			{
+				if (cState == MechaMoveSelected)
+					ComputeShowPath();
+			}
+			
+		}
+		
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))	//Clique gauche
 		{
 			if (hitObject != nullptr)
@@ -110,7 +116,16 @@ void PlayerController::PlayerDecideActions()
 			}
 			else if (controledMecha != nullptr)
 			{
-				DeSelectMecha();
+				if (controledMecha->GetState() == MechaState::MODE_CAPACITY)
+				{
+					if(controledMecha->GetCurrentActiveCapacity() != nullptr)
+						controledMecha->GetCurrentActiveCapacity()->DeselectCapacity();	
+				}
+				else
+				{
+					DeSelectMecha();
+
+				}
 
 			}
 

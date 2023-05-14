@@ -130,6 +130,8 @@ void ActiveCapacity::ButtonClicked()
 void ActiveCapacity::SelectCapacity()
 {
 	isActive = true;
+	linkToMech.SetCurrentActiveCapacity(this);
+	linkToMech.SetState(MechaState::MODE_CAPACITY);
 	//++ToDo: un event écouté par le controller qui déteient le mecha, pour dire passer en state capacité active séléctionnée
 }
 
@@ -137,4 +139,6 @@ void ActiveCapacity::DeselectCapacity()
 {
 	isActive = false;
 	linkToMech.gridRef->ResetTilesColor();
+	linkToMech.SetCurrentActiveCapacity(nullptr);
+	linkToMech.SetState(MechaState::SELECTED);
 }

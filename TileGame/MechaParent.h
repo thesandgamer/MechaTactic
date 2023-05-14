@@ -134,7 +134,8 @@ public:
 
 	void AddCapacity(std::unique_ptr<Capacity>&& newCapacity);	//&& r value
 
-	Capacity* GetCurrentActiveCapacity();
+	ActiveCapacity* GetCurrentActiveCapacity();
+	void SetCurrentActiveCapacity(ActiveCapacity* capacity);
 
 private:
 
