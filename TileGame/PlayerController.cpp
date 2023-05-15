@@ -82,6 +82,8 @@ void PlayerController::PlayerDecideActions()
 
 	if (!IsCurrentMechInAction())	//Si on à pas de mécha ou si celui quon à de séléctionné ne fait rien
 	{
+
+		//-------To show the path of the mecha selected
 		if (controledMecha != nullptr)
 		{
 			if (controledMecha->GetState() != MechaState::MODE_CAPACITY)
@@ -91,6 +93,8 @@ void PlayerController::PlayerDecideActions()
 			}
 			
 		}
+
+
 		
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))	//Clique gauche
 		{
@@ -99,9 +103,13 @@ void PlayerController::PlayerDecideActions()
 				hitObject->OnClicked();
 			}
 
+			//Si j'ai un mécha séléctionné avec une capacité séléctionné, 
+			//Si je clique sur quelque chose
+				//Si ce queleque chose est à un endroit de la capacité
+
 			if (controledMecha == nullptr)	//Si on à pas de mécha selectionné
 			{
-				SelectMecha();
+				SelectMecha();	//Check si on séléctionne un mécha
 			}
 			else	//Si on à un mecha de selectioné
 			{
@@ -109,6 +117,7 @@ void PlayerController::PlayerDecideActions()
 				{
 					PrepareWhereMoveMecha();
 				}
+
 			}
 		}
 		if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))	//Clique droit
@@ -183,9 +192,9 @@ void PlayerController::CheckWhatBehindRay()
 
 void PlayerController::SelectMecha()
 {
-	if (hitinfo.IsCollideActor())
+	if (hitinfo.IsCollideActor())	//Si la souris est sur un acteur
 	{
-		if (dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent) != nullptr)
+		if (dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent) != nullptr)	//Si cet acteur est un mécha
 		{
 			std::cout << "Mecha selected" << std::endl;
 			//++ToDo: rajouter vérfication
