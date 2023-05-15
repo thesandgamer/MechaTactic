@@ -38,7 +38,7 @@ void Game::Start()
     obstacles.push_back(new Obstacle({ 8,0,5 }));
     obstacles.push_back(new Obstacle({ 3,0,8 }));
 
-    for each (Obstacle * obstacle in obstacles)
+    for  (Obstacle * obstacle : obstacles)
     {
         obstacle->refToGrid = &grid;
         obstacle->Init();
@@ -86,7 +86,7 @@ void Game::Start()
     }
 
     //Rajoute obstacles
-    for each (Actor* obstacle in obstacles)
+    for  (Actor* obstacle : obstacles)
     {
         elementsInGame.push_back(obstacle);
     }
@@ -182,7 +182,7 @@ void Game::Draw()
    //DrawCube({ 0,-32,0 }, 32, 32, 32, DARKPURPLE);    //Center of world
    //DrawCube({ 128,-32,128 }, 32, 32, 32, DARKPURPLE);    //Center of world
 
-    for each (Actor* obstacle in obstacles)
+    for (Actor* obstacle : obstacles)
     {
         obstacle->Draw();
     }

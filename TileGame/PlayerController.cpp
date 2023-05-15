@@ -26,7 +26,7 @@ void PlayerController::Start()
 	Texture2D buttonSprite = LoadTexture("Ressources/EndTurnButton.png");
 	Vector2 buttonPos = { 10,10 };
 
-	endTurnButton = std::make_unique<Button>( buttonPos, buttonSprite, 128, 64 );
+	endTurnButton = std::make_unique<Button>( buttonPos, buttonSprite);
 
 	endTurnButton->textInButton = "End Turn";
 	endTurnButton->AddFunctionToTrigger(std::bind(&PlayerController::FinishTurn,this));//Set la fonction de callback créer un fonction lambda
@@ -105,7 +105,10 @@ void PlayerController::PlayerDecideActions()
 			}
 			else	//Si on à un mecha de selectioné
 			{
-				PrepareWhereMoveMecha();
+				if (controledMecha->GetState() == MechaState::MODE_MOVE)
+				{
+					PrepareWhereMoveMecha();
+				}
 			}
 		}
 		if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))	//Clique droit
@@ -116,7 +119,7 @@ void PlayerController::PlayerDecideActions()
 			}
 			else if (controledMecha != nullptr)
 			{
-				if (controledMecha->GetState() == MechaState::MODE_CAPACITY)
+				if (controledMecha->GetState() == MechaState::MODE_CAPACITY)	//If current mecha have capacity selected
 				{
 					if(controledMecha->GetCurrentActiveCapacity() != nullptr)
 						controledMecha->GetCurrentActiveCapacity()->DeselectCapacity();	

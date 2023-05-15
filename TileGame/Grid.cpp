@@ -143,7 +143,7 @@ void Grid::CalculateObstacles()
 	}
 
 	
-	for each (Actor * act in Game::instance().GetElementsInGame())//Pour chaque element du jeu
+	for  (Actor * act : Game::instance().GetElementsInGame())//Pour chaque element du jeu
 	{
 		//problème icic c'est que la position est une position in world
 		Vector3 posInGrid = PosInWorldToPosInGrid(act->GetPosition());

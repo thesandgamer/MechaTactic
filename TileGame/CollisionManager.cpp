@@ -40,7 +40,7 @@ bool CollisionManager::DoRayCollision(RaycastCollision* ray, RaycastHit& outHit)
 {
 	RaycastHit infos = {false};
 	outHit.Clean();
-	for each (P_Collision * collider in colliders) //On va récupérer un collider et regarder si il collide avec les autres collider
+	for  (P_Collision * collider : colliders) //On va récupérer un collider et regarder si il collide avec les autres collider
 	{
 		if (collider == ray) continue;
 		if (collider == nullptr) continue;
@@ -88,7 +88,7 @@ bool CollisionManager::DoRayCollision(RaycastCollision* ray, RaycastHit& outHit)
 
 void CollisionManager::ProcessColisions()
 {
-	for each (P_Collision* collider in colliders) //On va récupérer un collider et regarder si il collide avec les autres collider
+	for  (P_Collision* collider : colliders) //On va récupérer un collider et regarder si il collide avec les autres collider
 	{
 		if (!collider->checkingCollision)continue;
 		//++ToDo: checker si les deux collider ont le même parent, ou si l'un est parent de l'autre, et avoir un bool pour savoir si on veut désactiver les collisons entre eux
@@ -119,7 +119,7 @@ void CollisionManager::ProcessColisions()
 /// <param name="colliderToCheck"></param>
 void CollisionManager::DoCollisionBoxsCheck(BoxCollision* colliderToCheck)
 {
-	for each (P_Collision* collider in colliders)
+	for  (P_Collision* collider : colliders)
 	{
 		if (colliderToCheck == collider) continue;
 		if (colliderToCheck->collideWithLayer != collider->layer) continue;	//Si le collider ne collide pas avec le layer de l'autre objet
@@ -149,7 +149,7 @@ void CollisionManager::DoCollisionBoxsCheck(BoxCollision* colliderToCheck)
 
 void CollisionManager::DoRayBoxCollisionCheck(RaycastCollision* colliderToCheck)
 {
-	for each (P_Collision * collider in colliders)
+	for  (P_Collision * collider : colliders)
 	{
 		if (colliderToCheck == collider) continue;
 		if (colliderToCheck->collideWithLayer != collider->layer) continue;
@@ -181,7 +181,7 @@ void CollisionManager::DoRayBoxCollisionCheck(RaycastCollision* colliderToCheck)
 
 void CollisionManager::DoSphereBoxCollisionCheck(SphereCollision* colliderToCheck)//Une sphère va check les autres collisons
 {
-	for each (P_Collision * collider in colliders)
+	for  (P_Collision * collider : colliders)
 	{
 		if (colliderToCheck == collider) continue;
 		if (colliderToCheck->collideWithLayer != collider->layer) continue;

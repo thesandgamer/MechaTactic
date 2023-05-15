@@ -142,4 +142,5 @@ void ActiveCapacity::DeselectCapacity()
 	linkToMech.gridRef->ResetTilesColor();
 	linkToMech.SetCurrentActiveCapacity(nullptr);
 	linkToMech.SetState(MechaState::SELECTED);
+	button.UnPressButton();
 }
