@@ -117,6 +117,17 @@ void PlayerController::PlayerDecideActions()
 				{
 					PrepareWhereMoveMecha();
 				}
+				else if (controledMecha->GetState() == MechaState::MODE_CAPACITY)
+				{
+					if (hitObject != nullptr)
+					{
+						if (controledMecha->GetCurrentActiveCapacity()->InPossibleZone({ hitObject->GetPosInGrid().x,hitObject->GetPosInGrid().z }))
+						{
+							std::cout << "Case for capcity is good" << std::endl;
+							//Put here code to activate active capacity 
+						}
+					}
+				}
 
 			}
 		}
@@ -161,7 +172,7 @@ void PlayerController::CheckWhatBehindRay()
 
 	
 
-	if (CollisionManager::GetInstance()->DoRayCollision(&raycast, hitinfo))
+	if (CollisionManager::GetInstance()->DoRayCollision(&raycast, hitinfo))	//Si le rayon touche
 	{
 
 		if (hitinfo.hitCollider->Parent != nullptr)	//Si la collision touché est attaché à un acteur
@@ -185,6 +196,7 @@ void PlayerController::CheckWhatBehindRay()
 	else
 	{
 		if (cState == MechaMoveSelected) gridRef->ResetTilesColor(); cState = MechaSelected;
+		hitObject = nullptr;
 	}
 
 

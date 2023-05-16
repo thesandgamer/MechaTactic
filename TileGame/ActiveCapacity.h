@@ -26,11 +26,17 @@ public:
     void SelectCapacity();
     void DeselectCapacity();
 
+    bool InPossibleZone(Vector2 pos);
+
+    void SetPossibleZoneInGrid();
+
 private:
     Button button { {10,120},40,40 };
 
 
     std::vector<std::vector<int>> possibleZone{};
+
+    std::vector<Vector2> possibleZoneInGrid{};
 
     MechaParent& linkToMech ;
 

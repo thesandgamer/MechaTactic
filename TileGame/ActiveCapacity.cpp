@@ -144,3 +144,63 @@ void ActiveCapacity::DeselectCapacity()
 	linkToMech.SetState(MechaState::SELECTED);
 	button.UnPressButton();
 }
+
+bool ActiveCapacity::InPossibleZone(Vector2 pos)
+{
+	SetPossibleZoneInGrid();
+	for (Vector2 i : possibleZoneInGrid)
+	{
+		if (i.x == pos.x && i.y == pos.y)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void ActiveCapacity::SetPossibleZoneInGrid()
+{
+	possibleZoneInGrid.clear();
+
+	Vector2 pos = { linkToMech.GetPosInGrid().x,linkToMech.GetPosInGrid().z };	//Pos of mech
+	int mechaPosInGraph[2] = { possibleZone.size() / 2,possibleZone.size() / 2 };	
+
+	//Set position of the mech
+	for (int xx = 0; xx < possibleZone.size(); xx++)
+	{
+		for (int yy = 0; yy < possibleZone.at(xx).size(); yy++)
+		{
+			if (possibleZone[xx][yy] == 5)
+			{
+				mechaPosInGraph[1] = xx;
+				mechaPosInGraph[0] = yy;
+				break;
+			}
+		}
+	}
+
+
+	for (size_t xx = 0; xx < possibleZone.size(); xx++)
+	{
+		for (size_t yy = 0; yy < possibleZone.at(xx).size(); yy++)
+		{
+
+			if (possibleZone[xx][yy] == 5) continue;	//Si c'est la case d'origine
+
+			if (possibleZone[xx][yy] == 1)
+			{
+				int originX = pos.x - ((mechaPosInGraph[0]));
+				int originY = pos.y - ((mechaPosInGraph[1]));
+
+				Vector2 posInGrid = { originX + yy ,originY + xx };
+
+				if (posInGrid.x > 0 && posInGrid.x < linkToMech.gridRef->grid.size() && //If in grid with
+					posInGrid.y > 0 && posInGrid.y < linkToMech.gridRef->grid.at(0).size())	//If in grid height
+				{
+					possibleZoneInGrid.push_back(posInGrid);
+				}
+
+			}
+		}
+	}
+}
