@@ -234,6 +234,13 @@ void Game::Clean()
 
 bool Game::SomethingAlreadyHere(Vector2 pos)
 {
+    if (grid.grid[pos.x][pos.y].traversible = false)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
 
-    return false;
+    }
 }

@@ -80,6 +80,7 @@ std::vector<Vector2> AStar::GetPath(Vector2 startPos, Vector2 endPos)
     if (current != goalNode)
     {
         std::cout << "Path not find" << std::endl;
+        std::cout << "Position asked: "<< endPos.x << " "<< endPos.y << std::endl;
         return {};
     }
     std::vector<Vector2> path = CalculatePath();

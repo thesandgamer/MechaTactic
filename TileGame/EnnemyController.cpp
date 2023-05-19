@@ -1,5 +1,5 @@
 #include "EnnemyController.h"
-
+#include "Game.h"
 
 EnnemyController::EnnemyController(): Controller()
 {
@@ -75,10 +75,11 @@ void EnnemyController::AIActions()
 	float YGrid = std::rand() % (int)(gridRef->GRID_SIZE.z);//Random entre 0 et tailled de la grille
 	Vector2 PosToMove{ xGrid,YGrid };
 
+	//Si case bloqué check celles à coté
 	//Vérifier les cases à coté, si toutes bloqué refait du random
 
 	while ((PosToMove.x == controledMecha->GetPosInGrid().x && PosToMove.y == controledMecha->GetPosInGrid().z)
-		//|| (  SomethingAlreadyHere(PosToMove))	// à rajouter check si pas quelque chose déjà ici
+		|| (Game::instance().SomethingAlreadyHere(PosToMove))	// à rajouter check si pas quelque chose déjà ici
 		)
 	{
 		float xGrid = std::rand() % (int)(gridRef->GRID_SIZE.x);//Random entre 0 et tailled de la grille

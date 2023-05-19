@@ -14,12 +14,12 @@ void ActiveCapacity::Init()
 {
 	//++ToDo: rajouter un numéro genre 6 pour dire qu'on prend en compte la case du mécha	
 	possibleZone = {
+		{1,1,1,0,0},
 		{0,0,1,0,0},
-		{0,0,1,0,0},
-		{0,1,5,1,1},
-		{0,0,1,0,0},
-		{0,0,1,0,0},
-		{0,0,1,0,0},
+		{0,0,5,1,1},
+		{0,0,1,0,1},
+		{0,1,0,0,0},
+		{0,0,1,1,0},
 
 	};
 
