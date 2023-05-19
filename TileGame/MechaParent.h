@@ -18,6 +18,7 @@
 #include "ActiveCapacity.h"
 
 //++ToDo: Pousser l'utilisation de la machine d'état 
+//++ToDo: Remplacer la state machine par des flags: Hover Selected CanMove CanUseCapacity InMovement InCapacity
 enum class MechaState
 {
 	IDLE,
@@ -28,6 +29,8 @@ enum class MechaState
 	MODE_MOVE,
 	MODE_CAPACITY,
 };
+
+class Controller;
 
 
 /*	//++ToDo:
@@ -137,6 +140,9 @@ public:
 	ActiveCapacity* GetCurrentActiveCapacity();
 	void SetCurrentActiveCapacity(ActiveCapacity* capacity);
 
+	void SetOwner(Controller* newOwner) { owner = newOwner; }
+	Controller* GetOwner() { return owner; }
+
 private:
 
 	bool selected{ false };
@@ -146,6 +152,7 @@ private:
 	ActiveCapacity* currentActiveCapacity;	//Pointer car besoin de savoir si c'est null
 
 	//void ManagerCapacities();
+	Controller* owner { nullptr };	//++ToDo: Peut être remplacer ça par un interface de ownership de mechs
 
 
 	Vector3 posInGrid { 0,0,0 };
@@ -165,7 +172,6 @@ private:
 
 	Color drawColor {WHITE};
 	Color baseColor {PURPLE};
-
 
 
 

@@ -56,19 +56,28 @@ void Game::Start()
 
     //++ToDo: fait en sorte que ça marche avec plusieurs player controller
 
+    EnnemyController* ennemy = new EnnemyController();
+    ennemy->AddMecha({ 2,0,5 });
+    ennemy->AddMecha({ 5,0,2 });
+    controllers.push_back(ennemy);
+
+
     for (size_t i = 0; i < controllers.size(); i++)
     {
         controllers.at(i)->SetGrid(&grid);
         controllers[i]->Start();
       
     }
-    /*
+    /* Alt Version
     for (auto i = controllers.begin(); i != controllers.end(); i++)
     {
         (*i)->SetGrid(&grid);
         (*i)->Start();
         
     }*/
+
+
+
 
 //=============Setup Cursor===========
     cursor.Start();
@@ -221,4 +230,10 @@ void Game::DrawUi()
 void Game::Clean()
 {
 
+}
+
+bool Game::SomethingAlreadyHere(Vector2 pos)
+{
+
+    return false;
 }

@@ -26,6 +26,7 @@ public:
 private:
 
     void ComputeShowPath();
+    bool HitObjectIsMyMech();
 
     Vector2 mousePos{0,0};
     Vector2 mousePosInGrid{ 0,0 };

@@ -10,6 +10,7 @@
 
 #include "Controller.h"
 #include "PlayerController.h"
+#include "EnnemyController.h"
 
 
 //++ToDo: faire en sorte que les info s'affichent en fonction de l'objet touché par le rayon
@@ -49,6 +50,8 @@ public:
 
 	CameraActor cam; // Faire en sorte qu'il y ait plusieurs camera, un par player controller
 
+	bool SomethingAlreadyHere(Vector2 pos);
+
 
 	int  SCREEN_WIDTH;
 	int  SCREEN_HEIGHT;
@@ -57,7 +60,7 @@ private:
 
 	//---Gère les controllers
 	TurnsManager turnManager;
-	vector<Controller*> controllers;
+	vector<Controller*> controllers;	//++ToDo: Remplacer ça par unique pointer
 
 
 

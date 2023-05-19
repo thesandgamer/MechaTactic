@@ -112,6 +112,9 @@
     <ClCompile Include="CameraActor.cpp" />
     <ClCompile Include="Capacity.cpp" />
     <ClCompile Include="ActiveCapacity.cpp" />
+    <ClCompile Include="EnnemyController.cpp">
+      <Filter>Controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -199,5 +202,8 @@
     <ClInclude Include="CameraActor.h" />
     <ClInclude Include="Capacity.h" />
     <ClInclude Include="ActiveCapacity.h" />
+    <ClInclude Include="EnnemyController.h">
+      <Filter>Controllers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

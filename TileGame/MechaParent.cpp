@@ -1,6 +1,6 @@
 #include "MechaParent.h"
 #include "Game.h"
-
+#include "Controller.h"
 
 //Constructeur à vide
 MechaParent::MechaParent()
@@ -204,17 +204,20 @@ void MechaParent::OnHovered()
 
 void MechaParent::OnClicked()
 {
-	Select();
+
 }
 
 void MechaParent::Select()
 {
+	if (haveDoActions) return;
 	selected = true;
 	state = MechaState::SELECTED;
 }
 
 void MechaParent::DeSelect()
 {
+	if (haveDoActions) return;
+
 	selected = false;
 	if (state != MechaState::INMOVEMENT && state != MechaState::INCAPACITY)
 	{

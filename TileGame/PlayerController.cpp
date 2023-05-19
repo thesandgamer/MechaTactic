@@ -18,7 +18,7 @@ void PlayerController::Start()
 	//------Change the color of mecha to distinc if no models
 	for (auto i = mechasList.begin(); i != mechasList.end(); i++)
 	{
-		(*i)->SetBaseColor({200,150,0,255});	//Si on met plus de 255 comment ça marque erreur
+		(*i)->SetBaseColor({204,102,0,255});	//Si on met plus de 255 comment ça marque erreur
 	}
 
 	Controller::Start();
@@ -67,8 +67,12 @@ void PlayerController::DrawUi()
 {
 	Controller::DrawUi();
 
-	endTurnButton->Update();
-	endTurnButton->Draw();
+	if (isTurn)
+	{
+		endTurnButton->Update();
+		endTurnButton->Draw();
+	}
+	
 }
 
 
@@ -125,6 +129,7 @@ void PlayerController::PlayerDecideActions()
 						{
 							std::cout << "Case for capcity is good" << std::endl;
 							//Put here code to activate active capacity 
+							controledMecha->GetCurrentActiveCapacity()->ActivateCapacity({ hitObject->GetPosInGrid().x,hitObject->GetPosInGrid().z });
 						}
 					}
 				}
@@ -204,18 +209,14 @@ void PlayerController::CheckWhatBehindRay()
 
 void PlayerController::SelectMecha()
 {
-	if (hitinfo.IsCollideActor())	//Si la souris est sur un acteur
+	if (HitObjectIsMyMech())	//Si la souris est sur un acteur
 	{
-		if (dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent) != nullptr)	//Si cet acteur est un mécha
-		{
 			std::cout << "Mecha selected" << std::endl;
 			//++ToDo: rajouter vérfication
 			controledMecha = dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent);
 			controledMecha->Select();
 
-			cState = MechaSelected;
-
-		}		
+			cState = MechaSelected;			
 	}
 }
 
@@ -225,7 +226,8 @@ void PlayerController::ComputeShowPath()
 	{
 		if (hitObject != nullptr)	//Et si le on à touché un objet
 		{
-			if (controledMecha->GetState() != MechaState::INMOVEMENT && controledMecha->GetState() != MechaState::INCAPACITY)
+			if (controledMecha->GetState() != MechaState::INMOVEMENT && controledMecha->GetState() != MechaState::INCAPACITY
+				&& controledMecha->GetState() != MechaState::DEACTIVATED)
 			{
 				controledMecha->SetState(MechaState::MODE_MOVE); //Le mecha est donc en mode mouvement
 				ShowPath(hitObject->GetPosInGrid());	//On affiche le chemin emprintable
@@ -243,6 +245,21 @@ void PlayerController::ComputeShowPath()
 	{
 		//gridRef->ResetTilesColor();
 	}
+}
+
+bool PlayerController::HitObjectIsMyMech()
+{
+	if (hitinfo.IsCollideActor())	//Si la souris est sur un acteur
+	{
+		if (dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent) != nullptr)	//Si c'est un mech de select
+		{
+			if (dynamic_cast<MechaParent*>(hitinfo.hitCollider->Parent)->GetOwner() == this)//Si il est à nous
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 

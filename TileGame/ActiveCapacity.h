@@ -29,6 +29,8 @@ public:
     bool InPossibleZone(Vector2 pos);
 
     void SetPossibleZoneInGrid();
+    
+    virtual void ActivateCapacity(Vector2 pos);
 
 private:
     Button button { {10,120},40,40 };

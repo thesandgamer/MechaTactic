@@ -12,7 +12,7 @@ ActiveCapacity::ActiveCapacity(MechaParent& mech) : linkToMech(mech)
 
 void ActiveCapacity::Init()
 {
-	
+	//++ToDo: rajouter un numéro genre 6 pour dire qu'on prend en compte la case du mécha	
 	possibleZone = {
 		{0,0,1,0,0},
 		{0,0,1,0,0},
@@ -204,3 +204,10 @@ void ActiveCapacity::SetPossibleZoneInGrid()
 		}
 	}
 }
+
+void ActiveCapacity::ActivateCapacity(Vector2 pos)
+{
+	//Fait l'effet de la capacité
+	std::cout << "Capacity is activated" << std::endl;
+}
+

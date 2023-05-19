@@ -31,7 +31,7 @@ public:
 
 	void AddMecha(Vector3 location);
 
-	bool MoveMecha(Vector3 moveTo);//bool to check if the movement is possible
+	void MoveMecha(Vector3 moveTo);//bool to check if the movement is possible
 
 
 	bool SelectMecha(MechaParent* pawnSelected);

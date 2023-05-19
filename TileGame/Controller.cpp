@@ -62,6 +62,7 @@ void Controller::AddMecha(Vector3 location)
 {
 	//++ToDo: check si on peut ajouter le mécha à cette position utiliser assertion
 	mechasList.push_back(new MechaParent(location));
+	mechasList.back()->SetOwner(this);
 }
 
 /// <summary>
@@ -105,16 +106,12 @@ bool Controller::IsCurrentMechInAction()	//marche pas car controlled mecha est r
 	return false;	//Il n'y a pas de mecha selectionné
 }
 
-bool Controller::MoveMecha(Vector3 moveTo)
+void Controller::MoveMecha(Vector3 moveTo)
 {
 	controledMecha->MoveTo(moveTo);
-
-	//DeSelectMecha();
-
 	gridRef->ResetTilesColor();//To remove the show path
 
-	return true;
-
+	//DeSelectMecha();
 	/*
 	if (gridRef->grid[moveTo.x][moveTo.y].traversible == true)//Si la case séléctionné est traversible
 	{
