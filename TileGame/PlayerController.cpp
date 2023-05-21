@@ -127,9 +127,9 @@ void PlayerController::PlayerDecideActions()
 					{
 						if (controledMecha->GetCurrentActiveCapacity()->InPossibleZone({ hitObject->GetPosInGrid().x,hitObject->GetPosInGrid().z }))
 						{
-							std::cout << "Case for capcity is good" << std::endl;
+							std::cout << "Case for capacity is good" << std::endl;
 							//Put here code to activate active capacity 
-							controledMecha->GetCurrentActiveCapacity()->ActivateCapacity({ hitObject->GetPosInGrid().x,hitObject->GetPosInGrid().z });
+							controledMecha->GetCurrentActiveCapacity()->ActivateCapacity(dynamic_cast<Actor*>(hitObject));
 						}
 					}
 				}

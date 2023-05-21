@@ -3,12 +3,13 @@
 CameraActor::CameraActor(): Actor()
 {
     transform.translation = {0,400,0 };
-
+    baseLoc = transform.translation;
 }
 
 CameraActor::CameraActor(Vector3 basePos) : Actor()
 {
     transform.translation = basePos;
+    baseLoc = transform.translation;
 
 }
 
@@ -19,7 +20,7 @@ CameraActor::~CameraActor()
 
 void CameraActor::Init()
 {
-
+    transform.translation = baseLoc;
     switch (camType)
     {
     case TopDown:
@@ -61,6 +62,20 @@ void CameraActor::Update()
     //Déplacement de la camera
     //Tourner la camera
 
+    if (IsKeyPressed(KEY_KP_0))///WIP: changement de cam pose problème avec le raycast du player
+    {
+        if (camType == Iso)
+        {
+            camType = TopDown;
+            Init();
+        }
+        else
+        {
+            camType = Iso;
+            Init();
+
+        }
+    }
     
 
 }

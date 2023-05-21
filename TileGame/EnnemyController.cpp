@@ -11,6 +11,7 @@ EnnemyController::~EnnemyController()
 
 void EnnemyController::Start()
 {
+
 	name = "Ennemy";
 	for (auto i = mechasList.begin(); i != mechasList.end(); i++)
 	{

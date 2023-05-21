@@ -224,6 +224,7 @@ void MechaParent::DeSelect()
 		state = MechaState::IDLE;
 
 	}
+	
 }
 
 void MechaParent::AddCapacity(std::unique_ptr<Capacity>&& newCapacity)
@@ -239,6 +240,15 @@ ActiveCapacity* MechaParent::GetCurrentActiveCapacity()
 void MechaParent::SetCurrentActiveCapacity(ActiveCapacity* capacity)
 {
 	currentActiveCapacity = capacity;
+}
+
+void MechaParent::EndActions()
+{
+	canMove = false;
+	haveDoActions = true;
+
+	DeSelect();
+	state = MechaState::DEACTIVATED;
 }
 
 /// <summary>
@@ -271,11 +281,7 @@ void MechaParent::MakeMovement()
 
 		if (positionIterator >= poses.size()) //Si on est arrivé à la fin des position où aller
 		{
-			canMove = false;
-			haveDoActions = true;
-
-			DeSelect();
-			state = MechaState::DEACTIVATED;
+			EndActions();
 
 			return;
 		}

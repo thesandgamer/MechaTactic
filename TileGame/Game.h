@@ -50,7 +50,7 @@ public:
 
 	CameraActor cam; // Faire en sorte qu'il y ait plusieurs camera, un par player controller
 
-	bool SomethingAlreadyHere(Vector2 pos);
+	bool SomethingAlreadyHere(Vector2 pos);	//++ToDo: mettre ça autre part
 
 
 	int  SCREEN_WIDTH;

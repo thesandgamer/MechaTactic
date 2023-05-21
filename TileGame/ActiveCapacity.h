@@ -5,9 +5,16 @@
 #include <vector>
 
 #include "Button.h"
+#include "Actor.h"
 
 class MechaParent;
 
+/// <summary>
+/// Not used for now
+/// </summary>
+enum CanBeActivateOnWhat {
+
+};
 
 class ActiveCapacity :
     public Capacity
@@ -30,7 +37,9 @@ public:
 
     void SetPossibleZoneInGrid();
     
-    virtual void ActivateCapacity(Vector2 pos);
+    virtual void ActivateCapacity(Actor* actorTarget);
+
+    void FinishCapacity();
 
 private:
     Button button { {10,120},40,40 };

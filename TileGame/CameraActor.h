@@ -41,7 +41,9 @@ private:
 	float targetDistance;
 	Vector2 angle;
 
-	CameraType camType { Iso };
+	Vector3 baseLoc;
+
+	CameraType camType { TopDown };
 
 	
 };

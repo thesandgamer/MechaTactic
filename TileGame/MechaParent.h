@@ -143,6 +143,8 @@ public:
 	void SetOwner(Controller* newOwner) { owner = newOwner; }
 	Controller* GetOwner() { return owner; }
 
+	void EndActions();
+
 private:
 
 	bool selected{ false };

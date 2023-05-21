@@ -47,6 +47,7 @@ int const SCREEN_HEIGHT = 540;
 
 int main(int argc, char** argv[])
 {
+    std::srand(std::time(nullptr));
 
     //Créer un écran et on met les fps à 60
     string windowName = "Mecha Tactic";
