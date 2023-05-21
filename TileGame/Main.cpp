@@ -31,13 +31,40 @@
 //      ??NotNow?? les cases de déplacement possible
 //
 
+//++ToDo:
+// Faire en sorte que les mécha puissen se déplacer et utiliser une capâcitée
+// Faire un système de vie
 //
-// Si on clique avec une capacité hors d'une bonne case déséléctionne la capacité
-// Si on déséléctionne capacité repase en mode mouvement
-// Si clique sur case pas acessible en mode déplacement déséléctionne le mécha
-// Mecha reste séléctionné quand finit déplacement mais peut plus bouger
-// 
-//
+
+
+/*
+ Si on clique avec une capacité hors d'une bonne case déséléctionne la capacité
+ Si on déséléctionne capacité repase en mode mouvement
+ Si clique sur case pas acessible en mode déplacement déséléctionne le mécha
+ Mecha reste séléctionné quand finit déplacement mais peut plus bouger
+
+Selected: 
+	Affiche son ui en bas à gauche
+	Entouré de vert 
+	Barre de vie s'affiche en dessus
+
+Selected et peut bouger:
+	Pareil sélécted 
+	Zone où peut se déplacer
+
+Hover(tant que hover)
+	Zone où peut se déplacer en plus clair
+	Pareil selected
+
+Hover et peut bouger
+	Pareil Hover et seletec peut bouger
+	
+	
+Selected et peut rien faire:
+	Pareil sélécted
+	Turn over marqué dans UI
+	Boutons grisé
+*/
 
 using namespace std;
 
