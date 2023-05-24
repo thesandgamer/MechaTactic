@@ -65,7 +65,25 @@ Selected et peut rien faire:
 	Turn over marqué dans UI
 	Boutons grisé
 */
+/*
+* Life Manager C++:
+Le rendre le plus indépendant possible
 
+Vie Maximum
+Vie current
+Armure
+f TakeDamages
+f Death
+e onDeath
+
+Damage Manager:
+f MakeDamages(LifeManager& toDamages,DamageData data)
+
+str DamageData:
+Damages to make
+Armor reducing(in %)
+
+*/
 using namespace std;
 
 //Setup la taille de l'écran
