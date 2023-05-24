@@ -17,6 +17,8 @@
 #include "Capacity.h"
 #include "ActiveCapacity.h"
 
+#include "LifeManager.h"
+
 //++ToDo: Pousser l'utilisation de la machine d'état 
 //++ToDo: Remplacer la state machine par des flags: Hover Selected CanMove CanUseCapacity InMovement InCapacity
 enum class MechaState
@@ -156,6 +158,8 @@ private:
 	//void ManagerCapacities();
 	Controller* owner { nullptr };	//++ToDo: Peut être remplacer ça par un interface de ownership de mechs
 
+	LifeManager lifeManager;
+	
 
 	Vector3 posInGrid { 0,0,0 };
 

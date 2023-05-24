@@ -43,7 +43,7 @@ private:
 
 	Vector3 baseLoc;
 
-	CameraType camType { TopDown };
+	CameraType camType { Iso };
 
 	
 };

@@ -115,6 +115,8 @@
     <ClCompile Include="EnnemyController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="LifeManager.cpp" />
+    <ClCompile Include="DamageDealer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -205,5 +207,12 @@
     <ClInclude Include="EnnemyController.h">
       <Filter>Controllers</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="LifeManager.h" />
+    <ClInclude Include="DamageDealer.h" />
+    <ClInclude Include="DamageData.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MecaTactic.rc" />
   </ItemGroup>
 </Project>

@@ -183,6 +183,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="DamageDealer.cpp" />
     <ClCompile Include="EnnemyController.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graph.cpp" />
@@ -190,6 +191,7 @@
     <ClCompile Include="IInteraction.cpp" />
     <ClCompile Include="InformationDisplay.cpp" />
     <ClCompile Include="InformationDisplayUi.cpp" />
+    <ClCompile Include="LifeManager.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MechaParent.cpp" />
@@ -220,6 +222,8 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Cursor.h" />
+    <ClInclude Include="DamageData.h" />
+    <ClInclude Include="DamageDealer.h" />
     <ClInclude Include="EnnemyController.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph.h" />
@@ -229,6 +233,7 @@
     <ClInclude Include="InformationDisplay.h" />
     <ClInclude Include="InformationDisplayUi.h" />
     <ClInclude Include="ITurn.h" />
+    <ClInclude Include="LifeManager.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="MechaParent.h" />
     <ClInclude Include="Node.h" />
@@ -236,10 +241,14 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="P_Collision.h" />
     <ClInclude Include="RaycastCollision.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SphereCollision.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TurnsManager.h" />
     <ClInclude Include="Vector2AStar.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MecaTactic.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
