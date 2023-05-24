@@ -43,9 +43,10 @@ void PlayerController::Start()
 
 void PlayerController::Update()
 {
+	Controller::Update();
+
 	if (!isTurn) return;
 
-	Controller::Update();
 	PlayerDecideActions();
 }
 
@@ -176,6 +177,7 @@ void PlayerController::CheckWhatBehindRay()
 	//Récupérer quel objet est sous mon rayon 
 
 	
+	IInteraction* oldObject = nullptr;
 
 	if (CollisionManager::GetInstance()->DoRayCollision(&raycast, hitinfo))	//Si le rayon touche
 	{
@@ -189,6 +191,7 @@ void PlayerController::CheckWhatBehindRay()
 		if (hitObject != nullptr)
 		{
 			hitObject->OnHovered();
+			oldObject = hitObject;
 			if (cState == MechaSelected) cState = MechaMoveSelected;
 
 		}
@@ -200,6 +203,11 @@ void PlayerController::CheckWhatBehindRay()
 	}
 	else
 	{
+		if (oldObject != nullptr)
+		{
+			oldObject->OnEndHovered();
+			oldObject = nullptr;
+		}
 		if (cState == MechaMoveSelected) gridRef->ResetTilesColor(); cState = MechaSelected;
 		hitObject = nullptr;
 	}

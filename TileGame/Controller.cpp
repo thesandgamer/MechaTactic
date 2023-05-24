@@ -29,7 +29,7 @@ void Controller::InitPawns()
 
 void Controller::Update()
 {
-	if (!isTurn) return;
+	//if (!isTurn) return;
 
 	//==========Update les pawns============
 	for (int i = 0; i < mechasList.size(); i++)
@@ -50,7 +50,7 @@ void Controller::Draw()
 
 void Controller::DrawUi()
 {
-	if (!isTurn) return;
+	//if (!isTurn) return;
 	for (auto i = mechasList.begin(); i < mechasList.end(); i++)
 	{
 		(*i)->DrawUI();

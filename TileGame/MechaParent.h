@@ -18,6 +18,7 @@
 #include "ActiveCapacity.h"
 
 #include "LifeManager.h"
+#include "InGameLifeBar.h"
 
 //++ToDo: Pousser l'utilisation de la machine d'état 
 //++ToDo: Remplacer la state machine par des flags: Hover Selected CanMove CanUseCapacity InMovement InCapacity
@@ -94,6 +95,7 @@ public:
 	//========] Interaction
 
 	void OnHovered() override;
+	void OnEndHovered()override;
 	void OnClicked() override;
 
 	Vector3 GetPosInGrid() { return posInGrid; }
@@ -158,8 +160,10 @@ private:
 	//void ManagerCapacities();
 	Controller* owner { nullptr };	//++ToDo: Peut être remplacer ça par un interface de ownership de mechs
 
-	LifeManager lifeManager;
+	LifeManager lifeManager{3,0};
+	InGameLifeBar lifeBar{ this,&lifeManager,{0,50,0} };
 	
+	bool canDrawLifeBar{ false };
 
 	Vector3 posInGrid { 0,0,0 };
 

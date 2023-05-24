@@ -115,8 +115,13 @@
     <ClCompile Include="EnnemyController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="LifeManager.cpp" />
     <ClCompile Include="DamageDealer.cpp" />
+    <ClCompile Include="InGameLifeBar.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -208,9 +213,14 @@
       <Filter>Controllers</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="LifeManager.h" />
     <ClInclude Include="DamageDealer.h" />
     <ClInclude Include="DamageData.h" />
+    <ClInclude Include="InGameLifeBar.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MecaTactic.rc" />

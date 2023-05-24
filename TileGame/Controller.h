@@ -19,7 +19,6 @@ enum ControllerState
 
 class Controller : public ITurn
 {
-
 public:
 	Controller();
 	~Controller();
@@ -62,6 +61,7 @@ public:
 	string GetName() { return name; }
 	string name;
 
+	bool isTurn{ false };
 
 protected:
 
@@ -81,7 +81,6 @@ protected:
 	//======] State
 	ControllerState cState {Thinking};
 
-	bool isTurn{false};
 
 	//======] UI
 

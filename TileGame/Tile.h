@@ -32,6 +32,7 @@ public:
 
 
 	void OnHovered()  {};
+	void OnEndHovered()override {};
 	void OnClicked()  {};
 	Vector3 GetPosInGrid()  { return posInGrid; } ;
 

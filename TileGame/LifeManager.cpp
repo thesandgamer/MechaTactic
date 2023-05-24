@@ -27,6 +27,11 @@ void LifeManager::TakeDamages(DamageData data)
 	}
 }
 
+LifeData LifeManager::ReturnLifeData()
+{
+	return {maxLife,currentLife,armor};
+}
+
 void LifeManager::Death()
 {
 	std::cout << "Death" << std::endl;

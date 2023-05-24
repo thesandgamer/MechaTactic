@@ -191,6 +191,7 @@
     <ClCompile Include="IInteraction.cpp" />
     <ClCompile Include="InformationDisplay.cpp" />
     <ClCompile Include="InformationDisplayUi.cpp" />
+    <ClCompile Include="InGameLifeBar.cpp" />
     <ClCompile Include="LifeManager.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="IInteraction.h" />
     <ClInclude Include="InformationDisplay.h" />
     <ClInclude Include="InformationDisplayUi.h" />
+    <ClInclude Include="InGameLifeBar.h" />
     <ClInclude Include="ITurn.h" />
     <ClInclude Include="LifeManager.h" />
     <ClInclude Include="List.h" />

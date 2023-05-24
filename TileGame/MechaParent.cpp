@@ -69,6 +69,7 @@ void MechaParent::Init()
 
 void MechaParent::Draw()
 {
+
 	DrawVisual();
 
 	if (selected)
@@ -78,60 +79,79 @@ void MechaParent::Draw()
 			cap->Draw();
 		}
 	}
+
 	
 }
 
 void MechaParent::DrawUI()
 {
+	if (canDrawLifeBar)
+	{
+		lifeBar.Draw();
+		std::cout << "DrawLifeBar" << std::endl;
+
+	}
+
+
+	if (!owner->isTurn)return;
+
 	if (selected)
 	{
-
 		for (const auto& cap : capacities)
 		{
 			cap->DrawUi();
 		}
+		
 	}
+
+	
+
 }
 
 
 void MechaParent::Update()
 {
+	if (owner->isTurn)
+	{
 
-
-	//If the mech have to move make it move
-	if (state == MechaState::INMOVEMENT)
-	{
-		MakeMovement();
-	}
-	//If the mech have to make capacity, make it
-	if (state == MechaState::INCAPACITY)
-	{
-		//MakeCapacity();
-	}
-
-	//MakePassiveCapacity
-	
-	/*
-	if (haveDoActions)
-	{
-		state = MechaState::DEACTIVATED;
-	}
-	else if (selected)
-	{
-		state = MechaState::SELECTED;
-	}
-	else
-	{
-		state = MechaState::IDLE;
-	}*/
-
-	if (selected)
-	{
-		for (const auto& cap : capacities)
+		//If the mech have to move make it move
+		if (state == MechaState::INMOVEMENT)
 		{
-			cap->Update();
+			MakeMovement();
+		}
+		//If the mech have to make capacity, make it
+		if (state == MechaState::INCAPACITY)
+		{
+			//MakeCapacity();
+		}
+
+		//MakePassiveCapacity
+
+		/*
+		if (haveDoActions)
+		{
+			state = MechaState::DEACTIVATED;
+		}
+		else if (selected)
+		{
+			state = MechaState::SELECTED;
+		}
+		else
+		{
+			state = MechaState::IDLE;
+		}*/
+
+		if (selected)
+		{
+			for (const auto& cap : capacities)
+			{
+				cap->Update();
+			}
 		}
 	}
+	
+	lifeBar.Update();
+
 
 }
 
@@ -200,6 +220,15 @@ string MechaParent::GetInformationOf()
 
 void MechaParent::OnHovered()
 {
+	std::cout << "Hover" << std::endl;
+	canDrawLifeBar = true;
+
+
+}
+
+void MechaParent::OnEndHovered()
+{
+	canDrawLifeBar = false;
 }
 
 void MechaParent::OnClicked()

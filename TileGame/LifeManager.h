@@ -7,6 +7,13 @@ struct DamageData;
 
 //++Question: Comment je peut faire pour qu'on puisse rajouter WIP WIP
 
+struct LifeData
+{
+	float maxLife{};
+	float currentLife{};
+	float armor{};
+};
+
 class LifeManager
 {
 public:
@@ -15,6 +22,9 @@ public:
 	~LifeManager();
 
 	void TakeDamages(DamageData data);
+
+	LifeData ReturnLifeData();
+
 
 private:
 	void Death();

@@ -23,9 +23,9 @@ void EnnemyController::Start()
 
 void EnnemyController::Update()
 {
-	if (!isTurn) return;
-
 	Controller::Update();
+
+	if (!isTurn) return;
 
 	if (controledMecha != nullptr)
 	{
