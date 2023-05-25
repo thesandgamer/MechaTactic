@@ -161,7 +161,7 @@ private:
 	Controller* owner { nullptr };	//++ToDo: Peut être remplacer ça par un interface de ownership de mechs
 
 	LifeManager lifeManager{3,0};
-	InGameLifeBar lifeBar{ this,&lifeManager,{0,50,0} };
+	InGameLifeBar lifeBar{ this,&lifeManager,{0,60,0} };
 	
 	bool canDrawLifeBar{ false };
 
