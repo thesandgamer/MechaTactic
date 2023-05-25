@@ -177,20 +177,27 @@ void PlayerController::CheckWhatBehindRay()
 	//Récupérer quel objet est sous mon rayon 
 
 	
-	IInteraction* oldObject = nullptr;
 
 	if (CollisionManager::GetInstance()->DoRayCollision(&raycast, hitinfo))	//Si le rayon touche
 	{
-
 		if (hitinfo.hitCollider->Parent != nullptr)	//Si la collision touché est attaché à un acteur
 		{
 			hitObject = dynamic_cast<IInteraction*>(hitinfo.hitCollider->Parent);	//Set l'objet touché
 		}
 
 		//Appel les fonctions de l'objet touché
-		if (hitObject != nullptr)
+		if (hitObject != nullptr)	//Si on à un objet sous la souris
 		{
 			hitObject->OnHovered();
+
+			if (oldObject != nullptr)
+			{
+				if (hitObject != oldObject)	//Si on  pas sur le même
+				{
+					oldObject->OnEndHovered();
+
+				}
+			}
 			oldObject = hitObject;
 			if (cState == MechaSelected) cState = MechaMoveSelected;
 
@@ -198,18 +205,24 @@ void PlayerController::CheckWhatBehindRay()
 		else
 		{
 			if (cState == MechaMoveSelected)	gridRef->ResetTilesColor();  cState = MechaSelected;
+			if (oldObject != nullptr)
+			{
+				oldObject->OnEndHovered();
+				//oldObject = nullptr;
+			}
 		}
 		
 	}
 	else
 	{
+		
+		if (cState == MechaMoveSelected) gridRef->ResetTilesColor(); cState = MechaSelected;
+		//hitObject = nullptr;
 		if (oldObject != nullptr)
 		{
 			oldObject->OnEndHovered();
 			oldObject = nullptr;
 		}
-		if (cState == MechaMoveSelected) gridRef->ResetTilesColor(); cState = MechaSelected;
-		hitObject = nullptr;
 	}
 
 

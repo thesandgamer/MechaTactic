@@ -41,6 +41,9 @@ private:
 
     IInteraction* hitObject { nullptr };
 
+    IInteraction* oldObject{ nullptr };
+
+
 
     
 
