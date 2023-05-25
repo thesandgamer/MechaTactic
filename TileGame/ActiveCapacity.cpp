@@ -16,8 +16,8 @@ void ActiveCapacity::Init()
 	possibleZone = {
 		{1,1,1,0,0},
 		{0,0,1,0,0},
-		{0,0,5,1,1},
-		{0,0,1,0,1},
+		{0,0,5,1,0},
+		{0,0,1,1,1},
 		{0,1,0,0,0},
 		{0,0,1,1,0},
 
@@ -54,8 +54,7 @@ void ActiveCapacity::Update()
 
 void ActiveCapacity::DrawUi()
 {
-	button.Update();
-	button.Draw();
+
 }
 
 void ActiveCapacity::DrawPossibleZone()
@@ -173,3 +172,9 @@ void ActiveCapacity::FinishCapacity()
 	linkToMech.EndActions();
 }
 
+
+void ActiveCapacity::DrawButton(Vector2 pos)
+{
+	button.Update();
+	button.Draw();
+}

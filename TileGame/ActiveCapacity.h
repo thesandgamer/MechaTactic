@@ -29,6 +29,8 @@ public:
     void Draw() override;
     void Update() override;
     void DrawUi() override;
+    void DrawButton(Vector2 pos) override;
+    
 
     void DrawPossibleZone() override;
 

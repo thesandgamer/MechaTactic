@@ -35,6 +35,8 @@ public:
 
     void Update();
     void Draw();
+    void DrawAt(Vector2 pos);
+
 
     Vector2 mousePos;
 

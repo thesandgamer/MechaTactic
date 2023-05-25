@@ -97,10 +97,13 @@ void MechaParent::DrawUI()
 
 	if (selected)
 	{
-		for (const auto& cap : capacities)
+
+		for (size_t i = 0; i < capacities.size(); i++)
 		{
-			cap->DrawUi();
+			capacities.at(i)->DrawUi();
+			capacities.at(i)->DrawButton({ 10,120.0f + i*10 });
 		}
+
 		
 	}
 

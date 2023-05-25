@@ -13,6 +13,10 @@ void Capacity::Draw()
 {
 }
 
+void Capacity::DrawButton(Vector2 pos)
+{
+}
+
 void Capacity::Update()
 {
 }

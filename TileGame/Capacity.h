@@ -6,6 +6,8 @@
 // Va permettre d'afficher
 // Les capacités actives: bouton, on clique dessus 
 
+#include "raylib.h"
+
 class Capacity
 {
 public:
@@ -13,7 +15,9 @@ public:
 	virtual void Init();
 	virtual void DrawUi();
 	virtual void Draw() ;
+	virtual void DrawButton(Vector2 pos);
 	virtual void Update() ;
+
 
 	virtual void DrawPossibleZone();
 

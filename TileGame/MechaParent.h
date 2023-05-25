@@ -22,6 +22,7 @@
 
 //++ToDo: Pousser l'utilisation de la machine d'état 
 //++ToDo: Remplacer la state machine par des flags: Hover Selected CanMove CanUseCapacity InMovement InCapacity
+
 enum class MechaState
 {
 	IDLE,
@@ -35,16 +36,17 @@ enum class MechaState
 
 class Controller;
 
+//++ToDo: Ajouter une classe pour l'interface
 
 /*	//++ToDo:
 
 	Mécha: 
 		Pour la séléction de son action
 	en mode déplacement de base
-	Mode déplacement:
-		Quand on survolle une tile acessible, montre le chemin actuel/ possible
-	Mode Capacité:
-		Montre zone possible
+	V Mode déplacement:
+		V Quand on survolle une tile acessible, montre le chemin actuel/ possible
+	V Mode Capacité:
+		V Montre zone possible
 
 
 	Mode effectue la capacitée: perte du controller du contrôle sur le mecha

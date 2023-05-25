@@ -131,6 +131,12 @@ void Button::Draw()
 
 }
 
+void Button::DrawAt(Vector2 pos)
+{
+	Draw();
+	position = pos;
+}
+
 
 void Button::CliquedSendFunction()
 {
