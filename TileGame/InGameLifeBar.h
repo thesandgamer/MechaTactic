@@ -22,10 +22,14 @@ public:
 	InGameLifeBar(Actor* onActor);
 	InGameLifeBar(LifeManager* lifeManager);
 	InGameLifeBar(Actor* onActor,LifeManager* lifeManager,Vector3 Offset);
+	InGameLifeBar(Actor* onActor,Vector3 Offset);
+	InGameLifeBar(Vector3 Offset);
 	~InGameLifeBar();
 
 	void Draw();
 	void Update();
+
+	void LinkTo(LifeManager* lifeManager, Actor* actor);
 
 
 private:

@@ -31,6 +31,9 @@ MechaParent::~MechaParent()
 
 void MechaParent::Init()
 {
+	lifeBar = new InGameLifeBar(this ,&lifeManager, { 0,60,0 });
+	//lifeBar.LinkTo(&lifeManager,this);
+
 	//-------Set collision
 	collision.modelToBoxing = &model;
 	//collision = BoxCollision(&model);
@@ -87,8 +90,8 @@ void MechaParent::DrawUI()
 {
 	if (canDrawLifeBar)
 	{
-		lifeBar.Draw();
-		std::cout << "DrawLifeBar" << std::endl;
+		lifeBar->Draw();
+		//std::cout << "DrawLifeBar" << std::endl;
 
 	}
 
@@ -152,8 +155,11 @@ void MechaParent::Update()
 			}
 		}
 	}
-	
-	lifeBar.Update();
+	if (!owner->isTurn)
+	{
+		std::cout << owner->name << " have: " << lifeManager.ReturnLifeData().currentLife << " PV" << std::endl;
+	}
+	lifeBar->Update();
 
 
 }
@@ -223,7 +229,7 @@ string MechaParent::GetInformationOf()
 
 void MechaParent::OnHovered()
 {
-	std::cout << "Hover" << std::endl;
+	//std::cout << "Hover" << std::endl;
 	canDrawLifeBar = true;
 
 

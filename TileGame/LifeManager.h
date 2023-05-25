@@ -1,16 +1,22 @@
 #pragma once
 #include "raylib.h"
 
-struct DamageData;
+#include "DamageData.h"
 
 //++ToDo: rajouter les critiques, si jamais tu fait énormément de damages
 
 //++Question: Comment je peut faire pour qu'on puisse rajouter WIP WIP
 
+/// <summary>
+/// 
+/// </summary>
 struct LifeData
 {
 	float maxLife{};
 	float currentLife{};
+	/// <summary>
+	/// For damages reduciton, in %
+	/// </summary>
 	float armor{};
 };
 
@@ -23,19 +29,17 @@ public:
 
 	void TakeDamages(DamageData data);
 
-	LifeData ReturnLifeData();
+	const LifeData& ReturnLifeData();
 
 
 private:
 	void Death();
 
-	float maxLife{};
-	float currentLife{};
+	LifeData lifeData{0,0,0};
+
 	
-	/// <summary>
-	/// For damages reduciton, in %
-	/// </summary>
-	float armor{};
+	
+
 
 
 };

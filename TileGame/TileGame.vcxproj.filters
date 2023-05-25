@@ -34,6 +34,9 @@
     <Filter Include="Collisions">
       <UniqueIdentifier>{2807864d-3a4a-4934-9921-4c62f304bdb5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{3f24b84e-f4c7-4eb3-818e-4f13ad6318cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AStar.cpp">
@@ -110,18 +113,25 @@
     </ClCompile>
     <ClCompile Include="IInteraction.cpp" />
     <ClCompile Include="CameraActor.cpp" />
-    <ClCompile Include="Capacity.cpp" />
-    <ClCompile Include="ActiveCapacity.cpp" />
     <ClCompile Include="EnnemyController.cpp">
       <Filter>Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="DamageDealer.cpp" />
     <ClCompile Include="InGameLifeBar.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="LifeManager.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="DamageDealer.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="ActiveCapacity.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Capacity.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeManager.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackCapacity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -207,20 +217,27 @@
     </ClInclude>
     <ClInclude Include="IInteraction.h" />
     <ClInclude Include="CameraActor.h" />
-    <ClInclude Include="Capacity.h" />
-    <ClInclude Include="ActiveCapacity.h" />
     <ClInclude Include="EnnemyController.h">
       <Filter>Controllers</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="DamageDealer.h" />
     <ClInclude Include="DamageData.h" />
     <ClInclude Include="InGameLifeBar.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="LifeManager.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="DamageDealer.h">
+      <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="ActiveCapacity.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Capacity.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeManager.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackCapacity.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MecaTactic.rc" />

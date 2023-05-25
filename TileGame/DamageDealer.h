@@ -1,8 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "LifeManager.h"
-
-struct DamageData;
+#include "DamageData.h"
 
 class DamageDealer
 {

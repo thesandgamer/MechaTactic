@@ -7,7 +7,6 @@
 #include "Button.h"
 #include "Actor.h"
 
-#include "DamageDealer.h"
 
 
 class MechaParent;
@@ -46,10 +45,9 @@ public:
 
     void FinishCapacity();
 
-private:
+protected:
     Button button { {10,120},40,40 };
 
-    DamageDealer damagerDealer;
 
     std::vector<std::vector<int>> possibleZone{};
 

@@ -175,6 +175,7 @@
     <ClCompile Include="ActiveCapacity.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AStar.cpp" />
+    <ClCompile Include="AttackCapacity.cpp" />
     <ClCompile Include="BandeauTexte.cpp" />
     <ClCompile Include="BoxCollision.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="AStar.h" />
     <ClInclude Include="AStartUtility.h" />
+    <ClInclude Include="AttackCapacity.h" />
     <ClInclude Include="BandeauTexte.h" />
     <ClInclude Include="BoxCollision.h" />
     <ClInclude Include="Button.h" />

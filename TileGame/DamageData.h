@@ -1,5 +1,6 @@
 #pragma once
-#include "DamageDealer.h"
+//#include "DamageDealer.h"
+
 
 struct DamageData
 {
@@ -10,7 +11,8 @@ struct DamageData
 	/// </summary>
 	float ArmorPercing{};
 
-	DamageDealer& whoMadeDamages;
+	//DamageDealer& whoMadeDamages;
+	//++ToDo: trouver un moyen de faire passer qui à fait les damages
 
 
 };

@@ -17,6 +17,14 @@ InGameLifeBar::InGameLifeBar(Actor* onActor, LifeManager* lifeManager, Vector3 O
 {
 }
 
+InGameLifeBar::InGameLifeBar(Actor* onActor, Vector3 Offset) : actorOn(onActor), offset{ Offset }
+{
+}
+
+InGameLifeBar::InGameLifeBar(Vector3 Offset): offset{Offset}
+{
+}
+
 InGameLifeBar::~InGameLifeBar()
 {
 }
@@ -28,7 +36,7 @@ void InGameLifeBar::Draw()
 	{
 		Vector2 posOnScreen = GetWorldToScreen(pos, Game::instance().cam.GetCamera());
 
-		LifeData data = lifeLinkTo->ReturnLifeData();
+		const LifeData& data = lifeLinkTo->ReturnLifeData();
 
 		//Set la taille de la boite qui englobe les points de vie
 			//largeur: Taille des bloc de pv * nombre de pv max + taille des spacer * nombre de points de vie + spacer en plus 
@@ -51,6 +59,12 @@ void InGameLifeBar::Draw()
 
 void InGameLifeBar::Update()
 {
+}
+
+void InGameLifeBar::LinkTo(LifeManager* lifeManager,Actor* actor)
+{
+	lifeLinkTo = lifeManager;
+	actorOn = actor;
 }
 
 

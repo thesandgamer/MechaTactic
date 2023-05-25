@@ -2,6 +2,7 @@
 #include "CollisionManager.h"
 
 #include "ActiveCapacity.h"
+#include "AttackCapacity.h"
 
 void Game::SetupScreen(int screenwidth, int screenHeight)
 {
@@ -50,7 +51,7 @@ void Game::Start()
     player->AddMecha({ 1,0,4 });
     player->AddMecha({ 8,0,8 });
     //Créer unique pointer pas stoqué car Add capacity à une R value(&&) (transfert de propritété)
-    player->GetMechaAt(0)->AddCapacity(std::make_unique<ActiveCapacity>(*player->GetMechaAt(0)) );
+    player->GetMechaAt(0)->AddCapacity(std::make_unique<AttackCapacity>(*player->GetMechaAt(0)) );
     //{ player->GetMechaAt(0) }
     controllers.push_back(player);   //Rajoute un player
 
@@ -58,7 +59,7 @@ void Game::Start()
 
     EnnemyController* ennemy = new EnnemyController();
     ennemy->AddMecha({ 2,0,5 });
-    ennemy->AddMecha({ 5,0,2 });
+   // ennemy->AddMecha({ 5,0,2 });
     controllers.push_back(ennemy);
 
 

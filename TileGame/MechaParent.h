@@ -151,6 +151,8 @@ public:
 
 	void EndActions();
 
+	LifeManager& GetLifeManager() { return lifeManager; }
+
 private:
 
 	bool selected{ false };
@@ -163,7 +165,7 @@ private:
 	Controller* owner { nullptr };	//++ToDo: Peut être remplacer ça par un interface de ownership de mechs
 
 	LifeManager lifeManager{3,0};
-	InGameLifeBar lifeBar{ this,&lifeManager,{0,60,0} };
+	InGameLifeBar* lifeBar{nullptr };
 	
 	bool canDrawLifeBar{ false };
 
