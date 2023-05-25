@@ -6,7 +6,7 @@
 class DamageDealer
 {
 public:
-	void MakeDamages(LifeManager toDamages, DamageData data);
+	void MakeDamages(LifeManager* toDamages, DamageData data);
 
 private:
 

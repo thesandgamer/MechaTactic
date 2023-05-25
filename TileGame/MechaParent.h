@@ -151,7 +151,7 @@ public:
 
 	void EndActions();
 
-	LifeManager& GetLifeManager() { return lifeManager; }
+	LifeManager* GetLifeManager() { return &lifeManager; }
 
 private:
 
@@ -164,8 +164,8 @@ private:
 	//void ManagerCapacities();
 	Controller* owner { nullptr };	//++ToDo: Peut être remplacer ça par un interface de ownership de mechs
 
-	LifeManager lifeManager{3,0};
-	InGameLifeBar* lifeBar{nullptr };
+	LifeManager lifeManager{ 3,0 };
+	InGameLifeBar lifeBar{ this ,&lifeManager, { 0,60,0 } };
 	
 	bool canDrawLifeBar{ false };
 

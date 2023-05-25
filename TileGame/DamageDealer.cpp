@@ -2,7 +2,7 @@
 #include "DamageData.h"
 
 
-void DamageDealer::MakeDamages(LifeManager toDamages, DamageData data)
+void DamageDealer::MakeDamages(LifeManager* toDamages, DamageData data)
 {
-	toDamages.TakeDamages(data);
+	toDamages->TakeDamages(data);
 }
