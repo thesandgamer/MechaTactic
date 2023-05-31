@@ -12,6 +12,8 @@
 
 typedef std::function<void()> FuncPointer;//Créer un type pointeur fonction void, créer le type du lambda
 
+//++ToDo: créer un pointeur de fonction pour quand hover
+
 enum class ButtonState
 {
     IDLE, HOVER, PRESSED,CLICK
@@ -43,6 +45,8 @@ public:
     void CliquedSendFunction();
     void CliquedSendFunctionWithInt();
 
+    void HoverSendFunction();
+
     void (*functPrt)();
     void (*functPrtInt)(int);
 
@@ -51,7 +55,10 @@ public:
     std::string textInButton;
 
     void AddFunctionToTrigger(std::function<void()> func);//Set l'instance
+    void AddHoverFunction(std::function<void()> func);
+
     void call();//Appel
+    void callHover();
 
     bool isActive = true;
 
@@ -82,7 +89,8 @@ private:
 
 
 
-    std::vector<std::function<void()>> functionsToTrigger; //instance de pointeur de fonction
+    std::vector<std::function<void()>> functionsToTrigger{}; //instance de pointeur de fonction
+    std::vector<std::function<void()>> hoverFunctionToTrigger{};
 
 };
 

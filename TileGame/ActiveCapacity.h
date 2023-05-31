@@ -18,6 +18,8 @@ enum CanBeActivateOnWhat {
 
 };
 
+//++ToDo: make draw possible zone when button is hivered;
+
 class ActiveCapacity :
     public Capacity
 {

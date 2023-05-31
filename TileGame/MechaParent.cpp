@@ -227,6 +227,7 @@ void MechaParent::OnHovered()
 {
 	//std::cout << "Hover" << std::endl;
 	canDrawLifeBar = true;
+	
 
 
 }

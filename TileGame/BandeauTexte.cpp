@@ -54,7 +54,7 @@ void BandeauTexte::Draw()
 	{
 		DrawTexture(sprite, position.x, position.y, color);
 		string text = textIn + " Turn";
-		DrawText(text.c_str(), sprite.width / 2 - MeasureText(text.c_str(),30)/2, position.y +sprite.height / 2 - 14, 30, color);
+		DrawText(text.c_str(), position.x + sprite.width / 2 - MeasureText(text.c_str(),30)/2, position.y +sprite.height / 2 - 14, 30, color);
 	}
 }
 

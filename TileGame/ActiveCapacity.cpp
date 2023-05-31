@@ -36,14 +36,18 @@ void ActiveCapacity::Init()
 
 	button.textInButton = "Cap1";
 	button.AddFunctionToTrigger(std::bind(&ActiveCapacity::ButtonClicked, this));
+	button.AddHoverFunction(std::bind(&ActiveCapacity::DrawPossibleZone, this));
 	button.lever = true;
 
 }
 
 void ActiveCapacity::Draw()
 {
+	linkToMech.gridRef->ResetTilesColor();
+
 	if (!isActive) return;
 	DrawPossibleZone();
+
 }
 
 void ActiveCapacity::Update()
@@ -67,7 +71,7 @@ void ActiveCapacity::DrawPossibleZone()
 			linkToMech.gridRef->GetTile(var.x, var.y)->ChangeColor(RED);
 		}
 	}
-
+	
 }
 
 void ActiveCapacity::ButtonClicked()

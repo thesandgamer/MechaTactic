@@ -87,8 +87,8 @@ Armor reducing(in %)
 using namespace std;
 
 //Setup la taille de l'écran
-int const SCREEN_WIDTH = 960;
-int const SCREEN_HEIGHT = 540;
+int const SCREEN_WIDTH = 1920;
+int const SCREEN_HEIGHT = 1080;
 
 int main(int argc, char** argv[])
 {
@@ -98,7 +98,7 @@ int main(int argc, char** argv[])
     string windowName = "Mecha Tactic";
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, windowName.c_str());
 
-    //ToggleFullscreen();
+    ToggleFullscreen();
     SetWindowPosition(0, 10);
     SetTargetFPS(60);
 

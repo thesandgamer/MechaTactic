@@ -48,6 +48,7 @@ void Button::ButtonHovered()
 {
 	state = ButtonState::HOVER;
 	drawColor = hoverColor;
+	HoverSendFunction();
 }
 
 void Button::ButtonPressed()
@@ -158,15 +159,33 @@ void Button::CliquedSendFunctionWithInt()
 	}
 }
 
+void Button::HoverSendFunction()
+{
+	callHover();
+}
+
 
 void Button::AddFunctionToTrigger(std::function<void()> func)
 {
 	functionsToTrigger.push_back(func);
 }
 
+void Button::AddHoverFunction(std::function<void()> func)
+{
+	hoverFunctionToTrigger.push_back(func);
+}
+
 void Button::call()
 {
 	for (auto i = functionsToTrigger.begin(); i != functionsToTrigger.end(); ++i)
+	{
+		(*i)();
+	}
+}
+
+void Button::callHover()
+{
+	for (auto i = hoverFunctionToTrigger.begin(); i != hoverFunctionToTrigger.end(); ++i)
 	{
 		(*i)();
 	}
