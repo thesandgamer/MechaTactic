@@ -146,6 +146,7 @@ public:
 	ActiveCapacity* GetCurrentActiveCapacity();
 	void SetCurrentActiveCapacity(ActiveCapacity* capacity);
 
+
 	void SetOwner(Controller* newOwner) { owner = newOwner; }
 	Controller* GetOwner() { return owner; }
 
@@ -158,7 +159,7 @@ private:
 	bool selected{ false };
 
 	//std::vector<Capacity*> capacities;	//Comment mettre un unique ptr ici?
-	std::vector<std::unique_ptr<Capacity>> capacities;	//Comment mettre un unique ptr ici?
+	std::vector<std::unique_ptr<Capacity>> capacities;
 	ActiveCapacity* currentActiveCapacity;	//Pointer car besoin de savoir si c'est null
 
 	//void ManagerCapacities();
