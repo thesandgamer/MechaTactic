@@ -6,6 +6,7 @@
 #include <string>
 #include <map>
 
+#include "Utility.h"
 #include "Game.h"
 
 //++ToDo: Faire en sorte de passer le jeu en 3d:
@@ -84,7 +85,8 @@ Damages to make
 Armor reducing(in %)
 
 */
-using namespace std;
+
+Utility* Utility::instance{ nullptr };
 
 //Setup la taille de l'écran
 int const SCREEN_WIDTH = 1920;
@@ -102,6 +104,8 @@ int main(int argc, char** argv[])
     SetWindowPosition(0, 10);
     SetTargetFPS(60);
 
+    Utility::GetInstance()->Start();
+
     Game::instance().SetupScreen(SCREEN_WIDTH, SCREEN_HEIGHT);
 
     Game::instance().Start();
@@ -113,6 +117,8 @@ int main(int argc, char** argv[])
     }
 
     Game::instance().Clean();
+    
+    Utility::GetInstance()->Unload();
 
     CloseWindow();
 

@@ -132,6 +132,11 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="AttackCapacity.cpp" />
+    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="MushMech.cpp">
+      <Filter>Mechas</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeMech.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -238,6 +243,11 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="AttackCapacity.h" />
+    <ClInclude Include="Utility.h" />
+    <ClInclude Include="MushMech.h">
+      <Filter>Mechas</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeMech.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MecaTactic.rc" />

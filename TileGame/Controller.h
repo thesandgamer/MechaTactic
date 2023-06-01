@@ -5,6 +5,7 @@ using std::vector;
 
 #include "Button.h"
 #include "MechaParent.h"
+#include "MushMech.h"
 
 
 
@@ -28,7 +29,7 @@ public:
 	virtual void Draw();
 	virtual void DrawUi();
 
-	void AddMecha(Vector3 location);
+	void AddMecha(MechaParent* mech);
 
 	void MoveMecha(Vector3 moveTo);//bool to check if the movement is possible
 

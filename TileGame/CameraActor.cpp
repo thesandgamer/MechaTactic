@@ -24,7 +24,10 @@ void CameraActor::Init()
     switch (camType)
     {
     case TopDown:
+        //transform.translation.y += 150;
+
         cam.target = { transform.translation.x,transform.translation.y - 800,transform.translation.z - 1 }; 
+        cam.projection = CAMERA_PERSPECTIVE;
         break;
     case Iso:
         transform.translation.y += 100;
@@ -32,6 +35,8 @@ void CameraActor::Init()
         transform.translation.x += 250;
         transform.translation.z += 250;
         cam.target = { transform.translation.x - 5,transform.translation.y - 10,transform.translation.z - 5 }; 
+
+        cam.projection = CAMERA_PERSPECTIVE;
 
         break;
     default:
@@ -45,7 +50,6 @@ void CameraActor::Init()
     //cam.target = { 0,0,0 };
     cam.up = { 0,1,0 };
     cam.fovy = 45;
-    cam.projection = CAMERA_PERSPECTIVE;
 
    // SetCameraMode(cam, CAMERA_FREE);
 }

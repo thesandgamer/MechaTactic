@@ -5,6 +5,8 @@
 
 AttackCapacity::AttackCapacity(MechaParent& mech): ActiveCapacity(mech)
 {
+	Texture2D sprite = LoadTexture("Ressources/AttackButton.png");
+	button.SetSprite(sprite);
 }
 
 void AttackCapacity::ActivateCapacity(Actor* actorTarget)

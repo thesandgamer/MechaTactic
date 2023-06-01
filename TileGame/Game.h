@@ -12,6 +12,9 @@
 #include "PlayerController.h"
 #include "EnnemyController.h"
 
+#include "MushMech.h"
+#include "TreeMech.h"
+
 
 //++ToDo: faire en sorte que les info s'affichent en fonction de l'objet touché par le rayon
 

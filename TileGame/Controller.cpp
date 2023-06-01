@@ -58,10 +58,10 @@ void Controller::DrawUi()
 
 }
 
-void Controller::AddMecha(Vector3 location)
+void Controller::AddMecha(MechaParent* mech)
 {
 	//++ToDo: check si on peut ajouter le mécha à cette position utiliser assertion
-	mechasList.push_back(new MechaParent(location));
+	mechasList.push_back(mech);
 	mechasList.back()->SetOwner(this);
 }
 

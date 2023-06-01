@@ -27,6 +27,7 @@ public:
     Button(Vector2 pos, float widthP, float heightP);
     ~Button();
 
+    void SetSprite(Texture2D sprite);
 
     void ButtonIdle();
     void ButtonCliqued();
@@ -82,7 +83,7 @@ private:
 
     Color idleColor {WHITE};
     Color hoverColor{ DARKGRAY };
-    Color pressedColor{LIGHTGRAY};
+    Color pressedColor {100,100,100,255};
     Color clickedColor{BLACK};
 
     bool isPressed{ false };

@@ -154,7 +154,7 @@ public:
 
 	LifeManager* GetLifeManager() { return &lifeManager; }
 
-private:
+protected:
 
 	bool selected{ false };
 
@@ -173,7 +173,7 @@ private:
 	Vector3 posInGrid { 0,0,0 };
 
 
-	BoxCollision collision{};
+	BoxCollision collision{ {32,32,32} };
 
 	MechaState state {MechaState::IDLE};
 
@@ -184,6 +184,7 @@ private:
 
 	//-------For drawing-------
 	Model model{};
+	Texture2D texture{};
 
 	Color drawColor {WHITE};
 	Color baseColor {PURPLE};

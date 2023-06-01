@@ -39,6 +39,7 @@ private:
 	LifeManager* lifeLinkTo{nullptr};
 	Vector3 offset{0,0,0};
 
+	
 	Transform transf{};
 
 	Vector2 spacerSize{ 6,6 };

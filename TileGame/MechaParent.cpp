@@ -25,7 +25,7 @@ MechaParent::MechaParent(Vector3 positionP, Model modelP): model{modelP}
 
 MechaParent::~MechaParent()
 {
-
+	UnloadModel(model);
 }
 
 
@@ -34,7 +34,7 @@ void MechaParent::Init()
 
 
 	//-------Set collision
-	collision.modelToBoxing = &model;
+	//collision.modelToBoxing = &model;
 	//collision = BoxCollision(&model);
 	collision.SetParent(this);
 	collision.id = "To test";
@@ -109,6 +109,7 @@ void MechaParent::DrawUI()
 		
 	}
 
+
 	
 
 }
@@ -168,11 +169,15 @@ void MechaParent::StartTurn()
 
 void MechaParent::DrawVisual()
 {
-	drawColor = baseColor;
 
 	switch (state)
 	{
 	case MechaState::IDLE:
+		if (model.materialCount > 0)
+		{
+			drawColor = WHITE;
+			break;
+		}
 		drawColor = baseColor;
 		break;
 	case MechaState::SELECTED:
@@ -186,7 +191,7 @@ void MechaParent::DrawVisual()
 
 		break;
 	case MechaState::DEACTIVATED:
-		drawColor = BLACK;
+		drawColor = DARKGRAY;
 		break;
 	default:
 		break;

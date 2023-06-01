@@ -197,6 +197,7 @@
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MechaParent.cpp" />
+    <ClCompile Include="MushMech.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="PlayerController.cpp" />
@@ -204,7 +205,9 @@
     <ClCompile Include="RaycastCollision.cpp" />
     <ClCompile Include="SphereCollision.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TreeMech.cpp" />
     <ClCompile Include="TurnsManager.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\build\raylib.vcxproj">
@@ -240,6 +243,7 @@
     <ClInclude Include="LifeManager.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="MechaParent.h" />
+    <ClInclude Include="MushMech.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="PlayerController.h" />
@@ -248,7 +252,9 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="SphereCollision.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TreeMech.h" />
     <ClInclude Include="TurnsManager.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="Vector2AStar.h" />
   </ItemGroup>
   <ItemGroup>

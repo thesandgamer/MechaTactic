@@ -48,8 +48,8 @@ void Game::Start()
 
 //=============Controllers Setup============
     PlayerController* player = new PlayerController();
-    player->AddMecha({ 1,0,4 });
-    player->AddMecha({ 8,0,8 });
+    player->AddMecha(   new TreeMech({ 1,0,4 }) );
+    player->AddMecha(   new TreeMech({ 8,0,8 }) );
     //Créer unique pointer pas stoqué car Add capacity à une R value(&&) (transfert de propritété)
     player->GetMechaAt(0)->AddCapacity(std::make_unique<AttackCapacity>(*player->GetMechaAt(0)) );
     player->GetMechaAt(1)->AddCapacity(std::make_unique<AttackCapacity>(*player->GetMechaAt(1)) );
@@ -60,8 +60,8 @@ void Game::Start()
     //++ToDo: fait en sorte que ça marche avec plusieurs player controller
 
     EnnemyController* ennemy = new EnnemyController();
-    ennemy->AddMecha({ 2,0,5 });
-    ennemy->AddMecha({ 5,0,2 });
+    ennemy->AddMecha(   new MushMech({ 2,0,5 })  );
+    ennemy->AddMecha(   new MushMech({ 5,0,2 })  );
     controllers.push_back(ennemy);
 
 

@@ -13,6 +13,7 @@ void EnnemyController::Start()
 {
 
 	name = "Ennemy";
+	
 	for (auto i = mechasList.begin(); i != mechasList.end(); i++)
 	{
 		(*i)->SetBaseColor({ 240,45,45,255 });	//Si on met plus de 255 comment ça marque erreur

@@ -23,6 +23,13 @@ Button::~Button()
 
 }
 
+void Button::SetSprite(Texture2D sprite)
+{
+	spriteIdle = sprite;
+	width = sprite.width;
+	height = sprite.height;
+}
+
 void Button::ButtonIdle()
 {
 	state = ButtonState::IDLE;
@@ -129,6 +136,8 @@ void Button::Draw()
 	{
 		DrawRectangle(position.x, position.y, width, height, drawColor);
 	}
+	//DrawRectangle(position.x, position.y, width, height, drawColor);
+
 
 }
 
