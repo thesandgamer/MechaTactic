@@ -5,7 +5,7 @@ void Utility::Start()
 	champiTexture = LoadTexture("Ressources/ChampiColor.png");
 	treeTexture = LoadTexture("Ressources/TreeMechColor.png");
 
-	ChampiModel = LoadModel("Ressources/Chapi.obj");
+	ChampiModel = LoadModel("Ressources/MechMush.glb");
 	TreeModel = LoadModel("Ressources/MechTree.glb");
 }
 
