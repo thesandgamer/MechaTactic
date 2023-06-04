@@ -31,11 +31,14 @@ public:
 
 	Texture2D champiTexture{};// = LoadTexture("../resources/Dot.png");
 	Texture2D treeTexture{};
+	Texture2D rockTexture{};
 
 	Shader* shader{nullptr};
 
 	Model ChampiModel{};
 	Model TreeModel{};
+	Model RockModel{};
+	Model CellModel{};
 
 
 	void Unload();

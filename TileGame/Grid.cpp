@@ -59,10 +59,6 @@ void Grid::Draw()
 	{
 		for (Tile tile : ligne)
 		{
-			if (tile.GetPosInGrid().x == 0 && tile.GetPosInGrid().z == 0)
-				tile.ChangeColor(DARKPURPLE);
-			if (tile.GetPosInGrid().x == 8 && tile.GetPosInGrid().z == 8)
-				tile.ChangeColor(DARKGREEN);
 			tile.Draw();
 			//DrawRectangleLines(gridPosition.x + tile.pos.x* CELL_WIDTH, gridPosition.y + tile.pos.y*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT, WHITE);
 
@@ -175,7 +171,7 @@ void Grid::ResetTilesColor()
 	{
 		for (int j = 0; j < grid[i].size(); j++)
 		{
-			grid[i][j].ChangeColor(PURPLE);
+			grid[i][j].ChangeColor(WHITE);
 		}
 	}
 }

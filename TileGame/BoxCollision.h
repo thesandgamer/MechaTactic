@@ -22,6 +22,7 @@ public:
 
 	Model* modelToBoxing{ nullptr };
 
+	/*
 	BoxCollision& operator=(const BoxCollision& other)
 	{
 		this->boundingBox = other.boundingBox;
@@ -31,7 +32,7 @@ public:
 		this->collisionType = other.collisionType;
 		this->drawCollision = other.drawCollision;
 		return *this;
-	}
+	}*/
 
 
 private:

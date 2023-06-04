@@ -136,7 +136,9 @@
     <ClCompile Include="MushMech.cpp">
       <Filter>Mechas</Filter>
     </ClCompile>
-    <ClCompile Include="TreeMech.cpp" />
+    <ClCompile Include="TreeMech.cpp">
+      <Filter>Mechas</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -247,7 +249,9 @@
     <ClInclude Include="MushMech.h">
       <Filter>Mechas</Filter>
     </ClInclude>
-    <ClInclude Include="TreeMech.h" />
+    <ClInclude Include="TreeMech.h">
+      <Filter>Mechas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MecaTactic.rc" />

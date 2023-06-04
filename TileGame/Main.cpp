@@ -100,7 +100,7 @@ int main(int argc, char** argv[])
     string windowName = "Mecha Tactic";
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, windowName.c_str());
 
-    ToggleFullscreen();
+   // ToggleFullscreen();
     SetWindowPosition(0, 10);
     SetTargetFPS(60);
 

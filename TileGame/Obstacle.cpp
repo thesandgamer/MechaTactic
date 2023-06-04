@@ -1,4 +1,5 @@
 #include "Obstacle.h"
+#include "Utility.h"
 
 Obstacle::Obstacle()
 {
@@ -17,16 +18,26 @@ Obstacle::Obstacle(Vector3 positionP) : Actor()
 void Obstacle::Init()
 {
 	//-------Set collision
-	collision = BoxCollision(&model);
+	collision = BoxCollision({32,32,32});
+	//collision = BoxCollision(&model);
 	collision.SetParent(this);
 	collision.id = "ObstacleCollision";
 
 	collision.Init();
 
+	model = Utility::GetInstance()->RockModel;
+
+
 	if (model.meshCount == NULL)//Si on à pas de mesh de loadé, load un cube
 	{
 		drawColor = DARKGRAY;
 		model = LoadModelFromMesh(GenMeshCube(Grid::CELL_WIDTH, Grid::CELL_HEIGHT, Grid::CELL_LENGTH));
+	}
+	else
+	{
+		drawColor = WHITE;
+
+
 	}
 
 	transform.translation = refToGrid->PosInGridToPosToWorld(posInGrid);

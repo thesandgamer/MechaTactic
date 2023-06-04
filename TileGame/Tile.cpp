@@ -2,6 +2,8 @@
 #include "Grid.h"
 #include "Game.h"
 
+#include "Utility.h"
+
 Tile::Tile(): refToGrid{nullptr}, informations{nullptr}
 {
 
@@ -24,6 +26,9 @@ void Tile::Init()
 	collision = BoxCollision(&model);
 	collision.SetParent(this);
 	collision.id = "TileCollision";
+
+	model = Utility::GetInstance()->CellModel;
+	drawColor = WHITE;
 
 	if (model.meshCount == NULL)//Si on à pas de mesh de loadé, load un cube
 	{
