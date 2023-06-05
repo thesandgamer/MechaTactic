@@ -15,6 +15,7 @@
 #include "MushMech.h"
 #include "TreeMech.h"
 
+#include "FX_Sprite.h"
 
 //++ToDo: faire en sorte que les info s'affichent en fonction de l'objet touché par le rayon
 
@@ -55,6 +56,7 @@ public:
 
 	bool SomethingAlreadyHere(Vector2 pos);	//++ToDo: mettre ça autre part
 
+	void CreateVFX(FX_Sprite* vfx);
 
 	int  SCREEN_WIDTH;
 	int  SCREEN_HEIGHT;
@@ -75,6 +77,8 @@ private:
 	vector<Actor*> elementsInGame;
 
 	vector<Obstacle*> obstacles;
+
+	vector <FX_Sprite*> vfxs;
 
 
 

@@ -5,6 +5,7 @@ void Utility::Start()
 	champiTexture = LoadTexture("Ressources/ChampiColor.png");
 	treeTexture = LoadTexture("Ressources/TreeMechColor.png");
 	rockTexture = LoadTexture("Ressources/RockColor.png");
+	fxExplosion = LoadTexture("Ressources/FX_Explosion.png");
 
 	ChampiModel = LoadModel("Ressources/MechMush.glb");
 	TreeModel = LoadModel("Ressources/MechTree.glb");
@@ -22,5 +23,8 @@ void Utility::Unload()
 
 	UnloadTexture(rockTexture);
 	UnloadModel(RockModel);
+
+	UnloadTexture(fxExplosion);
+
 
 }

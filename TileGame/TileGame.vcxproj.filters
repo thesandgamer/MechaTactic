@@ -139,6 +139,7 @@
     <ClCompile Include="TreeMech.cpp">
       <Filter>Mechas</Filter>
     </ClCompile>
+    <ClCompile Include="FX_Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -252,6 +253,7 @@
     <ClInclude Include="TreeMech.h">
       <Filter>Mechas</Filter>
     </ClInclude>
+    <ClInclude Include="FX_Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MecaTactic.rc" />

@@ -40,6 +40,8 @@ public:
 	Model RockModel{};
 	Model CellModel{};
 
+	Texture2D fxExplosion{};
+
 
 	void Unload();
 

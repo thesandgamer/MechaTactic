@@ -160,6 +160,10 @@ void Game::Update()
     {
         (*i)->Update();
     }
+    for (auto i = vfxs.begin(); i != vfxs.end(); i++)
+    {
+        (*i)->Update();
+    }
 
     cursor.Updtate();
     cam.Update();
@@ -204,6 +208,7 @@ void Game::Draw()
         (*i)->Draw();
     }
 
+
     cam.Draw();
 
     CollisionManager::GetInstance()->Draw();
@@ -221,6 +226,12 @@ void Game::DrawUi()
     {
         (*i)->DrawUi();
     }
+
+    for (auto i = vfxs.begin(); i != vfxs.end(); i++)
+    {
+        (*i)->Draw();
+    }
+
     cursor.Draw();
 
 //=======Draw les infos========
@@ -246,4 +257,9 @@ bool Game::SomethingAlreadyHere(Vector2 pos)
         return false;
 
     }
+}
+
+void Game::CreateVFX(FX_Sprite* vfx)
+{
+    vfxs.push_back(vfx);
 }

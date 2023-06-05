@@ -186,6 +186,7 @@
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DamageDealer.cpp" />
     <ClCompile Include="EnnemyController.cpp" />
+    <ClCompile Include="FX_Sprite.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -231,6 +232,7 @@
     <ClInclude Include="DamageData.h" />
     <ClInclude Include="DamageDealer.h" />
     <ClInclude Include="EnnemyController.h" />
+    <ClInclude Include="FX_Sprite.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Grid.h" />

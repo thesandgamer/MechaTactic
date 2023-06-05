@@ -2,11 +2,18 @@
 #include <iostream>
 #include "DamageData.h"
 
+#include "Game.h"
+#include "Utility.h"
+
 LifeManager::LifeManager() : lifeData{0,0,0}
 {
 }
 
 LifeManager::LifeManager(float MaxLife, float Armor): lifeData{MaxLife,MaxLife,Armor}
+{
+}
+
+LifeManager::LifeManager(Actor* owner, float MaxLife, float Armor) : lifeOwner{owner}, lifeData{ MaxLife, MaxLife, Armor }
 {
 }
 
@@ -25,6 +32,8 @@ void LifeManager::TakeDamages(DamageData data)
 	{
 		lifeData.currentLife = nextLife;
 		std::cout << "Have take damges, life now: " << lifeData.currentLife << std::endl;
+		Game::instance().CreateVFX(new FX_Sprite(Utility::GetInstance()->fxExplosion, 6, 10, lifeOwner->GetPosition()));
+
 	}
 }
 
