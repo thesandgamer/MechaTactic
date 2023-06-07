@@ -158,6 +158,9 @@ public:
 
 	LifeManager* GetLifeManager() { return &lifeManager; }
 
+	void Destroy();
+
+
 protected:
 
 	bool selected{ false };

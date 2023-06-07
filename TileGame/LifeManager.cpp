@@ -44,5 +44,6 @@ const LifeData& LifeManager::ReturnLifeData()
 void LifeManager::Death()
 {
 	std::cout << "Death" << std::endl;
+	delete(lifeOwner);
 	//delete this;
 }

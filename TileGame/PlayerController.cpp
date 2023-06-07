@@ -122,6 +122,7 @@ void PlayerController::PlayerDecideActions()
 				{
 					PrepareWhereMoveMecha();
 				}
+
 				else if (controledMecha->GetState() == MechaState::MODE_CAPACITY)
 				{
 					if (hitObject != nullptr)

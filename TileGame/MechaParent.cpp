@@ -25,7 +25,7 @@ MechaParent::MechaParent(Vector3 positionP, Model modelP): model{modelP}
 
 MechaParent::~MechaParent()
 {
-	UnloadModel(model);
+	Destroy();
 }
 
 
@@ -306,13 +306,17 @@ void MechaParent::EndMovement()
 void MechaParent::EndAction()
 {
 	haveDoActions = true;
-	state = MechaState::SELECTED;
+	state = MechaState::MODE_MOVE;
 
 	if (haveMove)
 	{
 		DeSelect();
 		state = MechaState::DEACTIVATED;
 	}
+}
+
+void MechaParent::Destroy()
+{
 }
 
 /// <summary>
