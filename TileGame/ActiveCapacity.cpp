@@ -173,7 +173,7 @@ void ActiveCapacity::ActivateCapacity(Actor* actorTarget)
 
 void ActiveCapacity::FinishCapacity()
 {
-	linkToMech.EndActions();
+	linkToMech.EndAction();
 }
 
 

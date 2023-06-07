@@ -112,6 +112,9 @@ public:
 
 
 	bool haveDoActions = false;
+	bool haveMove = false;
+
+	bool CanBeActivate();
 
 	/*
 	MechaParent(const MechaParent& other)
@@ -150,7 +153,8 @@ public:
 	void SetOwner(Controller* newOwner) { owner = newOwner; }
 	Controller* GetOwner() { return owner; }
 
-	void EndActions();
+	void EndMovement();
+	void EndAction();
 
 	LifeManager* GetLifeManager() { return &lifeManager; }
 

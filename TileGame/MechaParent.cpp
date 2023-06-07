@@ -207,7 +207,7 @@ void MechaParent::DrawVisual()
 /// <param name="positionToGo(InGrid)"></param>
 void MechaParent::MoveTo(Vector3 positionToGo)
 {
-	if (haveDoActions) return;
+	if (haveMove) return;
 	state = MechaState::INMOVEMENT;
 
 	//gridRef->Debug_CleanPathVisibility();	//Inuitile pour l'instant
@@ -249,14 +249,14 @@ void MechaParent::OnClicked()
 
 void MechaParent::Select()
 {
-	if (haveDoActions) return;
+	if (!CanBeActivate()) return;
 	selected = true;
 	state = MechaState::SELECTED;
 }
 
 void MechaParent::DeSelect()
 {
-	if (haveDoActions) return;
+	if (!CanBeActivate()) return;
 
 	selected = false;
 	if (state != MechaState::INMOVEMENT && state != MechaState::INCAPACITY)
@@ -265,6 +265,11 @@ void MechaParent::DeSelect()
 
 	}
 	
+}
+
+bool MechaParent::CanBeActivate()
+{
+	return !(haveDoActions && haveMove);
 }
 
 void MechaParent::AddCapacity(std::unique_ptr<Capacity>&& newCapacity)
@@ -282,13 +287,32 @@ void MechaParent::SetCurrentActiveCapacity(ActiveCapacity* capacity)
 	currentActiveCapacity = capacity;
 }
 
-void MechaParent::EndActions()
+void MechaParent::EndMovement()
 {
 	canMove = false;
-	haveDoActions = true;
+	haveMove = true;
 
-	DeSelect();
-	state = MechaState::DEACTIVATED;
+	state = MechaState::SELECTED;
+
+	if (haveDoActions)
+	{
+		DeSelect();
+		state = MechaState::DEACTIVATED;
+	}
+
+	
+}
+
+void MechaParent::EndAction()
+{
+	haveDoActions = true;
+	state = MechaState::SELECTED;
+
+	if (haveMove)
+	{
+		DeSelect();
+		state = MechaState::DEACTIVATED;
+	}
 }
 
 /// <summary>
@@ -321,7 +345,7 @@ void MechaParent::MakeMovement()
 
 		if (positionIterator >= poses.size()) //Si on est arrivé à la fin des position où aller
 		{
-			EndActions();
+			EndMovement();
 
 			return;
 		}
