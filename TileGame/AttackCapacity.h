@@ -10,6 +10,7 @@ class AttackCapacity :
 public:
     AttackCapacity(MechaParent& mech);
 
+    void Init() override;
     void ActivateCapacity(Actor* actorTarget) override;
 
 

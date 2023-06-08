@@ -5,8 +5,26 @@
 
 AttackCapacity::AttackCapacity(MechaParent& mech): ActiveCapacity(mech)
 {
+	Init();
+}
+
+void AttackCapacity::Init()
+{
 	Texture2D sprite = LoadTexture("Ressources/AttackButton.png");
 	button.SetSprite(sprite);
+	button.AddFunctionToTrigger(std::bind(&ActiveCapacity::ButtonClicked, this));
+	button.AddHoverFunction(std::bind(&ActiveCapacity::DrawPossibleZone, this));
+	button.lever = true;
+
+
+	possibleZone = {
+	{0,0,1,1,1},
+	{0,0,1,0,0},
+	{1,1,5,1,0},
+	{0,0,0,1,0},
+	{0,0,0,1,0},
+
+	};
 }
 
 void AttackCapacity::ActivateCapacity(Actor* actorTarget)
