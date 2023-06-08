@@ -30,7 +30,7 @@ void EnnemyController::Update()
 
 	if (controledMecha != nullptr)
 	{
-		if (controledMecha->haveDoActions)
+		if (controledMecha->haveMove)
 		{
 			AIActions();
 		}

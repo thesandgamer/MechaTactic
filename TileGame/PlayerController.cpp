@@ -122,6 +122,7 @@ void PlayerController::PlayerDecideActions()
 				{
 					PrepareWhereMoveMecha();
 				}
+
 				else if (controledMecha->GetState() == MechaState::MODE_CAPACITY)
 				{
 					if (hitObject != nullptr)
@@ -250,8 +251,12 @@ void PlayerController::ComputeShowPath()
 			if (controledMecha->GetState() != MechaState::INMOVEMENT && controledMecha->GetState() != MechaState::INCAPACITY
 				&& controledMecha->GetState() != MechaState::DEACTIVATED)
 			{
-				controledMecha->SetState(MechaState::MODE_MOVE); //Le mecha est donc en mode mouvement
-				ShowPath(hitObject->GetPosInGrid());	//On affiche le chemin emprintable
+				if (!controledMecha->haveMove)
+				{
+					controledMecha->SetState(MechaState::MODE_MOVE); //Le mecha est donc en mode mouvement
+					ShowPath(hitObject->GetPosInGrid());	//On affiche le chemin emprintable
+				}
+				
 			}
 			
 		}
@@ -302,7 +307,7 @@ void PlayerController::PrepareWhereMoveMecha()
 
 				MoveMecha(pos);
 
-				DeSelectMecha();
+				//DeSelectMecha();
 
 
 				

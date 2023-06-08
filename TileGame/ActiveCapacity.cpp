@@ -161,19 +161,19 @@ void ActiveCapacity::ActivateCapacity(Actor* actorTarget)
 	std::cout << "Capacity is activated" << std::endl;
 	DeselectCapacity();//The mech no longer have capacity selected
 
-	linkToMech.GetOwner()->DeSelectMecha();	//The controller no longer have the mech selected
+	//linkToMech.GetOwner()->DeSelectMecha();	//The controller no longer have the mech selected
 
 	linkToMech.SetState(MechaState::INCAPACITY);//The mech is now on capacity state
 
 
 
-	FinishCapacity();
+	//FinishCapacity();
 
 }
 
 void ActiveCapacity::FinishCapacity()
 {
-	linkToMech.EndActions();
+	linkToMech.EndAction();
 }
 
 

@@ -32,7 +32,6 @@ void LifeManager::TakeDamages(DamageData data)
 	{
 		lifeData.currentLife = nextLife;
 		std::cout << "Have take damges, life now: " << lifeData.currentLife << std::endl;
-		Game::instance().CreateVFX(new FX_Sprite(Utility::GetInstance()->fxExplosion, 6, 10, lifeOwner->GetPosition()));
 
 	}
 }
@@ -45,5 +44,6 @@ const LifeData& LifeManager::ReturnLifeData()
 void LifeManager::Death()
 {
 	std::cout << "Death" << std::endl;
+	delete(lifeOwner);
 	//delete this;
 }

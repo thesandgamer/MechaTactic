@@ -74,7 +74,7 @@ public:
 
 	std::string id{ "BaseId"};
 
-	bool drawCollision{ true };
+	bool drawCollision{ false };
 
 
 };

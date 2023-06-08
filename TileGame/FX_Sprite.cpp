@@ -57,5 +57,5 @@ void FX_Sprite::Update()
 
 void FX_Sprite::Draw()
 {
-    DrawTextureRec(sprite, frameRec, { posOnScreen.x - (sprite.width / NbFrames) /2 ,posOnScreen.y - sprite.height / 2 }, WHITE);
+    DrawTextureRec(sprite, frameRec, { posOnScreen.x - (sprite.width / NbFrames) /2 ,posOnScreen.y - sprite.height  }, WHITE);
 }
