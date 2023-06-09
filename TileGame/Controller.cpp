@@ -80,7 +80,7 @@ void Controller::ShowPath(Vector3 end)
 
 		for (Vector2 pos : poses)
 		{
-			gridRef->grid[pos.x][pos.y].ChangeColor(YELLOW);
+			gridRef->grid[pos.x][pos.y].ChangeColor(BLUE);
 		}
 
 		//Faire en sorte que la couleur ne se garde pas
