@@ -164,6 +164,13 @@ void MechaParent::Update()
 void MechaParent::StartTurn()
 {
 	haveDoActions = false;
+	haveMove = false;
+
+	for (const auto& cap : capacities)
+	{
+		dynamic_cast<ActiveCapacity*>(cap.get())->Reset();
+	}
+
 	state = MechaState::IDLE;
 }
 
@@ -256,9 +263,13 @@ void MechaParent::Select()
 
 void MechaParent::DeSelect()
 {
-	if (!CanBeActivate()) return;
-
 	selected = false;
+
+	if (!CanBeActivate())
+	{
+		return;
+	}
+
 	if (state != MechaState::INMOVEMENT && state != MechaState::INCAPACITY)
 	{
 		state = MechaState::IDLE;
@@ -296,8 +307,11 @@ void MechaParent::EndMovement()
 
 	if (haveDoActions)
 	{
-		DeSelect();
+		//DeSelect();
+		owner->DeSelectMecha();
+
 		state = MechaState::DEACTIVATED;
+		
 	}
 
 	
@@ -310,7 +324,8 @@ void MechaParent::EndAction()
 
 	if (haveMove)
 	{
-		DeSelect();
+		//DeSelect();
+		owner->DeSelectMecha();
 		state = MechaState::DEACTIVATED;
 	}
 }

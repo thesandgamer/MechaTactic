@@ -47,6 +47,8 @@ public:
 
     void FinishCapacity();
 
+    void Reset();
+
 protected:
     Button button { {10,120},40,40 };
 

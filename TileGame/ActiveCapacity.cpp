@@ -165,7 +165,8 @@ void ActiveCapacity::ActivateCapacity(Actor* actorTarget)
 
 	linkToMech.SetState(MechaState::INCAPACITY);//The mech is now on capacity state
 
-
+	linkToMech.haveDoActions = true;
+	button.DeactivteButton();
 
 	//FinishCapacity();
 
@@ -174,6 +175,11 @@ void ActiveCapacity::ActivateCapacity(Actor* actorTarget)
 void ActiveCapacity::FinishCapacity()
 {
 	linkToMech.EndAction();
+}
+
+void ActiveCapacity::Reset()
+{
+	button.ReactivateButton();
 }
 
 

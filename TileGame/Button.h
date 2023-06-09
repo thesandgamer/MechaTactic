@@ -16,7 +16,7 @@ typedef std::function<void()> FuncPointer;//Créer un type pointeur fonction void
 
 enum class ButtonState
 {
-    IDLE, HOVER, PRESSED,CLICK
+    IDLE, HOVER, PRESSED,CLICK, INACTIVE
 };
 
 class Button
@@ -35,6 +35,9 @@ public:
     void ButtonPressed();
 
     void UnPressButton();
+
+    void DeactivteButton();
+    void ReactivateButton();
 
     void Update();
     void Draw();
@@ -84,7 +87,8 @@ private:
     Color idleColor {WHITE};
     Color hoverColor{ DARKGRAY };
     Color pressedColor {100,100,100,255};
-    Color clickedColor{BLACK};
+    Color clickedColor {BLACK};
+    Color deactivateColor { 255,2,20,255 };
 
     bool isPressed{ false };
 

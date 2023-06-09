@@ -32,12 +32,14 @@ void Button::SetSprite(Texture2D sprite)
 
 void Button::ButtonIdle()
 {
+
 	state = ButtonState::IDLE;
 	drawColor = idleColor;
 }
 
 void Button::ButtonCliqued()
 {
+
 	if (lever) ButtonPressed();
 	TraceLog(LOG_INFO, " Button cliqued");
 
@@ -53,6 +55,7 @@ void Button::ButtonCliqued()
 
 void Button::ButtonHovered()
 {
+
 	state = ButtonState::HOVER;
 	drawColor = hoverColor;
 	HoverSendFunction();
@@ -60,6 +63,7 @@ void Button::ButtonHovered()
 
 void Button::ButtonPressed()
 {
+
 	if (!lever)
 	{
 		state = ButtonState::PRESSED;
@@ -86,13 +90,29 @@ void Button::ButtonPressed()
 
 void Button::UnPressButton()
 {
+
 	isPressed = false;
+	ButtonIdle();
+}
+
+void Button::DeactivteButton()
+{
+	state = ButtonState::INACTIVE;
+	drawColor = deactivateColor;
+
+}
+
+void Button::ReactivateButton()
+{
 	ButtonIdle();
 }
 
 void Button::Update()
 {
 	if (!isActive) return;
+	if (state == ButtonState::INACTIVE) return;
+
+
 	mousePos = GetMousePosition();
 
 	//ButtonState oldState = state;
@@ -127,6 +147,7 @@ float fontSize = 10;
 void Button::Draw()
 {
 	if (!isActive) return;
+
 	if (spriteIdle.width >= 0)	//Si il possède un sprite
 	{
 		DrawTexture(spriteIdle, position.x , position.y, drawColor);
@@ -147,6 +168,8 @@ void Button::DrawAt(Vector2 pos)
 	position = pos;
 }
 
+
+//-------------
 
 void Button::CliquedSendFunction()
 {
