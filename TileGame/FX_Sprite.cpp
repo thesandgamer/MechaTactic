@@ -4,7 +4,7 @@
 /**
 /// Texture2D / int / int / Vec3
 **/
-FX_Sprite::FX_Sprite()
+FX_Sprite::FX_Sprite(): framesSpeed{8}
 {
     Init();
 }
@@ -36,6 +36,7 @@ void FX_Sprite::Init()
 
 void FX_Sprite::Update()
 {
+    if (!active) return;
     framesCounter++;
 
     if (framesCounter >= (60 / framesSpeed))
@@ -47,7 +48,9 @@ void FX_Sprite::Update()
         {
             //currentFrame = 0;
             //Ou
-            delete this;
+           // Game::instance().RemoveVFX(this);
+           // delete this;
+            active = false;
         }
 
         frameRec.x = (float)currentFrame * (float)sprite.width / NbFrames;
@@ -57,5 +60,7 @@ void FX_Sprite::Update()
 
 void FX_Sprite::Draw()
 {
+    if (!active) return;
+
     DrawTextureRec(sprite, frameRec, { posOnScreen.x - (sprite.width / NbFrames) /2 ,posOnScreen.y - sprite.height  }, WHITE);
 }

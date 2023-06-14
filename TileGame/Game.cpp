@@ -34,10 +34,13 @@ void Game::Start()
 //=========Setup les obstacles==========
     //++ToDo: faire en sorte d'avoir une fonction pour rajouter un obstacle qui va vérifier qu'on peut rajouter à cet endroit là
 
-    obstacles.push_back(new Obstacle({ 2,0,2 }));
-    obstacles.push_back(new Obstacle({ 8,0,3 }));
-    obstacles.push_back(new Obstacle({ 8,0,5 }));
-    obstacles.push_back(new Obstacle({ 3,0,8 }));
+    obstacles.push_back(new Obstacle({ 5,0,5 }));
+    obstacles.push_back(new Obstacle({ 3,0,3 }));
+    obstacles.push_back(new Obstacle({ 4,0,7 }));
+    obstacles.push_back(new Obstacle({ 7,0,6 }));
+    obstacles.push_back(new Obstacle({ 2,0,8 }));
+    obstacles.push_back(new Obstacle({ 1,0,2 }));
+    obstacles.push_back(new Obstacle({ 6,0,2 }));
 
     for  (Obstacle * obstacle : obstacles)
     {
@@ -262,4 +265,9 @@ bool Game::SomethingAlreadyHere(Vector2 pos)
 void Game::CreateVFX(FX_Sprite* vfx)
 {
     vfxs.push_back(vfx);
+}
+
+void Game::RemoveVFX(FX_Sprite* vfToRemove)
+{
+    vfxs.erase(std::find(vfxs.begin(), vfxs.end(), vfToRemove));
 }

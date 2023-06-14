@@ -61,6 +61,8 @@ public:
 	int  SCREEN_WIDTH;
 	int  SCREEN_HEIGHT;
 
+	void RemoveVFX(FX_Sprite* vfToRemove);
+
 private:
 
 	//---Gère les controllers

@@ -26,10 +26,11 @@ private:
 
 
 	int framesCounter{ 0 };
-	int framesSpeed{ 0 };
+	int framesSpeed{ 8 };
 
 	int currentFrame{ 0 };
 
+	bool active{ true };
 
 };
 
