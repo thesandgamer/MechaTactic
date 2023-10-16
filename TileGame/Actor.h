@@ -22,9 +22,12 @@ public:
 	void SetPosition(Vector3 newPos) { transform.translation = newPos; }
 	Vector3 GetPosition() { return transform.translation; }
 
+	Vector3 GetPosInGrid() { return posInGrid; }
+
 
 protected:
 	Transform transform{ {-1,-1,-1},{0,0,0}, {1,1,1} };
+	Vector3 posInGrid{ 0,0,0 };
 
 
 };

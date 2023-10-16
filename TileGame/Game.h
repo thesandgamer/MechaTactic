@@ -76,6 +76,9 @@ private:
 
 	Cursor cursor;
 
+	/// <summary>
+	/// For elements in game: Mechs and obstacle for now
+	/// </summary>
 	vector<Actor*> elementsInGame;
 
 	vector<Obstacle*> obstacles;

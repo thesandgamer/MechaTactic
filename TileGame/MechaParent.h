@@ -177,7 +177,6 @@ protected:
 	
 	bool canDrawLifeBar{ false };
 
-	Vector3 posInGrid { 0,0,0 };
 
 
 	BoxCollision collision{ {32,32,32} };

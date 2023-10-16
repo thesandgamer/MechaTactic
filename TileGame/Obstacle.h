@@ -29,7 +29,7 @@ public:
 	Grid* refToGrid{  nullptr };
 
 private:
-	Vector3 posInGrid{ 0,0,0 };
+	
 
 	InformationDisplay* informations;
 	string info;

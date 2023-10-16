@@ -63,8 +63,8 @@ void Game::Start()
     //++ToDo: fait en sorte que ça marche avec plusieurs player controller
 
     EnnemyController* ennemy = new EnnemyController();
-    ennemy->AddMecha(   new MushMech({ 2,0,5 })  );
-    ennemy->AddMecha(   new MushMech({ 5,0,2 })  );
+    ennemy->AddMecha(  new MushMech({ 2,0,5 })  );
+    ennemy->AddMecha(  new MushMech({ 5,0,2 })  );
     controllers.push_back(ennemy);
 
 
@@ -251,6 +251,18 @@ void Game::Clean()
 
 bool Game::SomethingAlreadyHere(Vector2 pos)
 {
+
+
+    //Check si y'a pas un mecha déjà là
+    for (auto element : elementsInGame)
+    {
+        //element->GetPosition() == { pos.x, pos.y };
+        if (element->GetPosInGrid().x == pos.x && element->GetPosInGrid().z == pos.y)
+        {
+            return true;
+        }
+    }
+
     if (grid.grid[pos.x][pos.y].traversible = false)
     {
         return true;

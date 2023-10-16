@@ -72,22 +72,16 @@ void EnnemyController::AIActions()
 	}
 
 	SelectMecha(mechasList.at(it++));
-
-	float xGrid = std::rand() % (int)(gridRef->GRID_SIZE.x);//Random entre 0 et tailled de la grille
-	float YGrid = std::rand() % (int)(gridRef->GRID_SIZE.z);//Random entre 0 et tailled de la grille
-	Vector2 PosToMove{ xGrid,YGrid };
+	Vector2 PosToMove{};
 
 	//Si case bloqué check celles à coté
 	//Vérifier les cases à coté, si toutes bloqué refait du random
-
-	while ((PosToMove.x == controledMecha->GetPosInGrid().x && PosToMove.y == controledMecha->GetPosInGrid().z)
-		|| (Game::instance().SomethingAlreadyHere(PosToMove))	// à rajouter check si pas quelque chose déjà ici
-		)
+	do
 	{
 		float xGrid = std::rand() % (int)(gridRef->GRID_SIZE.x);//Random entre 0 et tailled de la grille
 		float YGrid = std::rand() % (int)(gridRef->GRID_SIZE.z);//Random entre 0 et tailled de la grille
 		PosToMove = { xGrid,YGrid };
-	}
+	} while ((Game::instance().SomethingAlreadyHere(PosToMove)));
 
 	MoveMecha({ PosToMove.x,0,PosToMove.y });
 
