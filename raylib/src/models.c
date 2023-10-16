@@ -649,9 +649,8 @@ void DrawPlane(Vector3 centerPos, Vector2 size, Color color)
 }
 
 // Draw a ray line
-void DrawRay(Ray ray, Color color)
+void DrawRay(Ray ray,float scale, Color color)
 {
-    float scale = 10000;
 
     rlBegin(RL_LINES);
         rlColor4ub(color.r, color.g, color.b, color.a);
@@ -814,6 +813,63 @@ void UnloadModelKeepMeshes(Model model)
     RL_FREE(model.bindPose);
 
     TRACELOG(LOG_INFO, "MODEL: Unloaded model (but not meshes) from RAM and VRAM");
+}
+
+// Compute mesh bounding box limits
+// NOTE: minVertex and maxVertex should be transformed by model transform matrix
+BoundingBox GetMeshBoundingBox(Mesh mesh)
+{
+    // Get min and max vertex to construct bounds (AABB)
+    Vector3 minVertex = { 0 };
+    Vector3 maxVertex = { 0 };
+
+    if (mesh.vertices != NULL)
+    {
+        minVertex = (Vector3){ mesh.vertices[0], mesh.vertices[1], mesh.vertices[2] };
+        maxVertex = (Vector3){ mesh.vertices[0], mesh.vertices[1], mesh.vertices[2] };
+
+        for (int i = 1; i < mesh.vertexCount; i++)
+        {
+            minVertex = Vector3Min(minVertex, (Vector3) { mesh.vertices[i * 3], mesh.vertices[i * 3 + 1], mesh.vertices[i * 3 + 2] });
+            maxVertex = Vector3Max(maxVertex, (Vector3) { mesh.vertices[i * 3], mesh.vertices[i * 3 + 1], mesh.vertices[i * 3 + 2] });
+        }
+    }
+
+    // Create the bounding box
+    BoundingBox box = { 0 };
+    box.min = minVertex;
+    box.max = maxVertex;
+
+    return box;
+}
+
+// Compute model bounding box limits (considers all meshes)
+BoundingBox GetModelBoundingBox(Model model)
+{
+    BoundingBox bounds = { 0 };
+
+    if (model.meshCount > 0)
+    {
+        Vector3 temp = { 0 };
+        bounds = GetMeshBoundingBox(model.meshes[0]);
+
+        for (int i = 1; i < model.meshCount; i++)
+        {
+            BoundingBox tempBounds = GetMeshBoundingBox(model.meshes[i]);
+
+            temp.x = (bounds.min.x < tempBounds.min.x) ? bounds.min.x : tempBounds.min.x;
+            temp.y = (bounds.min.y < tempBounds.min.y) ? bounds.min.y : tempBounds.min.y;
+            temp.z = (bounds.min.z < tempBounds.min.z) ? bounds.min.z : tempBounds.min.z;
+            bounds.min = temp;
+
+            temp.x = (bounds.max.x > tempBounds.max.x) ? bounds.max.x : tempBounds.max.x;
+            temp.y = (bounds.max.y > tempBounds.max.y) ? bounds.max.y : tempBounds.max.y;
+            temp.z = (bounds.max.z > tempBounds.max.z) ? bounds.max.z : tempBounds.max.z;
+            bounds.max = temp;
+        }
+    }
+
+    return bounds;
 }
 
 // Upload vertex data into a VAO (if supported) and VBO
@@ -3145,6 +3201,103 @@ RayHitInfo GetCollisionRayGround(Ray ray, float groundHeight)
     }
 
     return result;
+}
+
+// Get collision info between ray and sphere
+RayHitInfo GetRayCollisionSphere(Ray ray, Vector3 center, float radius)
+{
+    RayHitInfo collision = { 0 };
+
+    Vector3 raySpherePos = Vector3Subtract(center, ray.position);
+    float vector = Vector3DotProduct(raySpherePos, ray.direction);
+    float distance = Vector3Length(raySpherePos);
+    float d = radius * radius - (distance * distance - vector * vector);
+
+    collision.hit = d >= 0.0f;
+
+    // Check if ray origin is inside the sphere to calculate the correct collision point
+    if (distance < radius)
+    {
+        collision.distance = vector + sqrtf(d);
+
+        // Calculate collision point
+        collision.position = Vector3Add(ray.position, Vector3Scale(ray.direction, collision.distance));
+
+        // Calculate collision normal (pointing outwards)
+        collision.normal = Vector3Negate(Vector3Normalize(Vector3Subtract(collision.position, center)));
+    }
+    else
+    {
+        collision.distance = vector - sqrtf(d);
+
+        // Calculate collision point
+        collision.position = Vector3Add(ray.position, Vector3Scale(ray.direction, collision.distance));
+
+        // Calculate collision normal (pointing inwards)
+        collision.normal = Vector3Normalize(Vector3Subtract(collision.position, center));
+    }
+
+    return collision;
+}
+
+// Get collision info between ray and box
+RayHitInfo GetRayCollisionBox(Ray ray, BoundingBox box)
+{
+    RayHitInfo collision = { 0 };
+
+    // Note: If ray.position is inside the box, the distance is negative (as if the ray was reversed)
+    // Reversing ray.direction will give use the correct result.
+    bool insideBox = (ray.position.x > box.min.x) && (ray.position.x < box.max.x) &&
+        (ray.position.y > box.min.y) && (ray.position.y < box.max.y) &&
+        (ray.position.z > box.min.z) && (ray.position.z < box.max.z);
+
+    if (insideBox) ray.direction = Vector3Negate(ray.direction);
+
+    float t[11] = { 0 };
+
+    t[8] = 1.0f / ray.direction.x;
+    t[9] = 1.0f / ray.direction.y;
+    t[10] = 1.0f / ray.direction.z;
+
+    t[0] = (box.min.x - ray.position.x) * t[8];
+    t[1] = (box.max.x - ray.position.x) * t[8];
+    t[2] = (box.min.y - ray.position.y) * t[9];
+    t[3] = (box.max.y - ray.position.y) * t[9];
+    t[4] = (box.min.z - ray.position.z) * t[10];
+    t[5] = (box.max.z - ray.position.z) * t[10];
+    t[6] = (float)fmax(fmax(fmin(t[0], t[1]), fmin(t[2], t[3])), fmin(t[4], t[5]));
+    t[7] = (float)fmin(fmin(fmax(t[0], t[1]), fmax(t[2], t[3])), fmax(t[4], t[5]));
+
+    collision.hit = !((t[7] < 0) || (t[6] > t[7]));
+    collision.distance = t[6];
+    collision.position = Vector3Add(ray.position, Vector3Scale(ray.direction, collision.distance));
+
+    // Get box center point
+    collision.normal = Vector3Lerp(box.min, box.max, 0.5f);
+    // Get vector center point->hit point
+    collision.normal = Vector3Subtract(collision.position, collision.normal);
+    // Scale vector to unit cube
+    // NOTE: We use an additional .01 to fix numerical errors
+    collision.normal = Vector3Scale(collision.normal, 2.01f);
+    collision.normal = Vector3Divide(collision.normal, Vector3Subtract(box.max, box.min));
+    // The relevant elemets of the vector are now slightly larger than 1.0f (or smaller than -1.0f)
+    // and the others are somewhere between -1.0 and 1.0 casting to int is exactly our wanted normal!
+    collision.normal.x = (float)((int)collision.normal.x);
+    collision.normal.y = (float)((int)collision.normal.y);
+    collision.normal.z = (float)((int)collision.normal.z);
+
+    collision.normal = Vector3Normalize(collision.normal);
+
+    if (insideBox)
+    {
+        // Reset ray.direction
+        ray.direction = Vector3Negate(ray.direction);
+        // Fix result
+        collision.distance *= -1.0f;
+        collision.normal = Vector3Negate(collision.normal);
+    }
+
+    return collision;
 }
 
 //----------------------------------------------------------------------------------

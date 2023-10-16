@@ -6,40 +6,52 @@
 #include "Tile.h"
 #include "AStar.h"
 
-class Grid
+//++ToDo: refacto cette classe(remttre bien public/privé)
+
+class Grid: public Actor
 {
 public:
-	Grid(Vector2 pos ,int width, int height, int cellWidth,int cellHeight);
+	Grid(Vector3 pos,Vector3 gridSize);
 	Grid();
 	~Grid();
 
 	void Start();
-	void Update();
-	void Draw();
+	void Init() override;
+	void Draw() override;
+	void Update() override;
 
 
-	int GRID_WITH;
-	int GRID_HEIGHT;
+	Vector3 GRID_SIZE;
 	
-	int CELL_WIDTH;
-	int CELL_HEIGHT;
+	const static int CELL_WIDTH { 32 };
+	const static int CELL_LENGTH { 32 };
+	const static int CELL_HEIGHT { 32 };
 
+	/// <summary>
+	/// Stoque les tuiles qui vont composer le terrain de jeu
+	/// </summary>
 	std::vector<std::vector<Tile>> grid;
+
+	Tile* GetTile(int posInGridX, int posInGridY);
 
 	AStar aStar;
 
-	Vector2 GetGridPos() { return gridPosition; }
+	Vector3 GetGridPos() { return transform.translation; }
 	
-	bool IsInGrid(Vector2 pos);
+	bool IsInGrid(Vector3 pos);
+	 
+	Vector3 PosInGrid(Vector3 pos);
 
-	Vector2 PosInGrid(Vector2 pos);
-
-	void Debug_CleanPathVisibility();
+	Vector3 PosInGridToPosToWorld(Vector3 pos);
+	Vector3 PosInWorldToPosInGrid(Vector3 pos);
 
 	void CalculateObstacles();
 
 	Texture2D spriteOfTiles;
 
+	void ResetTilesColor();
+
+	/*
 	Grid& operator=(const Grid& other)
 	{
 		this->GRID_WITH = other.GRID_WITH;
@@ -52,9 +64,9 @@ public:
 		this->spriteOfTiles = other.spriteOfTiles;
 		return* this;
 	}
-
+	*/
 private:
-	Vector2 gridPosition;
+
 
 	
 };

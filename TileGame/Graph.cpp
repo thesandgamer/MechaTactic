@@ -31,32 +31,37 @@ double Graph::GetCostOfNode(Node current, Node next)
     return -1;
 }
 
-Node& Graph::GetNode(Vector2 node)
+Node* Graph::GetNode(Vector2 node)
 {
     auto it = find(graphNodes.begin(), graphNodes.end(), node);
     if (it != graphNodes.end())
     {
         int index = distance(graphNodes.begin(), it);
-        return graphNodes.at(index);
+        return &graphNodes.at(index);
 
+    }
+    else
+    {
+        return nullptr;
     }
 }
 
-Node& Graph::GetNode(Node& node)
+Node* Graph::GetNode(const Node& node)
 {
     auto it = find(graphNodes.begin(), graphNodes.end(), node);
     if (it != graphNodes.end())
     {
         int index = distance(graphNodes.begin(), it);
-        return graphNodes.at(index);
+        return &graphNodes.at(index);
 
     }
-    return node;
+    return nullptr;
 }
 
-std::vector<Node> Graph::GetAroundNodes(Node current)
+std::vector<Node*> Graph::GetAroundNodes(const Node current)
 {
-    std::vector<Node> nodes{};
+    std::vector<Node*> nodes{};
+    /*
     int i = 0;
     //On va parcourir les 9 tiles
     for (int xx = -1; xx < 2; xx++)
@@ -72,7 +77,12 @@ std::vector<Node> Graph::GetAroundNodes(Node current)
             }
 
         }
-    }
+    }*/
+
+    nodes.push_back(GetNode({ current.x - (float)1, current.y + (float)0 }));
+    nodes.push_back(GetNode({ current.x + (float)1, current.y + (float)0 }));
+    nodes.push_back(GetNode({ current.x + (float)0, current.y - (float)1 }));
+    nodes.push_back(GetNode({ current.x + (float)0, current.y + (float)1 }));
 
     return nodes;
 }

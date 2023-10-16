@@ -1,19 +1,56 @@
 #include "Obstacle.h"
+#include "Utility.h"
 
 Obstacle::Obstacle()
 {
 }
 
-Obstacle::Obstacle(Vector2 positionP, Texture2D spriteP) :Actor(positionP,spriteP)
+Obstacle::Obstacle(Vector3 positionP) : Actor()
 {
+	posInGrid = positionP;
+
+	/*
 	informations = new InformationDisplay();
 	informations->SetPos(&position);
-	informations->infPasseur = this;
+	informations->infPasseur = this;*/
+}
+
+void Obstacle::Init()
+{
+	//-------Set collision
+	collision = BoxCollision({32,32,32});
+	//collision = BoxCollision(&model);
+	collision.SetParent(this);
+	collision.id = "ObstacleCollision";
+
+	collision.Init();
+
+	model = Utility::GetInstance()->RockModel;
+
+
+	if (model.meshCount == NULL)//Si on à pas de mesh de loadé, load un cube
+	{
+		drawColor = DARKGRAY;
+		model = LoadModelFromMesh(GenMeshCube(Grid::CELL_WIDTH, Grid::CELL_HEIGHT, Grid::CELL_LENGTH));
+	}
+	else
+	{
+		drawColor = WHITE;
+
+
+	}
+
+	transform.translation = refToGrid->PosInGridToPosToWorld(posInGrid);
 }
 
 void Obstacle::Draw()
 {
-	DrawTexture(sprite, position.x * gridRef->CELL_WIDTH + gridRef->GetGridPos().x, position.y * gridRef->CELL_HEIGHT + gridRef->GetGridPos().y, WHITE);
+	//DrawTexture(sprite, position.x * gridRef->CELL_WIDTH + gridRef->GetGridPos().x, position.y * gridRef->CELL_HEIGHT + gridRef->GetGridPos().y, WHITE);
+	DrawModel(model, transform.translation, transform.scale.x, drawColor);
+}
+
+void Obstacle::Update()
+{
 }
 
 string Obstacle::GetInformationOf()

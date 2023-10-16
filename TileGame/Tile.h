@@ -2,34 +2,41 @@
 #include "raylib.h"
 #include "InformationDisplay.h"
 #include "IInformationPasseur.h"
+#include "IInteraction.h"
 
+#include "BoxCollision.h"
 class Grid;
 
-class Tile: public IInformationPasseur
+class Tile: public IInformationPasseur, public Actor, public IInteraction
 {
 public:
 	Tile();
-	Tile(int xP, int yP);
-	Tile(int xP, int yP,float widthP,float heightP);
+	Tile(Vector3 positionP);
+	Tile(Vector3 positionP,Model modelP);
 	~Tile() {};
 
-	Vector2 pos;
 
-	float width;
-	float height;
+	bool traversible{ true };
 
-	bool traversible;
+	Grid* refToGrid {nullptr};
 
-	Grid* refToGrid;
-
-	void Init();
-	void Draw();
+	void Init() override;
+	void Draw() override;
+	void Update() override;
 
 	InformationDisplay* GetInformations() { return informations; }
 
 	string GetInformationOf() override;
 
+	void ChangeColor(Color color) { drawColor = color; }
 
+
+	void OnHovered()  {};
+	void OnEndHovered()override {};
+	void OnClicked()  {};
+	Vector3 GetPosInGrid()  { return posInGrid; } ;
+
+	/*
 	Tile& operator=(const Tile& other)
 	{
 		this->pos = other.pos;
@@ -41,9 +48,22 @@ public:
 
 		return *this;
 	}	
+	*/
 
-	Texture2D sprite;
+
 private:
+	Vector3 posInGrid{ 0,0,0 };
+
+	void posInGridToPos();
+
+	//-------Collisions-------
+	BoxCollision collision{};
+
+	//-------For drawing-------
+	Model model{};
+
+	Color drawColor{ WHITE };
+
 	InformationDisplay* informations;
 
 

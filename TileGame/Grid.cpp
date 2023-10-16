@@ -1,22 +1,16 @@
 #include "Grid.h"
 #include "Game.h"
 
-Grid::Grid(Vector2 pos,int width, int height, int cellWidth, int cellHeight) :gridPosition(pos), GRID_WITH{ width }, GRID_HEIGHT{ height }, CELL_WIDTH{ cellWidth },CELL_HEIGHT{cellHeight}
+
+Grid::Grid(Vector3 pos, Vector3 gridSize): Actor()
 {
-	
+	transform.translation = pos;
+	GRID_SIZE = gridSize;
+
 }
 
-Grid::Grid() 
+Grid::Grid(): Actor()
 {
-	GRID_WITH = 0;
-	GRID_HEIGHT = 0;
-	CELL_WIDTH = 0;
-	CELL_HEIGHT = 0;
-	gridPosition = { 0,0 };	
-
-	//aStar = 
-
-
 }
 
 Grid::~Grid()
@@ -25,27 +19,34 @@ Grid::~Grid()
 
 void Grid::Start()
 {
-	grid.resize(GRID_WITH);
+	
+	grid.resize(GRID_SIZE.x);
 	for (std::vector<Tile>& i : grid)
 	{
-		i.resize(GRID_HEIGHT);
+		i.resize(GRID_SIZE.z);
 	}
-	std::cout << "Grid finish to resize" << std::endl;
+	std::cout << "[GRID]----Grid finish to resize" << std::endl;
 
-
+	//---------Fill grid---------
+	
 	for (int i = 0; i < grid.size(); i++)
 	{
 		for (int j = 0; j < grid[i].size(); j++)
 		{
-			grid[i][j] = Tile(i, j, CELL_WIDTH, CELL_HEIGHT);
-			grid[i][j].sprite = spriteOfTiles;
+			grid[i][j] = Tile( Vector3{(float)i,-1,(float)j} );
+			//Set le model
 			grid[i][j].refToGrid = this;
 			grid[i][j].Init();
 
 		}
 	}
+		
 	//Set la graph de A*
-	aStar = AStar(GRID_WITH, GRID_HEIGHT);
+	aStar = AStar(GRID_SIZE.x, GRID_SIZE.z);
+}
+
+void Grid::Init()
+{
 }
 
 void Grid::Update()
@@ -54,8 +55,6 @@ void Grid::Update()
 
 void Grid::Draw()
 {
-
-	DrawCube({ 0,0,0 }, 64, 64, 64, RED);
 	for (std::vector<Tile> ligne : grid)
 	{
 		for (Tile tile : ligne)
@@ -68,12 +67,19 @@ void Grid::Draw()
 
 }
 
-bool Grid::IsInGrid(Vector2 pos)
+Tile* Grid::GetTile(int posInGridX, int posInGridY)
+{
+	if (posInGridX < 0 || posInGridY < 0 || posInGridX > grid.size()-1 || posInGridY > grid.at(posInGridX).size()-1) return nullptr;
+	return &grid[posInGridX][posInGridY];
+	
+}
+
+bool Grid::IsInGrid(Vector3 pos)
 {
 	if (pos.x >= 0
 		&& pos.y  >= 0
-			&& pos.x < ( GRID_WITH   ) 
-			&& pos.y < ( GRID_HEIGHT  ))
+			&& pos.x < ( GRID_SIZE.x) 
+			&& pos.y < (GRID_SIZE.z))
 	{
 		return true;
 	}
@@ -86,33 +92,86 @@ bool Grid::IsInGrid(Vector2 pos)
 
 
 //Peut peut être être fait en mettant un pointeur et changeant la valeur
-Vector2 Grid::PosInGrid(Vector2 pos)
+Vector3 Grid::PosInGrid(Vector3 pos)
 {
-	Vector2 newPos;
-	newPos.x = (int) (( ( pos.x  -gridPosition.x)/ CELL_WIDTH));
-	newPos.y = (int) (( (pos.y - gridPosition.y) / CELL_HEIGHT));
+	Vector3 newPos;
+	newPos.x = (( (pos.x - transform.translation.x) / CELL_WIDTH));
+	newPos.y = (( (pos.y - transform.translation.y) / CELL_HEIGHT));
+	newPos.z = (( (pos.z - transform.translation.z) / CELL_LENGTH));
 
 	//std::cout << "Pos in grid: " << newPos.x << " " << newPos.y << std::endl;
 
 	return newPos;
 }
 
-void Grid::Debug_CleanPathVisibility()
+Vector3 Grid::PosInGridToPosToWorld(Vector3 pos)
 {
-	for (int i = 0; i < grid.size() ;i++)
-	{
-		for (int j = 0; j < grid[i].size(); j++)
-		{
-		}
-	}
+	return {
+		(pos.x * CELL_WIDTH)  + GetGridPos().x,
+		(pos.y * CELL_HEIGHT) + GetGridPos().y,
+		(pos.z * CELL_LENGTH) + GetGridPos().z,
+
+	};
+}
+
+Vector3 Grid::PosInWorldToPosInGrid(Vector3 pos)
+{
+	return {
+		(pos.x - GetGridPos().x )/ CELL_WIDTH  ,
+		(pos.y - GetGridPos().y )/ CELL_HEIGHT ,
+		(pos.z - GetGridPos().z ) / CELL_LENGTH ,
+
+	};
 }
 
 void Grid::CalculateObstacles()
 {
-	for each (Actor * act in Game::instance().GetElementsInGame())
-	{
-		aStar.aStarGrid.AddObstacle(act->position);
-		//grid[act->position.x][act->position.y].traversible = false;
+	//Check tout ce qui peut faire obstacle au déplacement
+	//Si une tuile se trouve au même endroit
 
+	for (int i = 0; i < grid.size(); i++)
+	{
+		for (int j = 0; j < grid[i].size(); j++)
+		{
+			aStar.aStarGrid.RemoveObstacle({ grid[i][j].GetPosInGrid().x,grid[i][j].GetPosInGrid().z});
+			grid[i][j].traversible = true;
+		}
+	}
+
+	
+	for  (Actor * act : Game::instance().GetElementsInGame())//Pour chaque element du jeu
+	{
+		//problème icic c'est que la position est une position in world
+		Vector3 posInGrid = PosInWorldToPosInGrid(act->GetPosition());
+
+		aStar.aStarGrid.AddObstacle({ posInGrid.x,posInGrid.z });
+		grid[posInGrid.x][posInGrid.z].traversible = false;
+		
+		/*
+		if (posInGrid.x == grid[posInGrid.x][posInGrid.z].posInGrid.x && posInGrid.z == grid[posInGrid.x][posInGrid.z].posInGrid.z)
+		{
+			aStar.aStarGrid.AddObstacle({ posInGrid.x,posInGrid.z });
+			grid[posInGrid.x][posInGrid.z].traversible = false;
+		}
+		else
+		{
+			aStar.aStarGrid.RemoveObstacle({ posInGrid.x,posInGrid.z });
+			grid[posInGrid.x][posInGrid.z].traversible = true;
+		}
+		*/
+		
+
+	}
+	
+}
+
+void Grid::ResetTilesColor()
+{
+	for (int i = 0; i < grid.size(); i++)
+	{
+		for (int j = 0; j < grid[i].size(); j++)
+		{
+			grid[i][j].ChangeColor(WHITE);
+		}
 	}
 }

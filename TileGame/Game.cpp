@@ -1,4 +1,8 @@
 #include "Game.h"
+#include "CollisionManager.h"
+
+#include "ActiveCapacity.h"
+#include "AttackCapacity.h"
 
 void Game::SetupScreen(int screenwidth, int screenHeight)
 {
@@ -9,61 +13,102 @@ void Game::SetupScreen(int screenwidth, int screenHeight)
 void Game::Start()
 {
 //===========Setup la Grille==============
-    const static int GRID_WIDTH = 10;
-    const static int GRID_HEIGHT = 10;
+    const static int GRID_WIDTH = 9;
+    const static int GRID_LENGTH = 9;
+    const static int GRID_HEIGHT = 1;
 
     const static int CELL_WIDTH = 32;
+    const static int CELL_LENGTH = 32;
     const static int CELL_HEIGHT = 32;
-    Vector2 gridPos = { SCREEN_WIDTH / 2 - (GRID_WIDTH * CELL_WIDTH) / 2 ,SCREEN_HEIGHT / 2 - (GRID_HEIGHT * CELL_HEIGHT) / 2 };
+    //Vector2 gridPos = { SCREEN_WIDTH / 2 - (GRID_WIDTH * CELL_WIDTH) / 2 ,SCREEN_HEIGHT / 2 - (GRID_HEIGHT * CELL_HEIGHT) / 2 };
+    Vector3 gridPos = { - (GRID_WIDTH * (CELL_WIDTH) /2 - CELL_WIDTH/2)  ,0, -(GRID_LENGTH * (CELL_LENGTH) /2 - CELL_LENGTH/2) }; //Center grid in world
 
-    Texture2D tileSprite = LoadTexture("Ressources/TileBackground.png");
 
-    grid = Grid(gridPos, GRID_WIDTH, GRID_HEIGHT, CELL_WIDTH, CELL_HEIGHT); //On génère la grille
-    grid.spriteOfTiles = tileSprite;
+    grid = Grid(gridPos, {GRID_WIDTH,GRID_HEIGHT,GRID_LENGTH}); //On génère la grille
     grid.Start();
 
-//=========Setup les obstacles==========
-    Texture2D obstacleSprite = LoadTexture("Ressources/Obstacle.png");
-    obstacles.push_back(new Obstacle({ 4,4 }, obstacleSprite));
-    obstacles.push_back(new Obstacle({ 2,2 }, obstacleSprite));
-    obstacles.push_back(new Obstacle({ 8,3 }, obstacleSprite));
-    obstacles.push_back(new Obstacle({ 8,5 }, obstacleSprite));
-    obstacles.push_back(new Obstacle({ 3,8 }, obstacleSprite));
 
-    for each (Obstacle * obstacle in obstacles)
+//=========Setup la camera==========
+    cam.Init();
+
+//=========Setup les obstacles==========
+    //++ToDo: faire en sorte d'avoir une fonction pour rajouter un obstacle qui va vérifier qu'on peut rajouter à cet endroit là
+
+    obstacles.push_back(new Obstacle({ 5,0,5 }));
+    obstacles.push_back(new Obstacle({ 3,0,3 }));
+    obstacles.push_back(new Obstacle({ 4,0,7 }));
+    obstacles.push_back(new Obstacle({ 7,0,6 }));
+    obstacles.push_back(new Obstacle({ 2,0,8 }));
+    obstacles.push_back(new Obstacle({ 1,0,2 }));
+    obstacles.push_back(new Obstacle({ 6,0,2 }));
+
+    for  (Obstacle * obstacle : obstacles)
     {
+        obstacle->refToGrid = &grid;
         obstacle->Init();
     }
 
 
-//=============Setup Player============
-	player.Start();
-    player.SetGrid(&grid);
+//=============Controllers Setup============
+    PlayerController* player = new PlayerController();
+    player->AddMecha(   new TreeMech({ 1,0,4 }) );
+    player->AddMecha(   new TreeMech({ 8,0,8 }) );
+    //Créer unique pointer pas stoqué car Add capacity à une R value(&&) (transfert de propritété)
+    player->GetMechaAt(0)->AddCapacity(std::make_unique<AttackCapacity>(*player->GetMechaAt(0)) );
+    player->GetMechaAt(1)->AddCapacity(std::make_unique<AttackCapacity>(*player->GetMechaAt(1)) );
+    player->GetMechaAt(1)->GetCurrentActiveCapacity();
+    //{ player->GetMechaAt(0) }
+    controllers.push_back(player);   //Rajoute un player
 
-//=============Setup Ennemy============
-    ennemy.Start();
-    ennemy.SetGrid(&grid);
+    //++ToDo: fait en sorte que ça marche avec plusieurs player controller
+
+    EnnemyController* ennemy = new EnnemyController();
+    ennemy->AddMecha(  new MushMech({ 2,0,5 })  );
+    ennemy->AddMecha(  new MushMech({ 5,0,2 })  );
+    controllers.push_back(ennemy);
+
+
+    for (size_t i = 0; i < controllers.size(); i++)
+    {
+        controllers.at(i)->SetGrid(&grid);
+        controllers[i]->Start();
+      
+    }
+    /* Alt Version
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    {
+        (*i)->SetGrid(&grid);
+        (*i)->Start();
+        
+    }*/
+
+
+
 
 //=============Setup Cursor===========
     cursor.Start();
 
 //============Setup elements in game==============
-    for (int i = 0; i < player.GetPawns()->size(); i++)
+
+    // Rajoute tout les méchas de tous les controllers dans les éléments in game(sert d'obstacles)
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
     {
-        elementsInGame.push_back(&player.GetPawns()->at(i));
-    }
-    for (int i = 0; i < ennemy.GetPawns()->size(); i++)
-    {
-        elementsInGame.push_back(&ennemy.GetPawns()->at(i));
+        for (int j = 0; j < (*i)->GetNumberOfMechas(); j++)
+        {
+           elementsInGame.push_back((*i)->GetMechaAt(j));  //Rajoute tous les méchas
+        }
+
     }
 
-    for each (Actor* obstacle in obstacles)
+    //Rajoute obstacles
+    for  (Actor* obstacle : obstacles)
     {
         elementsInGame.push_back(obstacle);
     }
 
 
 //===========Setup les info==========
+    /*
     infoUi = new InformationDisplayUi();
     infoUi->SetPosition({ (float)SCREEN_WIDTH - SCREEN_WIDTH / 3,0 });
 
@@ -82,6 +127,7 @@ void Game::Start()
     {
         informations.push_back(obstacle->GetInformations());
     }
+    
 
                     //------Forcément de Dernier----------
     //On va parcourir toutes les tiles de la grille et récupérer les informaion pour les mettre dans informations
@@ -92,11 +138,14 @@ void Game::Start()
             informations.push_back(grid.grid[i][j].GetInformations());
         }
     }
+    */
 
 
 //=========Setup Turn Manager===========
-    turnManager.AddPawn(&player);
-    turnManager.AddPawn(&ennemy);
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    {
+        turnManager.AddSomethingMakeTurn(*i);
+    }
     turnManager.Start();
 
 
@@ -108,13 +157,22 @@ void Game::Update()
     turnManager.Update();
     grid.Update();
 
-	player.Update();
-    ennemy.Update();
+    CollisionManager::GetInstance()->Update();
+
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    {
+        (*i)->Update();
+    }
+    for (auto i = vfxs.begin(); i != vfxs.end(); i++)
+    {
+        (*i)->Update();
+    }
 
     cursor.Updtate();
-
+    cam.Update();
 
 //=======Updtate infos=========
+    /* Ca n'a pas à être là, avoir cette feature dans les player controller
     for (InformationDisplay* inf : informations)
     {
         if (inf->GetPos().x == player.GetMousePosInGrid().x && inf->GetPos().y == player.GetMousePosInGrid().y)
@@ -128,37 +186,100 @@ void Game::Update()
         {
             infoUi->infoLinkedTo = nullptr;
         }
-    }
+    }*/
 }
 
 void Game::Draw()
 {
     BeginDrawing();
     ClearBackground(BLACK);
+    BeginMode3D(cam.GetCamera());
 
-
+   // DrawGrid(32, 32);
     grid.Draw();
-    for each (Actor* obstacle in obstacles)
+
+   //DrawCube({ 0,-32,0 }, 32, 32, 32, DARKPURPLE);    //Center of world
+   //DrawCube({ 128,-32,128 }, 32, 32, 32, DARKPURPLE);    //Center of world
+
+    for (Actor* obstacle : obstacles)
     {
         obstacle->Draw();
     }
 
-	player.Draw();
-    ennemy.Draw();
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    {
+        (*i)->Draw();
+    }
+
+
+    cam.Draw();
+
+    CollisionManager::GetInstance()->Draw();
+
+    EndMode3D();
 
     DrawUi();
-
+    
     EndDrawing();
 }
 
 void Game::DrawUi()
 {
-	player.DrawUi();
+    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    {
+        (*i)->DrawUi();
+    }
+
+    for (auto i = vfxs.begin(); i != vfxs.end(); i++)
+    {
+        (*i)->Draw();
+    }
+
     cursor.Draw();
 
 //=======Draw les infos========
-    infoUi->Draw();
+    //infoUi->Draw();
 
 //=======
     turnManager.DrawUi();
+}
+
+void Game::Clean()
+{
+
+}
+
+bool Game::SomethingAlreadyHere(Vector2 pos)
+{
+
+
+    //Check si y'a pas un mecha déjà là
+    for (auto element : elementsInGame)
+    {
+        //element->GetPosition() == { pos.x, pos.y };
+        if (element->GetPosInGrid().x == pos.x && element->GetPosInGrid().z == pos.y)
+        {
+            return true;
+        }
+    }
+
+    if (grid.grid[pos.x][pos.y].traversible = false)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+
+    }
+}
+
+void Game::CreateVFX(FX_Sprite* vfx)
+{
+    vfxs.push_back(vfx);
+}
+
+void Game::RemoveVFX(FX_Sprite* vfToRemove)
+{
+    vfxs.erase(std::find(vfxs.begin(), vfxs.end(), vfToRemove));
 }

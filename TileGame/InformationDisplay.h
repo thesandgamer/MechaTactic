@@ -7,6 +7,8 @@
 
 using std::string;
 
+//++ToDo: Refacto cette classe
+
 class InformationDisplay
 {
 public:
@@ -16,8 +18,8 @@ public:
 	string GetTitle() { return title; }
 	void SetTitle(string titleP) { title = titleP; }
 
-	void SetPos(Vector2* pos);
-	Vector2 GetPos() { return *position; }
+	void SetPos(Vector3* pos);
+	Vector3 GetPos() { return *position; }
 
 	InformationDisplay(const InformationDisplay& other)
 	{
@@ -29,7 +31,7 @@ public:
 		this->title = other.title;
 		this->position = other.position;
 	}
-	Vector2* position;
+	Vector3* position;
 	IInformationPasseur* infPasseur;
 
 

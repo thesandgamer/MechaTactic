@@ -17,7 +17,7 @@ void TurnsManager::Start()
 {
 	//----------Set Ui----------
 	Texture2D bandeauSprite = LoadTexture("Ressources/Bandeau.png");
-	Vector2 pos = { 0, Game::instance().SCREEN_HEIGHT / 2 };
+	Vector2 pos = { Game::instance().SCREEN_WIDTH/2 - bandeauSprite.width /2 , Game::instance().SCREEN_HEIGHT / 2 };
 	endTurnBandeau = BandeauTexte(bandeauSprite,pos,1.5f);
 
 	//----------
@@ -27,12 +27,12 @@ void TurnsManager::Start()
 
 void TurnsManager::Update()
 {
-	Game::instance().GetGrid()->CalculateObstacles(); //Pas mettre ça ici 
+
 	endTurnBandeau.Update();
 
 	if (haveTurn != nullptr) //Si quelqu'un existe
 	{
-		if (haveTurn->EndTurn())//Si il à finit son tour
+		if (haveTurn->HaveEndTurn())//Si il à finit son tour
 		{
 			//Passe au suivant 
 			if (actual < allControllers.size()-1)
@@ -55,6 +55,8 @@ void TurnsManager::MakeTurns()
 
 	haveTurn = allControllers.at(actual);	//Le controller qui va jouer va être celui à l'actuel
 	haveTurn->StartTurn();
+	Game::instance().GetGrid()->CalculateObstacles(); 
+
 
 }
 
@@ -64,7 +66,7 @@ void TurnsManager::DrawUi()
 
 }
 
-void TurnsManager::AddPawn(ITurn* turn)
+void TurnsManager::AddSomethingMakeTurn(ITurn* turn)
 {
 	allControllers.push_back(turn);
 }

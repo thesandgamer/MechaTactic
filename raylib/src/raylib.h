@@ -1367,7 +1367,7 @@ RLAPI void DrawSphereWires(Vector3 centerPos, float radius, int rings, int slice
 RLAPI void DrawCylinder(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color); // Draw a cylinder/cone
 RLAPI void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color); // Draw a cylinder/cone wires
 RLAPI void DrawPlane(Vector3 centerPos, Vector2 size, Color color);                                      // Draw a plane XZ
-RLAPI void DrawRay(Ray ray, Color color);                                                                // Draw a ray line
+RLAPI void DrawRay(Ray ray,float size, Color color);                                                                // Draw a ray line
 RLAPI void DrawGrid(int slices, float spacing);                                                          // Draw a grid (centered at (0, 0, 0))
 
 //------------------------------------------------------------------------------------
@@ -1379,6 +1379,7 @@ RLAPI Model LoadModel(const char *fileName);                                    
 RLAPI Model LoadModelFromMesh(Mesh mesh);                                                   // Load model from generated mesh (default material)
 RLAPI void UnloadModel(Model model);                                                        // Unload model (including meshes) from memory (RAM and/or VRAM)
 RLAPI void UnloadModelKeepMeshes(Model model);                                              // Unload model (but not meshes) from memory (RAM and/or VRAM)
+RLAPI BoundingBox GetModelBoundingBox(Model model);                                         // Compute model bounding box limits (considers all meshes)
 
 // Mesh loading/unloading functions
 RLAPI void UploadMesh(Mesh *mesh, bool dynamic);                                            // Upload vertex data into GPU and provided VAO/VBO ids
@@ -1439,6 +1440,8 @@ RLAPI RayHitInfo GetCollisionRayMesh(Ray ray, Mesh mesh, Matrix transform);     
 RLAPI RayHitInfo GetCollisionRayModel(Ray ray, Model model);                                            // Get collision info between ray and model
 RLAPI RayHitInfo GetCollisionRayTriangle(Ray ray, Vector3 p1, Vector3 p2, Vector3 p3);                  // Get collision info between ray and triangle
 RLAPI RayHitInfo GetCollisionRayGround(Ray ray, float groundHeight);                                    // Get collision info between ray and ground plane (Y-normal plane)
+RLAPI RayHitInfo GetRayCollisionBox(Ray ray, BoundingBox box);                                    // Get collision info between ray and box
+RLAPI RayHitInfo GetRayCollisionSphere(Ray ray, Vector3 center, float radius);                    // Get collision info between ray and sphere
 
 //------------------------------------------------------------------------------------
 // Audio Loading and Playing Functions (Module: audio)

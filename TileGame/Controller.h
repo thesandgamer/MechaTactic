@@ -5,6 +5,18 @@ using std::vector;
 
 #include "Button.h"
 #include "MechaParent.h"
+#include "MushMech.h"
+
+
+
+enum ControllerState
+{
+	Thinking,	//State où aucun mécha n'est séléctionné
+	MechaSelected,	//Un mecha est séléctionné
+	MechaMoveSelected,	
+	MechaCapacitySelected,
+	MechaMakeActions,	//Un mecha fait ses actions
+};
 
 class Controller : public ITurn
 {
@@ -12,51 +24,65 @@ public:
 	Controller();
 	~Controller();
 
-	void Start();
-	void InitPawns();
-	void Update();
-	void Draw();
-	void DrawUi();
+	virtual void Start();
+	virtual void Update();
+	virtual void Draw();
+	virtual void DrawUi();
 
-	bool MovePawn(Vector2 moveTo);//bool to check if the movement is possible
+	void AddMecha(MechaParent* mech);
+
+	void MoveMecha(Vector3 moveTo);//bool to check if the movement is possible
+
 
 	bool SelectMecha(MechaParent* pawnSelected);
 	void DeSelectMecha();
 
-	vector<MechaParent>* GetMechas();
-	vector<MechaParent> GetMechasDirect();
+
+	//vector<MechaParent*>* GetMechas();
+	//vector<MechaParent*> GetMechasDirect();
+
+	int GetNumberOfMechas() { return mechasList.size(); }
+	MechaParent* GetMechaAt(int index) { return mechasList.at(index); }
 
 	void SetGrid(class Grid* grid);
 
 
-	void FinishPlayerTurn();
+	void FinishTurn();
 
 	MechaParent* GetControledPawn() { return controledMecha; }
 
 
 	//==========Interfaces==========
 	void StartTurn();
-	bool EndTurn();
+	bool HaveEndTurn();
+
 	int initiative;
 	bool finishHisTurn = false;
+
 	string GetName() { return name; }
 	string name;
 
+	bool isTurn{ false };
 
-private:
-	vector<MechaParent> mechasList;
-	MechaParent* controledMecha;
+protected:
 
-	class Grid* gridRef;
+	void ShowPath(Vector3 end);
 
-	//==========
+	bool IsCurrentMechInAction();
 
-	//==========
-	bool isTurn = false;
+	//======] For Mechas
+	void InitPawns();
 
-	//==========UI==========
+	vector<MechaParent*> mechasList{};	//*Remplacer par smart pointer: unique pointers
+	MechaParent* controledMecha{ nullptr };	//Juste un lien vers le mecha
+
+	//======] Grid
+	class Grid* gridRef{nullptr};	//Juste un lien vers la grille: juste une référence
+
+	//======] State
+	ControllerState cState {Thinking};
 
 
-
+	//======] UI
 
 };

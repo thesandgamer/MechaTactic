@@ -24,6 +24,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>TileGame</RootNamespace>
     <ProjectName>MecaTactic</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -102,7 +103,7 @@
       <AdditionalIncludeDirectories>..\src;.;..\raylib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -171,28 +172,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActiveCapacity.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AStar.cpp" />
+    <ClCompile Include="AttackCapacity.cpp" />
     <ClCompile Include="BandeauTexte.cpp" />
+    <ClCompile Include="BoxCollision.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CameraActor.cpp" />
+    <ClCompile Include="Capacity.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Cursor.cpp" />
-    <ClCompile Include="Ennemy.cpp" />
+    <ClCompile Include="DamageDealer.cpp" />
+    <ClCompile Include="EnnemyController.cpp" />
+    <ClCompile Include="FX_Sprite.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="IInteraction.cpp" />
     <ClCompile Include="InformationDisplay.cpp" />
     <ClCompile Include="InformationDisplayUi.cpp" />
+    <ClCompile Include="InGameLifeBar.cpp" />
+    <ClCompile Include="LifeManager.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MechaParent.cpp" />
+    <ClCompile Include="MushMech.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Obstacle.cpp" />
-    <ClCompile Include="Pawn.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="P_Collision.cpp" />
+    <ClCompile Include="RaycastCollision.cpp" />
+    <ClCompile Include="SphereCollision.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TreeMech.cpp" />
     <ClCompile Include="TurnsManager.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\build\raylib.vcxproj">
@@ -200,31 +216,51 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActiveCapacity.h" />
     <ClInclude Include="Actor.h" />
     <ClInclude Include="AStar.h" />
     <ClInclude Include="AStartUtility.h" />
+    <ClInclude Include="AttackCapacity.h" />
     <ClInclude Include="BandeauTexte.h" />
+    <ClInclude Include="BoxCollision.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="CameraActor.h" />
+    <ClInclude Include="Capacity.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Cursor.h" />
-    <ClInclude Include="Ennemy.h" />
+    <ClInclude Include="DamageData.h" />
+    <ClInclude Include="DamageDealer.h" />
+    <ClInclude Include="EnnemyController.h" />
+    <ClInclude Include="FX_Sprite.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IInformationPasseur.h" />
+    <ClInclude Include="IInteraction.h" />
     <ClInclude Include="InformationDisplay.h" />
     <ClInclude Include="InformationDisplayUi.h" />
+    <ClInclude Include="InGameLifeBar.h" />
     <ClInclude Include="ITurn.h" />
+    <ClInclude Include="LifeManager.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="MechaParent.h" />
+    <ClInclude Include="MushMech.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Obstacle.h" />
-    <ClInclude Include="Pawn.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="P_Collision.h" />
+    <ClInclude Include="RaycastCollision.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SphereCollision.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TreeMech.h" />
     <ClInclude Include="TurnsManager.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="Vector2AStar.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MecaTactic.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,13 +1,23 @@
 #pragma once
 #include "Actor.h"
-#include "Player.h"
-#include "Ennemy.h"
 #include "Grid.h"
 #include "Button.h"
 #include "InformationDisplayUi.h"
 #include "TurnsManager.h"
 #include "Cursor.h"
 #include "Obstacle.h"
+#include "CameraActor.h"
+
+#include "Controller.h"
+#include "PlayerController.h"
+#include "EnnemyController.h"
+
+#include "MushMech.h"
+#include "TreeMech.h"
+
+#include "FX_Sprite.h"
+
+//++ToDo: faire en sorte que les info s'affichent en fonction de l'objet touché par le rayon
 
 class Game
 {
@@ -23,7 +33,7 @@ public:
 	Game(Game&&) = delete;
 	Game& operator=(Game&&) = delete;
 private:
-	Game() : player{ Player() }, SCREEN_WIDTH{ -1 }, SCREEN_HEIGHT{ -1 }, infoUi{nullptr} {};
+	Game() : SCREEN_WIDTH{ -1 }, SCREEN_HEIGHT{ -1 } {};// infoUi{nullptr} {};
 
 
 
@@ -35,36 +45,55 @@ public:
 	void Draw();
 	void DrawUi();
 
+	void Clean();
+
 	Grid* GetGrid() { return &grid; }
 
 	vector<Actor*> GetElementsInGame() { return elementsInGame; }
 
-	Player* GetPlayer() { return &player; }
+
+	CameraActor cam; // Faire en sorte qu'il y ait plusieurs camera, un par player controller
+
+	bool SomethingAlreadyHere(Vector2 pos);	//++ToDo: mettre ça autre part
+
+	void CreateVFX(FX_Sprite* vfx);
 
 	int  SCREEN_WIDTH;
 	int  SCREEN_HEIGHT;
 
+	void RemoveVFX(FX_Sprite* vfToRemove);
+
 private:
 
-
+	//---Gère les controllers
 	TurnsManager turnManager;
-	Player player;
-	Ennemy ennemy;
+	vector<Controller*> controllers;	//++ToDo: Remplacer ça par unique pointer
+
+
+
+	//-----Pour lagrille
 	Grid grid;
 
 	Cursor cursor;
 
+	/// <summary>
+	/// For elements in game: Mechs and obstacle for now
+	/// </summary>
 	vector<Actor*> elementsInGame;
 
 	vector<Obstacle*> obstacles;
 
+	vector <FX_Sprite*> vfxs;
+
+
 
 
 //========On va gérer le display des informations
+	/* Mettre la feature dans le player controller
 	InformationDisplayUi* infoUi;
 	vector<InformationDisplay*> informations;
 
-
+	*/
 
 
 

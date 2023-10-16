@@ -1,27 +1,33 @@
 #pragma once
 #include "raylib.h"
-#include "Grid.h"
 
 class Actor
 {
 
 public:
+
 	Actor();
-	Actor(Vector2 positionP);
-	Actor(Vector2 positionP, Texture2D spriteP);
+	~Actor();
 
-	void Init();
-	void Draw();
-	void Update() {};
-
-	Vector2 position;
-	Grid* gridRef;
+	virtual void Init() {};
+	virtual void Draw() {};
+	virtual void Update() {};
 
 
-	bool isActive = true;	
+	bool isActive = true;
+
+	Transform GetTransform() { return transform; }
+	Transform* GetTransformPointer() { return &transform; }
+
+	void SetPosition(Vector3 newPos) { transform.translation = newPos; }
+	Vector3 GetPosition() { return transform.translation; }
+
+	Vector3 GetPosInGrid() { return posInGrid; }
+
 
 protected:
-	Texture2D sprite;
+	Transform transform{ {-1,-1,-1},{0,0,0}, {1,1,1} };
+	Vector3 posInGrid{ 0,0,0 };
 
 
 };

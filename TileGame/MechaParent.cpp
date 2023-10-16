@@ -1,155 +1,224 @@
 #include "MechaParent.h"
 #include "Game.h"
-
+#include "Controller.h"
 
 //Constructeur à vide
 MechaParent::MechaParent()
 {
-	position = { -1, -1 };
+	posInGrid = { 0,0,0 };
 	gridRef = nullptr;
 	informations = nullptr;
 }
 
-MechaParent::MechaParent(Vector2 positionP) : Actor(positionP)
+MechaParent::MechaParent(Vector3 positionP)
 {
-	position = positionP;
-	gridRef = nullptr;
-	informations = nullptr;
-
-	Init();
+	posInGrid = positionP;
+	//Init();
 }
 
-MechaParent::MechaParent(Vector2 positionP, Texture2D spriteP) : Actor(positionP)
+MechaParent::MechaParent(Vector3 positionP, Model modelP): model{modelP}
 {
-	position = positionP;
-	gridRef = nullptr;
-	informations = nullptr;
-	sprite = spriteP;
-
-	Init();
-
+	posInGrid = positionP;
+	//Init();
 }
 
-MechaParent::MechaParent(Vector2 positionP, float widthP, float heightP) : Actor(positionP)
-{
-	position = positionP;
-	width = widthP;
-	height = heightP;
-	gridRef = nullptr;
-	informations = nullptr;
-
-	Init();
-
-
-}
 
 MechaParent::~MechaParent()
 {
+	Destroy();
 }
 
 
 void MechaParent::Init()
 {
+
+
+	//-------Set collision
+	//collision.modelToBoxing = &model;
+	//collision = BoxCollision(&model);
+	collision.SetParent(this);
+	collision.id = "To test";
+
+
+	//-----Setup le lien avec la grid
+	gridRef = Game::instance().GetGrid();
+
+
+	//Setup le model pour le dessiner
+	if (model.meshCount == NULL)
+	{
+		drawColor = baseColor;
+		model = LoadModelFromMesh(GenMeshCube(gridRef->CELL_WIDTH-10, gridRef->CELL_HEIGHT, gridRef->CELL_WIDTH-10));
+	}
+
+	//----Init les collisions
+	collision.Init();
+
+
+
+	//-----Setup des informations
 	informations = new InformationDisplay();
-	informations->SetPos(&position);
+	informations->SetPos(&posInGrid);
 	informations->infPasseur = this;
 
-	gridRef = Game::instance().GetGrid();
-	std::cout << sprite.width << std::endl;
+
+	//----Set sa postion in world depending of is position in grid
+	transform.translation = gridRef->PosInGridToPosToWorld(posInGrid);
+
+	
 
 }
 
 void MechaParent::Draw()
 {
-	DrawVisual(position);
+
+	DrawVisual();
+
+	if (selected)
+	{
+		for (const auto& cap : capacities)
+		{
+			cap->Draw();
+		}
+	}
+
+	
+}
+
+void MechaParent::DrawUI()
+{
+	if (canDrawLifeBar)
+	{
+		lifeBar.Draw();
+		//std::cout << "DrawLifeBar" << std::endl;
+
+	}
+
+
+	if (!owner->isTurn)return;
+
+	if (selected)
+	{
+
+		for (size_t i = 0; i < capacities.size(); i++)
+		{
+			capacities.at(i)->DrawUi();
+			capacities.at(i)->DrawButton({ 10,120.0f + i*10 });
+		}
+
+		
+	}
+
+
+	
+
 }
 
 
 void MechaParent::Update()
 {
-
-	if (canMove)
+	if (owner->isTurn)
 	{
-		if (poses.empty()) return;
-		Vector2 posToGo = poses[positionIterator];
-		//Vector2AStar pos = { position.x,position.y };
 
-
-		if (position.x == posToGo.x && position.y == posToGo.y)//Si on est arrivé à la position suivante
+		//If the mech have to move make it move
+		if (state == MechaState::INMOVEMENT)
 		{
-			positionIterator++;//On augmente l'iterator
-			currentTime = 0; //Et on reset le temps
+			MakeMovement();
+		}
+		//If the mech have to make capacity, make it
+		if (state == MechaState::INCAPACITY)
+		{
+			//MakeCapacity();
 		}
 
-		position.x = EaseQuadInOut(currentTime, position.x, posToGo.x - position.x, duration);//On va au x suivant suivant un lerping
-		position.y = EaseQuadInOut(currentTime, position.y, posToGo.y - position.y, duration);//On va au y suivant suivant un lerping
+		//MakePassiveCapacity
 
-		currentTime++; //Augmente le temps
-
-		if (positionIterator >= poses.size()) //Si on est arrivé à la fin des position où aller
+		/*
+		if (haveDoActions)
 		{
-
-			canMove = false;
-			haveDoActions = true;
-			selected = false;
-			return;
+			state = MechaState::DEACTIVATED;
 		}
+		else if (selected)
+		{
+			state = MechaState::SELECTED;
+		}
+		else
+		{
+			state = MechaState::IDLE;
+		}*/
 
+		if (selected)
+		{
+			for (const auto& cap : capacities)
+			{
+				cap->Update();
+			}
+		}
 	}
+	
+	lifeBar.Update();
 
-	if (haveDoActions)
-	{
-		state = MechaState::NoActionsPossible;
-	}
-	else if (selected)
-	{
-		state = MechaState::SelectedGhost;
-	}
-	else
-	{
-		state = MechaState::NORMAL;
-	}
 
 }
 
-void MechaParent::DrawVisual(Vector2 positionP)
+void MechaParent::StartTurn()
 {
-	Color color = WHITE;
+	haveDoActions = false;
+	haveMove = false;
+
+	for (const auto& cap : capacities)
+	{
+		dynamic_cast<ActiveCapacity*>(cap.get())->Reset();
+	}
+
+	state = MechaState::IDLE;
+}
+
+void MechaParent::DrawVisual()
+{
 
 	switch (state)
 	{
-	case MechaState::NORMAL:
-		color = WHITE;
+	case MechaState::IDLE:
+		if (model.materialCount > 0)
+		{
+			drawColor = WHITE;
+			break;
+		}
+		drawColor = baseColor;
 		break;
-	case MechaState::SelectedGhost:
-		color = GRAY;
+	case MechaState::SELECTED:
+		drawColor = GRAY;
+		break;
+	case MechaState::MODE_MOVE:
+		drawColor = GRAY;
+		break;
+	case MechaState::MODE_CAPACITY:
+		drawColor = GRAY;
 
 		break;
-	case MechaState::NoActionsPossible:
-		color = BLACK;
-		break;
-	case MechaState::Destroyed:
+	case MechaState::DEACTIVATED:
+		drawColor = DARKGRAY;
 		break;
 	default:
 		break;
 	}
 
-	DrawRectangle(positionP.x * gridRef->CELL_WIDTH + width / 4 + gridRef->GetGridPos().x, positionP.y * gridRef->CELL_HEIGHT + height / 4 + gridRef->GetGridPos().y, width, height, color);
-
-
-
+	DrawModel(model,transform.translation, transform.scale.x, drawColor);
 
 }
 
-
-void MechaParent::MoveTo(Vector2 positionToGo)
+/// <summary>
+/// Tell the mech to move to a GridPosition
+/// </summary>
+/// <param name="positionToGo(InGrid)"></param>
+void MechaParent::MoveTo(Vector3 positionToGo)
 {
-	if (haveDoActions) return;
+	if (haveMove) return;
+	state = MechaState::INMOVEMENT;
 
-	//Si il n'y a pas de position à aller, finit
-	//Appel le A star
-	gridRef->Debug_CleanPathVisibility();
-	poses = gridRef->aStar.GetPath({ position.x,position.y }, { positionToGo.x,positionToGo.y });
+	//gridRef->Debug_CleanPathVisibility();	//Inuitile pour l'instant
+	poses = gridRef->aStar.GetPath({ posInGrid.x,posInGrid.z }, { positionToGo.x,positionToGo.z });
 	canMove = true;
 	currentTime = 0;
 	positionIterator = 0;
@@ -160,9 +229,146 @@ void MechaParent::MoveTo(Vector2 positionToGo)
 //Ici on va set les informations affiché du mecha
 string MechaParent::GetInformationOf()
 {
-	info += "Ma position: " + std::to_string(position.x) + " : " + std::to_string(position.y);
+	info += "Ma position: " + std::to_string(posInGrid.x) + " : " + std::to_string(posInGrid.z);
 	informations->SetTitle(info);
 
 	return info;
+}
+
+void MechaParent::OnHovered()
+{
+	//std::cout << "Hover" << std::endl;
+	canDrawLifeBar = true;
+	
+
+
+}
+
+void MechaParent::OnEndHovered()
+{
+	canDrawLifeBar = false;
+}
+
+void MechaParent::OnClicked()
+{
+
+}
+
+void MechaParent::Select()
+{
+	if (!CanBeActivate()) return;
+	selected = true;
+	state = MechaState::SELECTED;
+}
+
+void MechaParent::DeSelect()
+{
+	selected = false;
+
+	if (!CanBeActivate())
+	{
+		return;
+	}
+
+	if (state != MechaState::INMOVEMENT && state != MechaState::INCAPACITY)
+	{
+		state = MechaState::IDLE;
+
+	}
+	
+}
+
+bool MechaParent::CanBeActivate()
+{
+	return !(haveDoActions && haveMove);
+}
+
+void MechaParent::AddCapacity(std::unique_ptr<Capacity>&& newCapacity)
+{
+	capacities.push_back(std::move(newCapacity));	//Std::move: pour transférer pour pas de copie
+}
+
+ActiveCapacity* MechaParent::GetCurrentActiveCapacity()
+{
+	return currentActiveCapacity;
+}
+
+void MechaParent::SetCurrentActiveCapacity(ActiveCapacity* capacity)
+{
+	currentActiveCapacity = capacity;
+}
+
+void MechaParent::EndMovement()
+{
+	canMove = false;
+	haveMove = true;
+
+	state = MechaState::SELECTED;
+
+	if (haveDoActions)
+	{
+		//DeSelect();
+		owner->DeSelectMecha();
+
+		state = MechaState::DEACTIVATED;
+		
+	}
+
+	
+}
+
+void MechaParent::EndAction()
+{
+	haveDoActions = true;
+	state = MechaState::MODE_MOVE;
+
+	if (haveMove)
+	{
+		//DeSelect();
+		owner->DeSelectMecha();
+		state = MechaState::DEACTIVATED;
+	}
+}
+
+void MechaParent::Destroy()
+{
+}
+
+/// <summary>
+/// Make actual movement for the mech
+/// </summary>
+void MechaParent::MakeMovement()
+{
+	if (canMove)
+	{
+		if (poses.empty()) return;
+		Vector2 posToGo = poses[positionIterator];
+		Vector3 posTo = gridRef->PosInGridToPosToWorld({ posToGo.x,0,posToGo.y });
+		//Vector2AStar pos = { position.x,position.y };
+
+
+		if (transform.translation.x == posTo.x && transform.translation.z == posTo.z)//Si on est arrivé à la position suivante
+		{
+			positionIterator++;//On augmente l'iterator
+			currentTime = 0; //Et on reset le temps
+			posInGrid = { posToGo.x,0,posToGo.y };//Set la position actuelle dans la grille
+			gridRef->CalculateObstacles();
+
+		}
+
+
+		transform.translation.x = EaseQuadInOut(currentTime, transform.translation.x, posTo.x - transform.translation.x, duration);//On va au x suivant suivant un lerping
+		transform.translation.z = EaseQuadInOut(currentTime, transform.translation.z, posTo.z - transform.translation.z, duration);//On va au y suivant suivant un lerping
+
+		currentTime++; //Augmente le temps
+
+		if (positionIterator >= poses.size()) //Si on est arrivé à la fin des position où aller
+		{
+			EndMovement();
+
+			return;
+		}
+
+	}
 }
 

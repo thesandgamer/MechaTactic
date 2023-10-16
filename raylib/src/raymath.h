@@ -529,6 +529,29 @@ RMDEF Vector3 Vector3RotateByQuaternion(Vector3 v, Quaternion q)
     return result;
 }
 
+// Multiply a vector by a quaternio
+RMDEF Vector3 Vector3MultiplyByQuaternion(Vector3 point, Quaternion rotation)
+{
+    float num1 = rotation.x * 2.f;
+    float num2 = rotation.y * 2.f;
+    float num3 = rotation.z * 2.f;
+    float num4 = rotation.x * num1;
+    float num5 = rotation.y * num2;
+    float num6 = rotation.z * num3;
+    float num7 = rotation.x * num2;
+    float num8 = rotation.x * num3;
+    float num9 = rotation.y * num3;
+    float num10 = rotation.w * num1;
+    float num11 = rotation.w * num2;
+    float num12 = rotation.w * num3;
+    Vector3 vector3;
+    vector3.x = (float)((1.0 - ((double)num5 + (double)num6)) * (double)point.x + ((double)num7 - (double)num12) * (double)point.y + ((double)num8 + (double)num11) * (double)point.z);
+    vector3.y = (float)(((double)num7 + (double)num12) * (double)point.x + (1.0 - ((double)num4 + (double)num6)) * (double)point.y + ((double)num9 - (double)num10) * (double)point.z);
+    vector3.z = (float)(((double)num8 - (double)num11) * (double)point.x + ((double)num9 + (double)num10) * (double)point.y + (1.0 - ((double)num4 + (double)num5)) * (double)point.z);
+
+    return vector3;
+}
+
 // Calculate linear interpolation between two vectors
 RMDEF Vector3 Vector3Lerp(Vector3 v1, Vector3 v2, float amount)
 {
