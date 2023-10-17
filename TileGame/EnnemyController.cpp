@@ -74,6 +74,7 @@ void EnnemyController::AIActions()
 	SelectMecha(mechasList.at(it++));
 	Vector2 PosToMove{};
 
+
 	//Si case bloqué check celles à coté
 	//Vérifier les cases à coté, si toutes bloqué refait du random
 	do
