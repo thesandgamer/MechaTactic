@@ -140,6 +140,10 @@
       <Filter>Mechas</Filter>
     </ClCompile>
     <ClCompile Include="FX_Sprite.cpp" />
+    <ClCompile Include="NetworkAgent.cpp" />
+    <ClCompile Include="NetworkClient.cpp" />
+    <ClCompile Include="NetworkServer.cpp" />
+    <ClCompile Include="Packet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -254,6 +258,10 @@
       <Filter>Mechas</Filter>
     </ClInclude>
     <ClInclude Include="FX_Sprite.h" />
+    <ClInclude Include="NetworkAgent.h" />
+    <ClInclude Include="NetworkClient.h" />
+    <ClInclude Include="NetworkServer.h" />
+    <ClInclude Include="Packet.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MecaTactic.rc" />

@@ -73,6 +73,8 @@
     <IntDir>obj\x64\Debug\</IntDir>
     <TargetName>TileGame</TargetName>
     <TargetExt>.exe</TargetExt>
+    <IncludePath>..\SDL\SDL2-2.0.20\include;..\SDL\SDL2_ttf-2.0.18\include;..\SDL\SDL2_net-2.0.1\include;..\SDL\SDL2_mixer-2.0.4\include;..\SDL\SDL2_image-2.0.5\include;$(IncludePath)</IncludePath>
+    <ReferencePath>..\SDL\SDL2-2.0.20\lib\x64;..\SDL\SDL2_ttf-2.0.18\lib\x64;..\SDL\SDL2_net-2.0.1\lib\x64;..\SDL\SDL2_mixer-2.0.4\lib\x64;..\SDL\SDL2_image-2.0.5\lib\x64;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug.DLL|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -108,8 +110,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>winmm.lib;raylib.lib;kernel32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;raylib.lib;kernel32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_net.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\bin\Debug;..\SDL\SDL2-2.0.20\lib\x64;..\SDL\SDL2_image-2.0.5\lib\x64;..\SDL\SDL2_mixer-2.0.4\lib\x64;..\SDL\SDL2_net-2.0.1\lib\x64;..\SDL\SDL2_ttf-2.0.18\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug.DLL|x64'">
@@ -199,8 +201,12 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MechaParent.cpp" />
     <ClCompile Include="MushMech.cpp" />
+    <ClCompile Include="NetworkAgent.cpp" />
+    <ClCompile Include="NetworkClient.cpp" />
+    <ClCompile Include="NetworkServer.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Packet.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="P_Collision.cpp" />
     <ClCompile Include="RaycastCollision.cpp" />
@@ -246,8 +252,12 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="MechaParent.h" />
     <ClInclude Include="MushMech.h" />
+    <ClInclude Include="NetworkAgent.h" />
+    <ClInclude Include="NetworkClient.h" />
+    <ClInclude Include="NetworkServer.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Packet.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="P_Collision.h" />
     <ClInclude Include="RaycastCollision.h" />
