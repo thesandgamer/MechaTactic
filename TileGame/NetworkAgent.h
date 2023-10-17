@@ -3,8 +3,10 @@
 #include <sstream>
 #include "Packet.h"
 #include <SDL_net.h>
+
 class NetworkAgent
 {
+
 public:
 	NetworkAgent();
 	~NetworkAgent();

@@ -1,5 +1,7 @@
 #include "NetworkServer.h"
+
 #include <iostream>
+
 NetworkServer::NetworkServer()
 : NetworkAgent(), state{ ServerState::READ_CONFIG_FILE }
 {

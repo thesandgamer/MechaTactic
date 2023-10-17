@@ -144,6 +144,8 @@
     <ClCompile Include="NetworkClient.cpp" />
     <ClCompile Include="NetworkServer.cpp" />
     <ClCompile Include="Packet.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneParent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStar.h">
@@ -262,6 +264,8 @@
     <ClInclude Include="NetworkClient.h" />
     <ClInclude Include="NetworkServer.h" />
     <ClInclude Include="Packet.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneParent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MecaTactic.rc" />

@@ -210,6 +210,8 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="P_Collision.cpp" />
     <ClCompile Include="RaycastCollision.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneParent.cpp" />
     <ClCompile Include="SphereCollision.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TreeMech.cpp" />
@@ -262,6 +264,8 @@
     <ClInclude Include="P_Collision.h" />
     <ClInclude Include="RaycastCollision.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneParent.h" />
     <ClInclude Include="SphereCollision.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TreeMech.h" />

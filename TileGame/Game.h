@@ -17,6 +17,11 @@
 
 #include "FX_Sprite.h"
 
+
+
+
+
+
 //++ToDo: faire en sorte que les info s'affichent en fonction de l'objet touché par le rayon
 
 class Game
@@ -62,6 +67,8 @@ public:
 	int  SCREEN_HEIGHT;
 
 	void RemoveVFX(FX_Sprite* vfToRemove);
+
+
 
 private:
 

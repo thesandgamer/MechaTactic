@@ -22,5 +22,6 @@ public:
 	/*
 	Packet(GameObject* gameObject);
 	Vector2<float> position{ 0.0f, 0.0f };
-	Vector2<float> direction{ 0.0f, 0.0f };*/
+	Vector2<float> direction{ 0.0f, 0.0f };
+	*/
 };

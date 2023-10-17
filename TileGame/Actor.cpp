@@ -8,3 +8,8 @@ Actor::~Actor()
 {
 }
 
+void Actor::Destroy()
+{
+	//Remove components
+}
+

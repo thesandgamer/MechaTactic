@@ -4,6 +4,9 @@
 #include "ActiveCapacity.h"
 #include "AttackCapacity.h"
 
+#include "NetworkClient.h"
+#include "NetworkServer.h"
+
 void Game::SetupScreen(int screenwidth, int screenHeight)
 {
     SCREEN_WIDTH = screenwidth;
@@ -296,3 +299,5 @@ void Game::RemoveVFX(FX_Sprite* vfToRemove)
 {
     vfxs.erase(std::find(vfxs.begin(), vfxs.end(), vfToRemove));
 }
+
+

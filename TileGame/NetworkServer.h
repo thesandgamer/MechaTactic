@@ -1,5 +1,6 @@
 #pragma once
 #include "NetworkAgent.h"
+
 enum class ServerState
 {
 	Null,
