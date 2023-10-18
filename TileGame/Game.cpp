@@ -54,6 +54,7 @@ void Game::Start()
 
 //=============Controllers Setup============
     PlayerController* p1 = new PlayerController();
+    p1->name = "Tree Player";
     p1->AddMecha(   new TreeMech({ 1,0,4 }) );
     p1->AddMecha(   new TreeMech({ 8,0,8 }) );
     //Créer unique pointer pas stoqué car Add capacity à une R value(&&) (transfert de propritété)
@@ -75,6 +76,7 @@ void Game::Start()
 
     //-------Add another player
     PlayerController* p2 = new PlayerController();
+    p2->name = "Mush Player";
     p2->AddMecha(new MushMech({ 2,0,5 }));
     p2->AddMecha(new MushMech({ 5,0,2 }));
     //Créer unique pointer pas stoqué car Add capacity à une R value(&&) (transfert de propritété)

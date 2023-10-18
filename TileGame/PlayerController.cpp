@@ -5,6 +5,8 @@
 
 PlayerController::PlayerController(): Controller()
 {
+	name = "Player";
+
 }
 
 PlayerController::~PlayerController()
@@ -13,7 +15,6 @@ PlayerController::~PlayerController()
 
 void PlayerController::Start()
 {
-	name = "Player";
 
 	//------Change the color of mecha to distinc if no models
 	for (auto i = mechasList.begin(); i != mechasList.end(); i++)

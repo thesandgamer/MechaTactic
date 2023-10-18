@@ -2,7 +2,6 @@
 #include "raylib.h"
 #include <string>
 #include <vector>
-#include <SDL_net.h>
 
 class Actor
 {
@@ -19,7 +18,8 @@ public:
 	virtual void Destroy();
 
 	std::string name{ "" };
-	Uint16 id{ 0 };
+	//Uint16 id{ 0 };
+	uint16_t id{ 0 };
 	bool isActive{ true };
 
 
