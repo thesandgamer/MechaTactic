@@ -5,6 +5,8 @@
 #include "Game.h"
 #include "Utility.h"
 
+Utility* Utility::instance{ nullptr };
+
 
 bool Engine::isRunning{ false };
 
@@ -23,8 +25,7 @@ void Engine::run()
     std::srand(std::time(nullptr));
 
     //Créer un écran et on met les fps à 60
-    const std::string windowName = "Mecha Tactic";
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, windowName.c_str());
+
 
     //ToggleFullscreen();
     SetWindowPosition(0, 10);
@@ -32,14 +33,12 @@ void Engine::run()
 
     Utility::GetInstance()->Start();
 
-    Game::instance().SetupScreen(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    Game::instance().Start();
+    sceneManager.start();
 
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        Game::instance().Update();
-        Game::instance().Draw();
+        sceneManager.update();
     }
 
     close();
@@ -50,16 +49,24 @@ void Engine::quitGame()
 {
 }
 
-bool Engine::init()
+CameraActor* Engine::getCameraActor()
 {
-	return false;
+    return sceneManager.getCurrentScene().getCamera();
 }
 
-void Engine::close()
+bool Engine::init()
+{
+    const std::string windowName = "Mecha Tactic";
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, windowName.c_str());
+
+	return true;
+}
+
+void Engine::close() const
 {
     sceneManager.close();
 
-    Game::instance().clean();
+    sceneManager.close();
 
     Utility::GetInstance()->Unload();
 

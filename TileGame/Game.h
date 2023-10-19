@@ -16,56 +16,37 @@
 #include "TreeMech.h"
 
 #include "FX_Sprite.h"
-
-
-
+#include "SceneParent.h"
 
 
 //++ToDo: faire en sorte que les info s'affichent en fonction de l'objet touché par le rayon
 
-class Game
+class Game : public SceneParent
 {
-public:
-	static Game& instance()
-	{
-		static Game inst;
-		return inst;
-	}
-
-	Game(const Game&) = delete;
-	Game& operator=(const Game&) = delete;
-	Game(Game&&) = delete;
-	Game& operator=(Game&&) = delete;
-private:
-	Game() : SCREEN_WIDTH{ -1 }, SCREEN_HEIGHT{ -1 } {};// infoUi{nullptr} {};
-
-
 
 public:
-	void SetupScreen( int screenwidth,  int screenHeight);
 
-	void Start();
-	void Update();
-	void Draw();
-	void drawUi();
+	Game() = default;
+
+	void start() override;
+	void update() override;
+	void draw() override;
+	void drawUi() override;
 
 	void clean();
 
-	Grid* GetGrid() { return &grid; }
+	Grid* getGrid() { return &grid; }
 
-	vector<Actor*> GetElementsInGame() { return elementsInGame; }
+	vector<Actor*> getElementsInGame() { return elementsInGame; }
 
 
 	CameraActor cam; // Faire en sorte qu'il y ait plusieurs camera, un par player controller
 
 	bool somethingAlreadyHere(Vector2 pos);	//++ToDo: mettre ça autre part
 
-	void CreateVFX(FX_Sprite* vfx);
+	void createVfx(FX_Sprite* vfx);
 
-	int  SCREEN_WIDTH;
-	int  SCREEN_HEIGHT;
-
-	void RemoveVFX(FX_Sprite* vfToRemove);
+	void removeVfx(FX_Sprite* vfToRemove);
 
 
 

@@ -7,13 +7,9 @@
 #include "NetworkClient.h"
 #include "NetworkServer.h"
 
-void Game::SetupScreen(int screenwidth, int screenHeight)
-{
-    SCREEN_WIDTH = screenwidth;
-    SCREEN_HEIGHT = screenHeight;
-}
 
-void Game::Start()
+
+void Game::start()
 {
 //===========Setup la Grille==============
     const static int GRID_WIDTH = 9;
@@ -161,7 +157,7 @@ void Game::Start()
 
 }
 
-void Game::Update()
+void Game::update()
 {
     turnManager.Update();
     grid.Update();
@@ -198,7 +194,7 @@ void Game::Update()
     }*/
 }
 
-void Game::Draw()
+void Game::draw()
 {
     BeginDrawing();
     ClearBackground(BLACK);
@@ -283,12 +279,12 @@ bool Game::somethingAlreadyHere(const Vector2 pos)
     }
 }
 
-void Game::CreateVFX(FX_Sprite* vfx)
+void Game::createVfx(FX_Sprite* vfx)
 {
     vfxs.push_back(vfx);
 }
 
-void Game::RemoveVFX(FX_Sprite* vfToRemove)
+void Game::removeVfx(FX_Sprite* vfToRemove)
 {
     vfxs.erase(std::find(vfxs.begin(), vfxs.end(), vfToRemove));
 }

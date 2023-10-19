@@ -1,16 +1,4 @@
-#include "raylib.h"
-#include <iostream>
-#include <stdio.h>  
-#include <math.h> 
-#include <vector>
-#include <string>
-#include <map>
-
-#include "Utility.h"
-#include "Game.h"
-
-#include "SceneManager.h"
-
+#include "Engine.h"
 
 //++ToDo: Faire en sorte de passer le jeu en 3d:
 // Enlever le contrôle au joueur quand une unité s'active
@@ -89,43 +77,13 @@ Armor reducing(in %)
 
 */
 
-Utility* Utility::instance{ nullptr };
 
-//Setup la taille de l'écran
-constexpr int SCREEN_WIDTH = 1920;
-constexpr int SCREEN_HEIGHT = 1080;
 
-int main(int argc, char** argv[])
+int main(int argc, char** args)
 {
-    std::srand(std::time(nullptr));
-
-    //Créer un écran et on met les fps à 60
-    const string windowName = "Mecha Tactic";
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, windowName.c_str());
-
-    //ToggleFullscreen();
-    SetWindowPosition(0, 10);
-    SetTargetFPS(60);
-
-    Utility::GetInstance()->Start();
-
-    Game::instance().SetupScreen(SCREEN_WIDTH, SCREEN_HEIGHT);
-
-    Game::instance().Start();
-
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
-        Game::instance().Update();    
-        Game::instance().Draw();
-    }
-
-    Game::instance().clean();
-    
-    Utility::GetInstance()->Unload();
-
-    CloseWindow();
-
-    return 0;
+    Engine engine;
+	engine.run();
+	return 0;
 
 
 }
