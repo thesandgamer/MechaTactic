@@ -86,21 +86,12 @@ void Game::Start()
     controllers.push_back(p2);   //Rajoute un player
 
 
-    for (size_t i = 0; i < controllers.size(); i++)
+    for (auto& controller : controllers)
     {
-        controllers.at(i)->SetGrid(&grid);
-        controllers[i]->Start();
+	    controller->SetGrid(&grid);
+	    controller->Start();
       
     }
-    /* Alt Version
-    for (auto i = controllers.begin(); i != controllers.end(); i++)
-    {
-        (*i)->SetGrid(&grid);
-        (*i)->Start();
-        
-    }*/
-
-
 
 
 //=============Setup Cursor===========
@@ -109,11 +100,11 @@ void Game::Start()
 //============Setup elements in game==============
 
     // Rajoute tout les méchas de tous les controllers dans les éléments in game(sert d'obstacles)
-    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    for (const auto& controller : controllers)
     {
-        for (int j = 0; j < (*i)->GetNumberOfMechas(); j++)
+        for (int j = 0; j < controller->GetNumberOfMechas(); j++)
         {
-           elementsInGame.push_back((*i)->GetMechaAt(j));  //Rajoute tous les méchas
+           elementsInGame.push_back(controller->GetMechaAt(j));  //Rajoute tous les méchas
         }
 
     }
@@ -160,9 +151,9 @@ void Game::Start()
 
 
 //=========Setup Turn Manager===========
-    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    for (const auto& controller : controllers)
     {
-        turnManager.AddSomethingMakeTurn(*i);
+        turnManager.AddSomethingMakeTurn(controller);
     }
     turnManager.Start();
 
@@ -177,13 +168,13 @@ void Game::Update()
 
     CollisionManager::GetInstance()->Update();
 
-    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    for (const auto& controller : controllers)
     {
-        (*i)->Update();
+	    controller->Update();
     }
-    for (auto i = vfxs.begin(); i != vfxs.end(); i++)
+    for (const auto& vfx : vfxs)
     {
-        (*i)->Update();
+	    vfx->Update();
     }
 
     cursor.Updtate();
@@ -224,9 +215,9 @@ void Game::Draw()
         obstacle->Draw();
     }
 
-    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    for (const auto& controller : controllers)
     {
-        (*i)->Draw();
+	    controller->Draw();
     }
 
 
@@ -236,21 +227,21 @@ void Game::Draw()
 
     EndMode3D();
 
-    DrawUi();
+    drawUi();
     
     EndDrawing();
 }
 
-void Game::DrawUi()
+void Game::drawUi()
 {
-    for (auto i = controllers.begin(); i != controllers.end(); i++)
+    for (const auto& controller : controllers)
     {
-        (*i)->DrawUi();
+	    controller->DrawUi();
     }
 
-    for (auto i = vfxs.begin(); i != vfxs.end(); i++)
+    for (const auto& vfx : vfxs)
     {
-        (*i)->Draw();
+	    vfx->Draw();
     }
 
     cursor.Draw();
@@ -262,12 +253,12 @@ void Game::DrawUi()
     turnManager.DrawUi();
 }
 
-void Game::Clean()
+void Game::clean()
 {
 
 }
 
-bool Game::SomethingAlreadyHere(Vector2 pos)
+bool Game::somethingAlreadyHere(const Vector2 pos)
 {
 
 

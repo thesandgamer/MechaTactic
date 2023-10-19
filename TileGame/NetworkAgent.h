@@ -10,6 +10,7 @@ class NetworkAgent
 public:
 	NetworkAgent();
 	~NetworkAgent();
+
 	// Configuration
 	virtual bool readConfigFile() = 0;
 	virtual bool establishConnection() = 0;

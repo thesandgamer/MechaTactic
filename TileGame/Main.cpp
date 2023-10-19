@@ -9,6 +9,9 @@
 #include "Utility.h"
 #include "Game.h"
 
+#include "SceneManager.h"
+
+
 //++ToDo: Faire en sorte de passer le jeu en 3d:
 // Enlever le contrôle au joueur quand une unité s'active
 // Camera 3d: controllable(pour l'instant utiliser camear free)
@@ -89,15 +92,15 @@ Armor reducing(in %)
 Utility* Utility::instance{ nullptr };
 
 //Setup la taille de l'écran
-int const SCREEN_WIDTH = 1920;
-int const SCREEN_HEIGHT = 1080;
+constexpr int SCREEN_WIDTH = 1920;
+constexpr int SCREEN_HEIGHT = 1080;
 
 int main(int argc, char** argv[])
 {
     std::srand(std::time(nullptr));
 
     //Créer un écran et on met les fps à 60
-    string windowName = "Mecha Tactic";
+    const string windowName = "Mecha Tactic";
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, windowName.c_str());
 
     //ToggleFullscreen();
@@ -116,7 +119,7 @@ int main(int argc, char** argv[])
         Game::instance().Draw();
     }
 
-    Game::instance().Clean();
+    Game::instance().clean();
     
     Utility::GetInstance()->Unload();
 

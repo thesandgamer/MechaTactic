@@ -21,7 +21,6 @@
 
 
 
-
 //++ToDo: faire en sorte que les info s'affichent en fonction de l'objet touché par le rayon
 
 class Game
@@ -48,9 +47,9 @@ public:
 	void Start();
 	void Update();
 	void Draw();
-	void DrawUi();
+	void drawUi();
 
-	void Clean();
+	void clean();
 
 	Grid* GetGrid() { return &grid; }
 
@@ -59,7 +58,7 @@ public:
 
 	CameraActor cam; // Faire en sorte qu'il y ait plusieurs camera, un par player controller
 
-	bool SomethingAlreadyHere(Vector2 pos);	//++ToDo: mettre ça autre part
+	bool somethingAlreadyHere(Vector2 pos);	//++ToDo: mettre ça autre part
 
 	void CreateVFX(FX_Sprite* vfx);
 

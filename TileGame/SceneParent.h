@@ -23,11 +23,12 @@ int recvPacketThread(void* data);
 class SceneParent
 {
 public:
+	virtual ~SceneParent() = default;
 
-	virtual void Load();
-	virtual void Start();
-	virtual void Update();
-	virtual void Close();
+	virtual void load();
+	virtual void start();
+	virtual void update();
+	virtual void close();
 
 	virtual void onUpdate();
 
@@ -46,8 +47,8 @@ public:
 	void disconnect();
 	bool isOnline();
 	bool handlePacket(Packet* packet);
-	virtual void onDisconnect() {};
-	virtual void handleConnectionEstablished() {};
+	virtual void onDisconnect() {}
+	virtual void handleConnectionEstablished() {}
 
 
 protected:

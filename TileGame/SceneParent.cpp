@@ -6,15 +6,15 @@
 
 
 
-void SceneParent::Load()
+void SceneParent::load()
 {
 }
 
-void SceneParent::Start()
+void SceneParent::start()
 {
 }
 
-void SceneParent::Update()
+void SceneParent::update()
 {
 
 
@@ -72,7 +72,7 @@ void SceneParent::Update()
 
 }
 
-void SceneParent::Close()
+void SceneParent::close()
 {
     for (auto& gameObjectPair : gameObjectMap)
     {

@@ -83,7 +83,7 @@ void EnnemyController::AIActions()
 		float xGrid = std::rand() % (int)(gridRef->GRID_SIZE.x);//Random entre 0 et tailled de la grille
 		float YGrid = std::rand() % (int)(gridRef->GRID_SIZE.z);//Random entre 0 et tailled de la grille
 		PosToMove = { xGrid,YGrid };
-	} while ((Game::instance().SomethingAlreadyHere(PosToMove)));
+	} while ((Game::instance().somethingAlreadyHere(PosToMove)));
 
 	MoveMecha({ PosToMove.x,0,PosToMove.y });
 
