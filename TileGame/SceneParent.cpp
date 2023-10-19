@@ -72,6 +72,14 @@ void SceneParent::update()
 
 }
 
+void SceneParent::draw()
+{
+}
+
+void SceneParent::drawUi()
+{
+}
+
 void SceneParent::close()
 {
     for (auto& gameObjectPair : gameObjectMap)
@@ -87,7 +95,12 @@ void SceneParent::onUpdate()
 {
 }
 
-void SceneParent::setSceneMode(SceneMode sceneModeP)
+CameraActor* SceneParent::getCamera()
+{
+    return &cam;
+}
+
+void SceneParent::setSceneMode(const SceneMode sceneModeP)
 {
     sceneMode = sceneModeP;
 
@@ -132,7 +145,7 @@ void SceneParent::disconnect()
     onDisconnect();
     disconnected = true;
 }
-bool SceneParent::isOnline()
+bool SceneParent::isOnline() const
 {
     return sceneMode == SceneMode::OnlineClient
         || sceneMode == SceneMode::OnlineServer;

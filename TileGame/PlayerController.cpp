@@ -1,6 +1,7 @@
 #include "PlayerController.h"
 #include "Game.h"
 #include "CollisionManager.h"
+#include "Engine.h"
 #include "IInteraction.h"
 
 PlayerController::PlayerController(): Controller()
@@ -172,8 +173,8 @@ void PlayerController::CheckWhatBehindRay()
 	//Quand le tour du joueur est actif
 	//Faire un rayon entre la camera et la souris (faire un truc à la unity Camera.screenPointToRay
 	Vector3 direction{-1,-1,0};
-	//ray = { Game::instance().GetCamera()->position,direction };
-	ray = GetMouseRay(mousePos, Game::instance().cam.GetCamera());
+	//ray = { Game::instance().GetCameraActor()->position,direction };
+	ray = GetMouseRay(mousePos, Engine::getCameraActor().GetCamera());
 
 	raycast.SetDirection(ray.direction);
 	//Récupérer quel objet est sous mon rayon 

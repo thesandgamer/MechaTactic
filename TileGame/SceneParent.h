@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 
+#include "CameraActor.h"
 #include "NetworkServer.h"
 
 
@@ -28,11 +29,16 @@ public:
 	virtual void load();
 	virtual void start();
 	virtual void update();
+	virtual void draw();
+	virtual void drawUi();
 	virtual void close();
 
 	virtual void onUpdate();
 
 	std::map<Uint16, Actor*> gameObjectMap;
+
+
+	CameraActor* getCamera();
 
 
 	// Network
@@ -45,7 +51,7 @@ public:
 	void setSceneMode(SceneMode sceneMode);
 	void destroyNetworkAgent();
 	void disconnect();
-	bool isOnline();
+	bool isOnline() const;
 	bool handlePacket(Packet* packet);
 	virtual void onDisconnect() {}
 	virtual void handleConnectionEstablished() {}
@@ -54,6 +60,7 @@ public:
 protected:
 	SceneMode sceneMode{ SceneMode::SinglePlayer };
 
+	CameraActor cam;
 
 };
 
