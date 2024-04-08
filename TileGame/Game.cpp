@@ -50,7 +50,10 @@ void Game::Start()
 
 
 //=============Controllers Setup============
+
     PlayerController* p1 = new PlayerController();
+    p1->name = "Tree Player";
+
     p1->AddMecha(   new TreeMech({ 1,0,4 }) );
     p1->AddMecha(   new TreeMech({ 8,0,8 }) );
     //Créer unique pointer pas stoqué car Add capacity à une R value(&&) (transfert de propritété)
@@ -62,23 +65,24 @@ void Game::Start()
 
     
     //--------Add Ennemy controller
-    /*
+    
     EnnemyController* ennemy = new EnnemyController();
     ennemy->AddMecha(  new MushMech({ 2,0,5 })  );
     ennemy->AddMecha(  new MushMech({ 5,0,2 })  );
     controllers.push_back(ennemy);
-    */
-
+    
 
     //-------Add another player
+    /*
     PlayerController* p2 = new PlayerController();
+    p2->name = "Mushroom Player";
     p2->AddMecha(new MushMech({ 2,0,5 }));
     p2->AddMecha(new MushMech({ 5,0,2 }));
     //Créer unique pointer pas stoqué car Add capacity à une R value(&&) (transfert de propritété)
     p2->GetMechaAt(0)->AddCapacity(std::make_unique<AttackCapacity>(*p2->GetMechaAt(0)));
     p2->GetMechaAt(1)->AddCapacity(std::make_unique<AttackCapacity>(*p2->GetMechaAt(1)));
     p2->GetMechaAt(1)->GetCurrentActiveCapacity();
-    controllers.push_back(p2);   //Rajoute un player
+    controllers.push_back(p2);   //Rajoute un player*/
 
 
     for (size_t i = 0; i < controllers.size(); i++)
